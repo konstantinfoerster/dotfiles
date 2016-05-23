@@ -1,0 +1,6 @@
+#!/bin/sh
+
+set -x
+echo "executed panel_wrapper"
+exec $HOME/.scripts/panel/panel
+set +x

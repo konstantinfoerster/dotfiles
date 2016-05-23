@@ -1,0 +1,44 @@
+#!/bin/bash
+
+#export DISPLAY=:0
+export PANEL_FIFO="/tmp/panel-fifo"
+export PANEL_HEIGHT=15
+export PANEL_FONT="-misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso8859-1"
+export PANEL_ICON_FONT="-misc-stlarch-medium-r-normal-*-10-100-75-75-c-80-iso10646-1"
+export PANEL_WM_NAME=bspwm_panel
+
+if [ $(pgrep -cx panel) -gt 1 ] ; then
+	printf "%s\n" "The panel is already running." >&2
+	exit 1
+fi
+
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+source $HOME/.config/colors/current
+
+bspc config top_padding $PANEL_HEIGHT
+bspc subscribe report > "$PANEL_FIFO" &
+xtitle -sf 'T%s' > "$PANEL_FIFO" &
+
+#clock -sf 'S%a %H:%M' > "$PANEL_FIFO" &
+i3status > "$PANEL_FIFO" &
+
+#$HOME/.scripts/panel/panel_battery > "$PANEL_FIFO" &
+#$HOME/.scripts/panel/panel_audio > "$PANEL_FIFO" &
+   
+$HOME/.scripts/panel/panel_bar < "$PANEL_FIFO" | lemonbar -a 20 -n "$PANEL_WM_NAME" -g x$PANEL_HEIGHT -f "$PANEL_FONT" -f "$PANEL_ICON_FONT" -F "$COLOR_FG" -B "$COLOR_BG" | sh &
+wid=$(xdo id -a "$PANEL_WM_NAME")
+tries_left=20
+
+while [ -z "$wid" -a "$tries_left" -gt 0 ] ; do
+	sleep 0.05
+	wid=$(xdo id -a "$PANEL_WM_NAME")
+	tries_left=$((tries_left - 1))
+done
+[ -n "$wid" ] && xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" "$wid"
+
+wait

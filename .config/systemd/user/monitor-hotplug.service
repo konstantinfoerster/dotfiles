@@ -1,0 +1,9 @@
+[Unit]
+Description=Detect and configure displays
+Requires=panel.service
+Before=panel.service
+ 
+[Service]
+Type=oneshot
+ExecStart=/home/kg/.scripts/monitor.sh
+ExecStart=/home/kg/.scripts/monitor.sh workspaces

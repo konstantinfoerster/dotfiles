@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# background = base05/color7
+# foreground = base00/color0
+COLOR_BG=$(xrdb -query | grep -i background | tail -c 8)
+COLOR_FG=$(xrdb -query | grep -i foreground | tail -c 8)
+
+WHITE=$(xrdb -query | grep -i color15 | tail -c 8)
+# brighter bg color
+BLACK2=$(xrdb -query | grep -i color10 | tail -c 8)
+
+YELLOW=$(xrdb -query | grep -i color3 | tail -c 8)
+ORANGE=$(xrdb -query | grep -i color9 | tail -c 8)
+RED=$(xrdb -query | grep -i color1 | tail -c 8)
+MAGENTA=$(xrdb -query | grep -i color14 | tail -c 8)
+VIOLET=$(xrdb -query | grep -i color5 | tail -c 8)
+BLUE=$(xrdb -query | grep -i color4 | tail -c 8)
+CYAN=$(xrdb -query | grep -i color6 | tail -c 8)
+GREEN=$(xrdb -query | grep -i color2 | tail -c 8)

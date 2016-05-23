@@ -1,0 +1,32 @@
+#!/bin/sh
+
+source ${HOME}/.scripts/common.sh
+
+printBatteryInfo() {
+	local BAT=/sys/class/power_supply/CMB1
+
+	if [ -f $BAT ]; then
+		local consumption=$(echo - | awk "{printf \"%.2f\", $((  $(cat /sys/class/power_supply/CMB1/current_now) * $(cat /sys/class/power_supply/CMB1/voltage_now) )) / 1000000000000 }")
+         
+	 	local status=$(acpi --battery | cut -d' ' -f3 | sed 's/,//')
+	 	local remaining=$(acpi --battery | cut -d' ' -f5)
+	 	if [ "$status" == "Charging" ]; then
+			echo " "$(acpi --battery | cut -d' ' -f4 | sed 's/%,//')" ${remaining}"
+         	elif [ "$status" == "Discharging" ]; then
+			echo " "$(acpi --battery | cut -d' ' -f4 | sed 's/%,//')"% ${remaining} (${consumption}W)"
+         	else
+			echo " AC"
+         	fi
+	else
+		echo " AC"
+	fi
+}
+
+#if type "acpi" >/dev/null 2>&1  && acpi --battery 2>&1|grep -qv "No support for device" ; then
+#	while true; do
+#       		echo "B $(printBatteryInfo)"
+#       		sleep 20
+#	done
+#fi
+	
+

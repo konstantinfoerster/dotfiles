@@ -1,0 +1,45 @@
+#include "/home/kg/.config/colors/base16Dune"
+
+! do not scroll with output
+URxvt*scrollTtyOutput: false
+
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer: true
+
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
+
+URxvt*cursorBlink:		true
+URxvt*scrollBar:		false
+URxvt*depth:			32 
+URxvt*internalBorder: 		5
+URxvt*dynamicColors: on
+URxvt.urgentOnBell:  true
+
+! Disable annoying ISO keycap mode pop up:
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+URxvt.intensityStyles: false
+
+! URxvt.letterSpace: -1
+
+! Amount that I can scroll up
+URxvt.saveLines: 12000
+
+! Underline URLs
+URxvt.underlineURLs:true
+
+! Font
+URxvt.font:             xft:Hack:pixelsize=11:antialias=true,hinting=true,xft:icomoon:pixelsize=11
+URxvt.boldFont:         xft:Hack:pixelsize=11:antialias=true,hinting=true,xft:icomoon:pixelsize=11
+URxvt.italicFont:       xft:Hack:pixelsize=11:antialias=true,hinting=true,xft:icomoon:pixelsize=11
+URxvt.bolditalicFont:   xft:Hack:pixelsize=11:antialias=true,hinting=true,xft:icomoon:pixelsize=11
+
+Xft.autohint: 0
+Xft.antialias: 1
+Xft.lcdfilter:  lcddefault
+Xft.hinting: 1
+Xft.hintstyle: hintslight
+Xft.rgba:   rgb
+Xft.dpi: 96

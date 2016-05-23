@@ -1,0 +1,10 @@
+#!/bin/sh
+
+DEV_ETH="enp0s25"
+DEV_WIFI="wlp10s0"
+
+function printWifi() {
+	local ssid=$(essid -w $DEV_WIFI)
+	 
+	
+}

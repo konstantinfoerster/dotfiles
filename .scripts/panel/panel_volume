@@ -1,0 +1,15 @@
+#!/bin/sh
+
+source ${HOME}/.scripts/common.sh
+
+while true; do
+	volStatus=$(amixer get Master | sed -n 's/^.*\[\(o[nf]\+\)]$/\1/p' | uniq)
+	volLevel=$(amixer -M get Master | sed -n 's/^.*\[\([0-9]\+\)%.*$/\1/p' | uniq)
+	
+	if [ $volsStatus = "off" ]; then	
+		echo "V$(printIcon e04f)"
+	else
+		echo "V$(printIcon e05d) ${volLevel}%"
+	fi
+	sleep 10
+done
