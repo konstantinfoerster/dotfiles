@@ -49,3 +49,9 @@ set laststatus=2
 
 " Key mappings
 map <C-n> :NERDTreeToggle<CR>
+" disable arrow keys
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
