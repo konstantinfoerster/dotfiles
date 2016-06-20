@@ -1,24 +1,34 @@
 #!/bin/sh
 
-source ${HOME}/.scripts/common.sh
+source $HOME/.scripts/common.sh
+source $HOME/.config/colors/current
 
-printBatteryInfo() {
+BAT_LOW=25
+BAT_EMPTY=10
+function printBatteryInfo() {
 	local BAT=/sys/class/power_supply/CMB1
-
+	
 	if [ -d $BAT ]; then
 		local consumption=$(echo - | awk "{printf \"%.2f\", $((  $(cat $BAT/current_now) * $(cat $BAT/voltage_now) )) / 1000000000000 }")
          
 		local status=$(cat $BAT/status)
 	 	local remaining=$(acpi --battery | cut -d' ' -f5)
 	 	if [ "$status" == "Charging" ]; then
-			echo " "$(cat $BAT/capacity)" ${remaining}"
+			echo "$(printWithFG $YELLOW ) $(cat $BAT/capacity) ${remaining}"
          	elif [ "$status" == "Discharging" ]; then
-			echo " "$(cat $BAT/capacity)"% ${remaining} (${consumption}W)"
+			local cap=$(cat $BAT/capacity)
+			local colorState=$GREEN
+			if [ $cap -lt $BAT_LOW ]; then
+				colorState=$ORANGE
+			elif [ $cap -lt $BAT_EMPTY ]; then
+				colorState=$RED
+			fi
+			echo "$(printWithFG $colorState ) $cap% ${remaining} (${consumption}W)"
          	else
-			echo " AC"
+			echo "$(printWithFG $YELLOW ) AC"
          	fi
 	else
-		echo " AC"
+		echo "$(printWithFG $YELLOW ) AC"
 	fi
 }
 
@@ -28,5 +38,3 @@ printBatteryInfo() {
 #       		sleep 20
 #	done
 #fi
-	
-

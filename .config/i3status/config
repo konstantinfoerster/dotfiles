@@ -36,7 +36,7 @@ wireless _first_ {
 ethernet _first_ {
         # if you use %speed, i3status requires root privileges
         format_up = " %ip"
-        format_down = " down"
+        format_down = "%{F#d73737}%{F-} down"
 }
 
 battery 0 {
@@ -60,7 +60,8 @@ run_watch DHCP {
 }
 
 run_watch VPN {
-        pidfile = "/var/run/vpnc/pid"
+        pidfile = "/var/run/openvpn.pid"
+	format = "vpn on"
 	format_down = "vpn off"
 }
 

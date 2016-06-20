@@ -32,6 +32,13 @@ if [ -f "$userresources" ]; then
 fi
 unset userresources
 
+eval `/usr/bin/ssh-agent`
+export SSH_ASKPASS=/usr/lib/ssh/x11-ssh-askpass ssh-add < /dev/null
+
+keychain id_dsa
+[ -f ~/.keychain/$HOSTNAME-sh ] && . ~/.keychain/$HOSTNAME-sh 2>/dev/null
+[ -f ~/.keychain/$HOSTNAME-sh-gpg ] && . ~/.keychain/$HOSTNAME-sh-gpg 2>/dev/null
+
 #Swap escape with caps key
 setxkbmap -option caps:swapescape
 
@@ -51,7 +58,6 @@ devmon 	--sync --no-gui \
 	--exec-on-video "notify-send  \"Devmon\" \"Mounted video DVD\"" \
 	--exec-on-audio "notify-send  \"Devmon\" \"Mounted audio CD\"" \
 	--exec-on-remove "notify-send  \"Devmon\" \"Removed %f\"" > /dev/null 2>&1 &
-
 exec bspwm 2> ${HOME}/.local/log/bspwm.log
 
 #:exec ck-launch-session dbus-launch bspwm

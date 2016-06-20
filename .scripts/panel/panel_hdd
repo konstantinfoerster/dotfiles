@@ -1,0 +1,5 @@
+#!/bin/sh
+
+function printHdd() {
+	echo "/" $(df -h / | cut -d' ' -f8)
+}

@@ -1,10 +1,32 @@
 #!/bin/sh
 
+source $HOME/.scripts/common.sh
+source $HOME/.config/colors/current
+
 DEV_ETH="enp0s25"
 DEV_WIFI="wlp10s0"
 
 function printWifi() {
 	local ssid=$(essid -w $DEV_WIFI)
-	 
+	local dev_net=$DEV_ETH
+
+	if [ "$ssid" ]; then
+		dev_net=$DEV_WIFI
+	fi
+
+	local ipAddr=$(ip addr show $dev_net | grep inet\\s | awk '{print $2}')
+
+	colorState=$GREEN
+	if [ -z "$ipAddr" ]; then
+		ipAddr="down"	
+		colorState=$RED
+	fi
+
+	if [ "$DEV_WIFI" == "$dev_net"  ]; then
+		echo $(printWithFG $colorState ) $ssid $ipAddr " | " $(printWithFG $RED ) "down"
+	else
+		echo "$(printWithFG $RED ) down | $(printWithFG $colorState ) $ipAddr"
+	fi	
 	
 }
+printWifi

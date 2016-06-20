@@ -11,7 +11,7 @@ function sourceDir() {
 }
 
 function printWithFG(){
-	echo "{F$1}$2{F-}"
+	echo "%{F$1}$2%{F-}"
 }
 
 function printIcon() {
