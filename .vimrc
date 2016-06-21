@@ -16,6 +16,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kien/ctrlp.vim'
+Plugin 'jiangmiao/auto-pairs'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -41,6 +42,9 @@ set number
 set hidden
 
 set showtabline=1
+
+set shiftwidth=2
+set softtabstop=4
 
 syntax on
 
