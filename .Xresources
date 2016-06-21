@@ -1,20 +1,20 @@
 #include "/home/kg/.config/colors/base16Dune"
 
 ! do not scroll with output
-URxvt.scrollTtyOutput: false
+URxvt*scrollTtyOutput: false
 
 ! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
-URxvt.scrollWithBuffer: true
+URxvt*scrollWithBuffer: true
 
 ! scroll back to the bottom on keypress
-URxvt.scrollTtyKeypress: true
+URxvt*scrollTtyKeypress: true
 
-URxvt.cursorUnderline: true
-URxvt.cursorBlink: true
-URxvt.scrollBar: false
-URxvt.depth: 32 
-URxvt.internalBorder: 5
-URxvt.dynamicColors: on
+URxvt*cursorUnderline: true
+URxvt*cursorBlink: true
+URxvt*scrollBar: false
+URxvt*depth: 32 
+URxvt*internalBorder: 5
+URxvt*dynamicColors: on
 URxvt.urgentOnBell: true
 
 ! Disable annoying ISO keycap mode pop up:
@@ -33,10 +33,10 @@ URxvt.underlineURLs: true
 
 ! Font
 URxvt.allow_bold: true
-URxvt.font: xft:Hack:pixelsize=11:antialias=true,hinting=true,xft:icomoon:pixelsize=11
-URxvt.boldFont: xft:Hack:pixelsize=11:antialias=true,hinting=true,xft:icomoon:pixelsize=11
-URxvt.italicFont: xft:Hack:pixelsize=11:antialias=true,hinting=true,xft:icomoon:pixelsize=11
-URxvt.bolditalicFont: xft:Hack:pixelsize=11:antialias=true,hinting=true,xft:icomoon:pixelsize=11
+*font: xft:Hack:pixelsize=12:antialias=true,hinting=true,xft:icomoon:pixelsize=12
+*boldFont: xft:Hack:pixelsize=12:antialias=true,hinting=true,xft:icomoon:pixelsize=12
+*italicFont: xft:Hack:pixelsize=12:antialias=true,hinting=true,xft:icomoon:pixelsize=12
+*bolditalicFont: xft:Hack:pixelsize=12:antialias=true,hinting=true,xft:icomoon:pixelsize=12
 
 Xft.autohint: 0
 Xft.antialias: 1
@@ -44,4 +44,4 @@ Xft.lcdfilter: lcddefault
 Xft.hinting: 1
 Xft.hintstyle: hintslight
 Xft.rgba: rgb
-Xft.dpi: 96
+Xft.dpi: 96 
