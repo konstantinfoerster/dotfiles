@@ -67,7 +67,7 @@ devmon 	--sync --no-gui \
 	--exec-on-video "notify-send  \"Devmon\" \"Mounted video DVD\"" \
 	--exec-on-audio "notify-send  \"Devmon\" \"Mounted audio CD\"" \
 	--exec-on-remove "notify-send  \"Devmon\" \"Removed %f\"" > /dev/null 2>&1 &
-exec bspwm 2> ${HOME}/.local/log/bspwm.log
+exec bspwm 2> $HOME/.local/log/bspwm.log
 #:exec ck-launch-session dbus-launch bspwm
 
 # vim: set ft=sh:

@@ -15,11 +15,9 @@ export TERM='xterm-256color'
 
 stty -ixon
 
-if [ -n "$BASH_VERSION" ]; then
-    [[ -f $HOME/.bashrc ]] && . ~/.bashrc
-fi
+#[[ -f $HOME/.bashrc ]] && . ~/.bashrc
 
-if [ -f /usr/bin/bspwm ]; then
+if [ -f /usr/local/bin/bspwm ]; then
     [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
 fi
 
