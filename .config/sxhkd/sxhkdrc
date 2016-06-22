@@ -3,8 +3,8 @@
 #
 
 # terminal emulator
-alt + Return
-	urxvt
+alt + shift + Return
+	~/.scripts/tmux.sh
 
 # program launcher
 alt + space

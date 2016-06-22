@@ -11,11 +11,11 @@ fi
 export VISUAL=vim
 export EDITOR=vim
 
-export TERM='xterm-256color'
+#export TERM='xterm-256color'
 
 stty -ixon
 
-#[[ -f $HOME/.bashrc ]] && . ~/.bashrc
+[[ -f $HOME/.bashrc ]] && . ~/.bashrc
 
 if [ -f /usr/local/bin/bspwm ]; then
     [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
