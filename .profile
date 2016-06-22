@@ -1,7 +1,4 @@
-#
-# ~/.profile
-#
-# Will be executed on login
+# will be executed on login
 
 if [ -d $HOME/.bin ]; then
 	# add user drop-in path, useful for local builds of things
