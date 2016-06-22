@@ -1,0 +1,45 @@
+#!/bin/sh
+
+#will be read from .xinitrc and gdm
+
+source $HOME/.scripts/common.sh
+
+usermodmap=$HOME/.Xmodmap
+sysmodmap=/etc/X11/xinit/.Xmodmap
+
+if [ -f $sysmodmap ]; then
+	xmodmap "$sysmodmap"
+fi
+unset sysmodmap
+
+if [ -f "$usermodmap" ]; then
+        xmodmap "$usermodmap"
+fi
+unset usermodmap
+
+userresources=$HOME/.Xresources
+sysresources=/etc/X11/xinit/.Xresources
+
+#read global system Xresources file
+if [ -f "$sysresources" ]; then
+	xrdb -merge "$sysresources"
+fi
+unset sysresources
+
+#read user Xresources file
+if [ -f "$userresources" ]; then
+	xrdb -merge "$userresources"
+fi
+unset userresources
+
+#Swap escape with caps key
+setxkbmap -option caps:swapescape
+
+wmname LG3D
+export _JAVA_AWT_WM_NONREPARENTING=1
+#export SWT_GTK3=0
+
+xset +fp $HOME/.local/share/fonts
+xset fp rehash
+
+# vim: set ft=sh:

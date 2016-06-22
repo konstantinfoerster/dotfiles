@@ -21,8 +21,8 @@ shopt -s checkwinsize
 
 PROMPT_DIRTRIM=4 
 
-#Arch default
-#PS1='[\u@\h \W]\$ '
+#Swap escape with caps key
+setxkbmap -option caps:swapescape
 
 #\u user \h hostname \w pwd
 PS1="\u@\h \w\\$ "
