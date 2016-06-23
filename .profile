@@ -1,7 +1,7 @@
 # will be executed on login
 
-if [ -d $HOME/.bin ]; then
-	# add user drop-in path, useful for local builds of things
+# set PATH so it includes user's private bin if it exist
+if [ -d "$HOME/.bin" ]; then
 	export PATH=~/.bin:$PATH
 fi
 
@@ -12,7 +12,11 @@ export EDITOR=vim
 
 stty -ixon
 
-[[ -f $HOME/.bashrc ]] && . ~/.bashrc
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists 
+    [[ -f $HOME/.bashrc ]] && . ~/.bashrc
+fi
 
 if [ -f /usr/local/bin/bspwm ]; then
     [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
