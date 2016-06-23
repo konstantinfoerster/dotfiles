@@ -8,7 +8,8 @@ sourceDir /etc/X11/xinit/xinitrc.d
 if [ -f /usr/bin/ssh-agent ]; then
     eval `/usr/bin/ssh-agent`
     if [ -f /usr/lib/ssh/x11-ssh-askpass ]; then
-        export SSH_ASKPASS=/usr/lib/ssh/x11-ssh-askpass ssh-add < /dev/null
+        SSH_ASKPASS=/usr/lib/ssh/x11-ssh-askpass ssh-add < /dev/null
+	export SSH_ASKPASS
     fi
     
     if [ -f /usr/bin/keychain ]; then
@@ -30,7 +31,7 @@ if [ -f /usr/local/bin/bspwm ]; then
 	--exec-on-video "notify-send  \"Devmon\" \"Mounted video DVD\"" \
 	--exec-on-audio "notify-send  \"Devmon\" \"Mounted audio CD\"" \
 	--exec-on-remove "notify-send  \"Devmon\" \"Removed %f\"" > /dev/null 2>&1 &
-    exec bspwm 2> $HOME/.local/log/bspwm.log
+    exec bspwm &> $HOME/.local/log/bspwm.log
     #:exec ck-launch-session dbus-launch bspwm
 fi
 # vim: set ft=sh:
