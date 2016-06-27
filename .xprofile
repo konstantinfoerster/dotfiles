@@ -32,9 +32,6 @@ if [ -f "$userresources" ]; then
 fi
 unset userresources
 
-#Swap escape with caps key
-setxkbmap -option caps:swapescape
-
 wmname LG3D
 export _JAVA_AWT_WM_NONREPARENTING=1
 #export SWT_GTK3=0
