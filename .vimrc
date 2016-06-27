@@ -17,6 +17,8 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kien/ctrlp.vim'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'pangloss/vim-javascript'
+Plugin 'elzr/vim-json'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -59,9 +61,21 @@ noremap <Left> <NOP>
 noremap <Right> <NOP>
 
 " Airline
+"
 let g:airline_powerline_fonts = 1
 let g:airline_theme='dark' 
 if !exists('g:airline_symbols')
    let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
+
+" vim javascript
+" 
+" Enables syntax highlighting for JSDocs
+let g:javascript_plugin_jsdoc = 1
+"Enables some additional syntax highlighting for NGDocs. Requires JSDoc plugin to be enabled as well.
+let g:javascript_plugin_ngdoc = 1
+
+" vim json
+" disable conceal
+let g:vim_json_syntax_conceal = 0
