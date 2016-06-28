@@ -29,10 +29,11 @@ PS1="\u@\h \w\\$ "
 
 if [ -f ~/.bashrc.d/git-prompt.sh ]; then
     source ~/.bashrc.d/git-prompt.sh
-    PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
     GIT_PS1_SHOWDIRTYSTATE=1
     GIT_PS1_SHOWCOLORHINTS=1
-fi
+    #export GIT_PS1_SHOWUNTRACKEDFILES=1 # can be slow
+    PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
+  fi
 
 if [ -f ~/.bashrc.d/bash-aliases.sh ]; then
   source ~/.bashrc.d/bash-aliases.sh
