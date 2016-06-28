@@ -36,7 +36,7 @@ wmname LG3D
 export _JAVA_AWT_WM_NONREPARENTING=1
 #export SWT_GTK3=0
 
-xset +fp $HOME/.local/share/fonts
+xset +fp $HOME/.local/share/fonts/glyph-fonts
 xset fp rehash
 
 # vim: set ft=sh:
