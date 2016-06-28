@@ -11,6 +11,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Git wrapper
+Plugin 'chriskempson/base16-vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
@@ -37,8 +38,11 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+set background=dark
+colorscheme base16-atelier-dune
+
 " show line numbers
-" set number
+set number
 
 " Use relative line numbers
 set relativenumber
@@ -46,14 +50,18 @@ set relativenumber
 " hides buffers instead of closing them
 set hidden
 
+set textwidth=120
+
 " highlight current line number and line
 set cursorline
-hi CursorLine   cterm=NONE ctermbg=10 ctermfg=NONE
-hi cursorlinenr ctermfg=13
+" already set by colorschema
+"hi CursorLine   cterm=NONE ctermbg=10 ctermfg=NONE
+"hi CursorLineNr ctermfg=13
 
 " highlight column after 'textwidth'
 set colorcolumn=+1
-hi ColorColumn ctermbg=10
+" already set by colorschema
+" hi ColorColumn ctermbg=10
 
 " Use spaces insted tabs
 set expandtab
@@ -88,15 +96,14 @@ set ignorecase
 " requires +clipboard support
 " set clipboard=unnamedplus
 
-
 syntax on
 
 " Key mappings
 
 " Change the mapleader from \ to ,
-let mapleader=","
+let mapleader=","   
 set pastetoggle=<F2>
-
+      
 map <C-n> :NERDTreeToggle<CR>
 
 " Copy with ctr+c

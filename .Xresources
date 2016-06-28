@@ -1,4 +1,4 @@
-#include "/home/kg/.config/colors/base16Dune"
+#include "/home/kg/.config/colors/base16-atelierdune.dark.xresources"
 
 ! do not scroll with output
 URxvt*scrollTtyOutput: false
