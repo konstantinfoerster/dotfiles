@@ -1,42 +1,49 @@
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-" call vundle#begin('~/some/path/here')
+" install vim-plug if not exists
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
-" Git wrapper
-Plugin 'chriskempson/base16-vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'kien/ctrlp.vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'pangloss/vim-javascript'
-Plugin 'elzr/vim-json'
+" Make sure you use single quotes
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-" filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just
-" :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to
-" auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+Plug 'chriskempson/base16-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'  }
+Plug 'kien/ctrlp.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'easymotion/vim-easymotion'
+Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
+Plug 'elzr/vim-json', { 'for': ['javascript', 'json'] }
+
+"function! BuildYCM(info)
+"  if a:info.status == 'installed' || a:info.force
+"    !./install.sh
+"  endif
+"endfunction
+"Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+
+" Add plugins to &runtimepath
+call plug#end()
+
+" filetype detection and settings
+filetype plugin indent on
+
+" syntax highlighting"
+syntax enable
+
+" Git commits.
+autocmd FileType gitcommit setlocal spell
+
+" enable timout for commands
+set ttimeout
+set ttimeoutlen=100
 
 set background=dark
 colorscheme base16-atelier-dune
@@ -63,6 +70,11 @@ set colorcolumn=+1
 " already set by colorschema
 " hi ColorColumn ctermbg=10
 
+" Copy indent from current line when starting a new line
+set autoindent
+
+set smarttab
+
 " Use spaces insted tabs
 set expandtab
 
@@ -73,7 +85,7 @@ set tabstop=4
 set shiftwidth=4
 " Sets the number of columns for a tab
 set softtabstop=4
- 
+
 " Use actual tab chars in Makefiles.
 autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
 
@@ -89,22 +101,89 @@ set laststatus=2
 " set show matching parenthesis
 set showmatch
 
+" incremental search rules
+set incsearch
+
+" highlight all search results
+set hlsearch
+
 " ignore case when searching
 set ignorecase
+
+" case senstive if one character is uppercase
+set smartcase
 
 " use + (CLIPBOARD) register, so we can just copy with yy
 " requires +clipboard support
 " set clipboard=unnamedplus
+"
+" let the backspace key work normally
+set backspace=indent,eol,start
 
-syntax on
+" better command line completion, shows a list of matches
+set wildmenu
 
-" Key mappings
+" show cursor and line position in status line
+set ruler
+
+" start scrolling x lines before view ends
+if !&scrolloff
+  set scrolloff=5
+endif
+if !&sidescrolloff
+  set sidescrolloff=5
+endif
+
+" as much as possible of the last line in a window will be displayed
+set display+=lastline
+
+if &encoding ==# 'latin1' && has('gui_running')
+  set encoding=utf-8
+endif
+
+" search tags files efficiently
+if has('path_extra')
+  setglobal tags-=./tags tags-=./tags; tags^=./tags;
+endif
+
+if &shell =~# 'fish$'
+  set shell=/bin/bash
+endif
+
+set autoread
+
+if &history < 1000
+  set history=1000
+endif
+if &tabpagemax < 50
+  set tabpagemax=50
+endif
+if !empty(&viminfo)
+  set viminfo^=!
+endif
+
+" exclude options from storing in sessions
+set sessionoptions-=options
+
+" Allow color schemes to do bright colors without forcing bold.
+if &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
+  set t_Co=16
+endif
+
+" Load matchit.vim, but only if the user hasn't installed a newer version.
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+endif
 
 " Change the mapleader from \ to ,
-let mapleader=","   
+let mapleader=","
+
 set pastetoggle=<F2>
-      
+
 map <C-n> :NERDTreeToggle<CR>
+
+" Use <C-L> to clear the highlighting of :set hlsearch.
+nnoremap <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 
 " Copy with ctr+c
 " map <C-c> "+y<CR>"
@@ -114,6 +193,7 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
 " disable ex mode
 nnoremap Q <NOP>
 
@@ -122,6 +202,19 @@ nnoremap Q <NOP>
 "map <C-j> <C-w>j
 "map <C-k> <C-w>k
 "map <C-l> <C-w>l
+
+map <Leader> <Plug>(easymotion-prefix)
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+
+map / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+
+" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
+" Without these mappings, `n` & `N` works fine. (These mappings just provide
+" different highlight method and have some other features )
+map n <Plug>(easymotion-next)
+map N <Plug>(easymotion-prev)
 
 " Airline
 "
@@ -134,7 +227,7 @@ let g:airline_theme='dark'
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 
 " vim javascript
-" 
+"
 " Enables syntax highlighting for JSDocs
 let g:javascript_plugin_jsdoc = 1
 "Enables some additional syntax highlighting for NGDocs. Requires JSDoc plugin to be enabled as well.
@@ -143,3 +236,5 @@ let g:javascript_plugin_ngdoc = 1
 " vim json
 " disable conceal
 let g:vim_json_syntax_conceal = 0
+
+" vim:set ft=vim et sw=2:
