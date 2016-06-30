@@ -1,4 +1,5 @@
-set nocompatible              " be iMproved, required
+" be iMproved, required
+set nocompatible
 
 " install vim-plug if not exists
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -16,9 +17,12 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'  }
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
+
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-surround'
 Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
 Plug 'elzr/vim-json', { 'for': ['javascript', 'json'] }
 
@@ -105,7 +109,8 @@ set showmatch
 set incsearch
 
 " highlight all search results
-set hlsearch
+" vim-motions will show highlights
+"set hlsearch
 
 " ignore case when searching
 set ignorecase
@@ -139,6 +144,10 @@ set display+=lastline
 
 if &encoding ==# 'latin1' && has('gui_running')
   set encoding=utf-8
+endif
+
+if &listchars ==# 'eol:$'
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 endif
 
 " search tags files efficiently
@@ -176,7 +185,7 @@ if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
 endif
 
 " Change the mapleader from \ to ,
-let mapleader=","
+let mapleader="\<Space>"
 
 set pastetoggle=<F2>
 
@@ -236,5 +245,35 @@ let g:javascript_plugin_ngdoc = 1
 " vim json
 " disable conceal
 let g:vim_json_syntax_conceal = 0
+
+" ctrlp
+
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " respect git ignore files
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+
+  let g:ctrlp_working_path_mode = 'r'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+
+  "let g:ctrlp_extensions = ['line']
+endif
+
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " vim:set ft=vim et sw=2:
