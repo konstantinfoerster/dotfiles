@@ -19,19 +19,18 @@ if [ -f /usr/bin/ssh-agent ]; then
     fi
 fi
 
-if [ -f /usr/local/bin/bspwm ]; then
-    sxhkd &
+sxhkd &
 
-    xsetroot -cursor_name left_ptr &
-    #compton -f -b
-    devmon 	--sync --no-gui \
+xsetroot -solid '#333'
+xsetroot -cursor_name left_ptr &
+#compton -f -b
+devmon 	--sync --no-gui \
 	--exec-on-drive "notify-send \"Devmon\" \"Mounted %f on %d\"" \
 	--exec-on-unmount "notify-send \"Devmon\" \"Unmounted %f\"" \
 	--exec-on-disc "notify-send \"Devmon\" \"Mounted data CD/DVD\"" \
 	--exec-on-video "notify-send  \"Devmon\" \"Mounted video DVD\"" \
 	--exec-on-audio "notify-send  \"Devmon\" \"Mounted audio CD\"" \
 	--exec-on-remove "notify-send  \"Devmon\" \"Removed %f\"" > /dev/null 2>&1 &
-    exec bspwm > $HOME/.local/log/bspwm.log 2>&1
+exec bspwm > $HOME/.local/log/bspwm.log 2>&1
     #:exec ck-launch-session dbus-launch bspwm
-fi
 # vim: set ft=sh:
