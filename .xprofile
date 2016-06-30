@@ -13,7 +13,7 @@ fi
 unset sysmodmap
 
 if [ -f "$usermodmap" ]; then
-        xmodmap "$usermodmap"
+    xmodmap "$usermodmap"
 fi
 unset usermodmap
 

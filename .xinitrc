@@ -31,7 +31,7 @@ if [ -f /usr/local/bin/bspwm ]; then
 	--exec-on-video "notify-send  \"Devmon\" \"Mounted video DVD\"" \
 	--exec-on-audio "notify-send  \"Devmon\" \"Mounted audio CD\"" \
 	--exec-on-remove "notify-send  \"Devmon\" \"Removed %f\"" > /dev/null 2>&1 &
-    exec bspwm &> $HOME/.local/log/bspwm.log
+    exec bspwm > $HOME/.local/log/bspwm.log 2>&1
     #:exec ck-launch-session dbus-launch bspwm
 fi
 # vim: set ft=sh:
