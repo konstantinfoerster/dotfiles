@@ -1,9 +1,0 @@
-[Unit]
-Description=Starts lemonbar panel
-After=monitor-hotplug.service
-
-[Service]
-ExecStartPre=-/bin/pkill -x panel
-ExecStart=/home/kg/.scripts/panel/panel
-Environment=DISPLAY=:0
-Type=simple

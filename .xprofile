@@ -13,7 +13,7 @@ fi
 unset sysmodmap
 
 if [ -f "$usermodmap" ]; then
-        xmodmap "$usermodmap"
+    xmodmap "$usermodmap"
 fi
 unset usermodmap
 
@@ -32,8 +32,8 @@ if [ -f "$userresources" ]; then
 fi
 unset userresources
 
-wmname LG3D
-export _JAVA_AWT_WM_NONREPARENTING=1
+#wmname LG3D
+#export _JAVA_AWT_WM_NONREPARENTING=1
 #export SWT_GTK3=0
 
 xset +fp $HOME/.local/share/fonts/glyph-fonts

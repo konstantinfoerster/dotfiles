@@ -12,7 +12,6 @@ if [ $(pgrep -cx panel) -gt 1 ] ; then
 	exit 1
 fi
 
-
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
 [ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
