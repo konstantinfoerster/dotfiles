@@ -52,7 +52,7 @@ battery 0 {
 	last_full_capacity = true
 	low_threshold = 5
 	threshold_type = "percentage"
-	path = "/sys/class/power_supply/CMB1/uevent"
+	path = "/sys/class/power_supply/BAT0/uevent"
 }
 
 run_watch DHCP {
@@ -66,7 +66,7 @@ run_watch VPN {
 }
 
 tztime local {
-        format = " %d.%m.%Y %H:%M:%S"
+        format = " %d.%m.%Y %H:%M"
 }
 
 load {

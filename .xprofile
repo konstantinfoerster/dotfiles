@@ -1,7 +1,6 @@
 #!/bin/sh
 
 #will be read from .xinitrc and gdm
-
 source $HOME/.scripts/common.sh
 
 usermodmap=$HOME/.Xmodmap
@@ -33,8 +32,11 @@ fi
 unset userresources
 
 #wmname LG3D
-#export _JAVA_AWT_WM_NONREPARENTING=1
+export _JAVA_AWT_WM_NONREPARENTING=1
 #export SWT_GTK3=0
+
+#Swap escape with caps key
+setxkbmap -option caps:swapescape
 
 xset +fp $HOME/.local/share/fonts/glyph-fonts
 xset +fp $HOME/.local/share/fonts/hack

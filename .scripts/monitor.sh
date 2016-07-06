@@ -6,19 +6,20 @@ export XAUTHORITY=/home/kg/.Xauthority
 
 XRANDR="xrandr"
 CMD="$XRANDR"
-DEFAULT_DISPLAY="LVDS1"
+DEFAULT_DISPLAY="LVDS2"
 connectedDisplays=$(xrandr | grep " connected" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
 displayCount=`echo $connectedDisplays | wc --words`
 
 configureWorkspaces() {
-	i=1
-        for monitor in $(bspc query -M); do
-                 bspc monitor $monitor \
-                        -n "$i" \
-                        -d {I,II,III,IV,V}
-                 let i++
-         done
-         unset i
+    echo "@Deprecated configureWorkspaces"
+	let i=1
+    for monitor in $(bspc query -M); do
+        bspc monitor $monitor \
+           -n "$i" \
+           -d {I,II,III,IV,V}
+           let i++
+    done
+    unset i
 }
 
 beforeDisplay=""
@@ -48,9 +49,9 @@ configureDisplays() {
 	for VOUT in ${!VOUTS[*]}; do
 		buildDisplayCmd ${VOUT} ${VOUTS[${VOUT}]}
 	done
-#	set -x
+	set -x
 	$CMD
-#	set +x
+	set +x
 }
 
 find_mode() {

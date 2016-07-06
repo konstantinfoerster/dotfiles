@@ -1,15 +1,14 @@
 #!/bin/sh
-
+echo "loading .xinitrc"
 source $HOME/.scripts/common.sh
 sourceDir /etc/X11/xinit/xinitrc.d
 
 [ -f ~/.xprofile ] && source ~/.xprofile
 
 if [ -f /usr/bin/ssh-agent ]; then
-    eval `/usr/bin/ssh-agent`
+#    eval `/usr/bin/ssh-agent`
     if [ -f /usr/lib/ssh/x11-ssh-askpass ]; then
-        SSH_ASKPASS=/usr/lib/ssh/x11-ssh-askpass ssh-add < /dev/null
-	export SSH_ASKPASS
+        export SSH_ASKPASS=ssh-askpass
     fi
     
 #    if [ -f /usr/bin/keychain ]; then
@@ -23,6 +22,8 @@ sxhkd &
 
 xsetroot -solid '#333'
 xsetroot -cursor_name left_ptr &
+xautolock -detectsleep -time 5 -locker $HOME/.scripts/lock.sh &
+xset dpms 240 600 0
 #compton -f -b
 devmon 	--sync --no-gui \
 	--exec-on-drive "notify-send \"Devmon\" \"Mounted %f on %d\"" \
@@ -31,6 +32,7 @@ devmon 	--sync --no-gui \
 	--exec-on-video "notify-send  \"Devmon\" \"Mounted video DVD\"" \
 	--exec-on-audio "notify-send  \"Devmon\" \"Mounted audio CD\"" \
 	--exec-on-remove "notify-send  \"Devmon\" \"Removed %f\"" > /dev/null 2>&1 &
+
 exec bspwm > $HOME/.local/log/bspwm.log 2>&1
     #:exec ck-launch-session dbus-launch bspwm
 # vim: set ft=sh:

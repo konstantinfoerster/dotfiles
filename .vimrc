@@ -206,6 +206,8 @@ noremap <Right> <NOP>
 " disable ex mode
 nnoremap Q <NOP>
 
+nmap <C-N><C-N> :set invnumber<CR>:set invrelativenumber<CR>
+
 " Easy window navigation
 "map <C-h> <C-w>h
 "map <C-j> <C-w>j
