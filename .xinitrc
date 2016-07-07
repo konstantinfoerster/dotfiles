@@ -18,6 +18,10 @@ if [ -f /usr/bin/ssh-agent ]; then
     fi
 fi
 
+intel-virtual-output
+
+$HOME/.scripts/monitor.sh work
+
 sxhkd &
 
 xsetroot -solid '#333'

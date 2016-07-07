@@ -1,6 +1,6 @@
 #!/bin/sh
 
-$HOME/.scripts/monitor.sh 
+#$HOME/.scripts/monitor.sh 
 #$HOME/.scripts/monitor.sh workspaces
 
 source $HOME/.config/colors/current
@@ -38,5 +38,5 @@ bspc config merge_overlapping_monitors true
 #bspc rule -a Chromium desktop='^2'
 #bspc rule -a mplayer2 state=floating
 
-setsid $HOME/.scripts/panel/panel &
+$HOME/.scripts/panel/panel &
 #$HOME/.scripts/panel/panel_restart.sh &

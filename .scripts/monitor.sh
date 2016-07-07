@@ -54,6 +54,13 @@ configureDisplays() {
 	set +x
 }
 
+configureWork() {
+    set -x
+#    xrandr --output LVDS1 --auto --output VIRTUAL9 --off --output VIRTUAL8 --off --output VIRTUAL3 --off --output VIRTUAL2 --off --output VIRTUAL1 --off --output VIRTUAL7 --auto --left-of LVDS1 --output VIRTUAL6 --off --output VIRTUAL5 --off --output VIRTUAL4 --off --output VGA1 --off
+xarndr --output LVDS1 --auto --right-of VIRTUAL5 --output VIRTUAL7 --auto --left-of VIRTUAL5 --output VIRTUAL5 --auto
+    set +x
+}
+
 find_mode() {
     echo $(${XRANDR} |grep ${1} -A1|awk '{FS="[ x]"} /^\s/{printf("WIDTH=%s\nHEIGHT=%s", $4,$5)}')
 }
@@ -101,10 +108,12 @@ case "$1" in
 	    ;;
 
 	swap)
-            swapDisplays
-            ;;
-         
-        *)
+        swapDisplays
+        ;;
+    work)
+        configureWork
+        ;;      
+    *)
 	    configureDisplays	
  	    ;;
 esac
