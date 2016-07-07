@@ -39,4 +39,4 @@ bspc config merge_overlapping_monitors true
 #bspc rule -a mplayer2 state=floating
 
 setsid $HOME/.scripts/panel/panel &
-$HOME/.scripts/panel/panel_restart.sh &
+#$HOME/.scripts/panel/panel_restart.sh &

@@ -1,13 +1,12 @@
 #!/bin/sh
 
-function restartPanel() {
-    while read -r line; do
-        echo "Killing panel on signal $line"
+#function restartPanel() {
+#    while read -r line; do
         pkill -x panel
         sleep 1
         echo "Starting panel"
         setsid $HOME/.scripts/panel/panel &
-    done
-}
+#    done
+#}
 
-bspc subscribe monitor_geometry | restartPanel
+#bspc subscribe monitor_geometry | restartPanel

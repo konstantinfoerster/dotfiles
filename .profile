@@ -18,7 +18,7 @@ if [ -n "$BASH_VERSION" ]; then
     [[ -f $HOME/.bashrc ]] && . $HOME/.bashrc
 fi
 if [ -f /usr/local/bin/bspwm ]; then
-    [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && ssh-agentstartx
+    [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && ssh-agent startx
 fi
 
 # vim: ft=sh:

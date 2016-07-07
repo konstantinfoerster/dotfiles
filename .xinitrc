@@ -11,11 +11,11 @@ if [ -f /usr/bin/ssh-agent ]; then
         export SSH_ASKPASS=ssh-askpass
     fi
     
-#    if [ -f /usr/bin/keychain ]; then
-#        keychain id_dsa
-#        [ -f ~/.keychain/$HOSTNAME-sh  ] && . ~/.keychain/$HOSTNAME-sh 2>/dev/null
-#        [ -f ~/.keychain/$HOSTNAME-sh-gpg  ] && . ~/.keychain/$HOSTNAME-sh-gpg 2>/dev/null
-#    fi
+    if [ -f /usr/bin/keychain ]; then
+        keychain id_dsa id_rsa
+        [ -f ~/.keychain/$HOSTNAME-sh  ] && . ~/.keychain/$HOSTNAME-sh 2>/dev/null
+        [ -f ~/.keychain/$HOSTNAME-sh-gpg  ] && . ~/.keychain/$HOSTNAME-sh-gpg 2>/dev/null
+    fi
 fi
 
 sxhkd &

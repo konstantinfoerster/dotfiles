@@ -18,14 +18,15 @@ trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 mkfifo "$PANEL_FIFO"
 
 source $HOME/.config/colors/current
-let i=1
+i=1
 for monitor in $(bspc query -M); do
-	bspc monitor $monitor \     
-	-n "$i" \
-	-d {I,II,III,IV,V}
-	let i++
+	bspc monitor $monitor \
+        -n "$i" \
+    	-d {I,II,III,IV,V}
+    	let i++
 done
 unset i
+
 bspc config top_padding $PANEL_HEIGHT
 bspc subscribe report > "$PANEL_FIFO" &
 xtitle -sf 'T%s' > "$PANEL_FIFO" &
@@ -37,6 +38,16 @@ i3status > "$PANEL_FIFO" &
 #$HOME/.scripts/panel/panel_audio > "$PANEL_FIFO" &
    
 $HOME/.scripts/panel/panel_bar < "$PANEL_FIFO" | lemonbar -a 20 -n "$PANEL_WM_NAME" -g x$PANEL_HEIGHT -f "$PANEL_FONT" -f "$PANEL_ICON_FONT" -F "$COLOR_FG" -B "$COLOR_BG" | sh &
+
+
+function restartPanel() {
+    while read -r line; do
+        echo "Killing panel on signal $line"
+	    setsid $HOME/.scripts/panel/panel_restart.sh
+    done
+}
+bspc subscribe monitor_geometry | head -1 | restartPanel
+echo "ok"
 wid=$(xdo id -a "$PANEL_WM_NAME")
 tries_left=20
 
