@@ -1,3 +1,0 @@
-#FT2_SUBPIXEL_HINTING=0  # Classic mode
-FT2_SUBPIXEL_HINTING=1  # Infinality mode
-#FT2_SUBPIXEL_HINTING=2  # Default mode

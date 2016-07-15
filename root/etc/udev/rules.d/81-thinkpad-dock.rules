@@ -1,0 +1,3 @@
+SUBSYSTEM=="usb", ACTION=="remove", ENV{ID_VENDOR}=="17ef", ENV{ID_MODEL}=="100a", RUN+="/home/kg/.scripts/monitor.sh disable"
+#SUBSYSTEM=="usb", ACTION=="add", ENV{ID_VENDOR}=="17ef", ENV{ID_MODEL}=="100a", RUN+="/home/kg/.scripts/monitor.sh work > /tmp/work.log"
+
