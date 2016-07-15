@@ -1,8 +1,5 @@
 #!/bin/sh
 
-#$HOME/.scripts/monitor.sh 
-#$HOME/.scripts/monitor.sh workspaces
-
 source $HOME/.config/colors/current
 
 bspc config border_width         2
@@ -39,4 +36,3 @@ bspc config merge_overlapping_monitors true
 #bspc rule -a mplayer2 state=floating
 
 $HOME/.scripts/panel/panel &
-#$HOME/.scripts/panel/panel_restart.sh &

@@ -6,7 +6,10 @@ sourceDir /etc/X11/xinit/xinitrc.d
 [ -f ~/.xprofile ] && source ~/.xprofile
 
 if [ -f /usr/bin/ssh-agent ]; then
-#    eval `/usr/bin/ssh-agent`
+    if [ -z "$SSH_AUTH_SOCK" ]; then
+        echo "shh-agent not running, starting"
+        eval `ssh-agent`
+    fi
     if [ -f /usr/lib/ssh/x11-ssh-askpass ]; then
         export SSH_ASKPASS=ssh-askpass
     fi
@@ -17,10 +20,8 @@ if [ -f /usr/bin/ssh-agent ]; then
         [ -f ~/.keychain/$HOSTNAME-sh-gpg  ] && . ~/.keychain/$HOSTNAME-sh-gpg 2>/dev/null
     fi
 fi
-
+# TODO check if on dock
 intel-virtual-output
-
-$HOME/.scripts/monitor.sh work
 
 sxhkd &
 

@@ -8,6 +8,10 @@ fi
 export VISUAL=vim
 export EDITOR=vim
 
+export FT2_SUBPIXEL_HINTING=0  # Classic mode
+#export FT2_SUBPIXEL_HINTING=1  # Infinality mode 
+#FT2_SUBPIXEL_HINTING=2  # Default mode
+
 #export TERM='xterm-256color'
 
 stty -ixon

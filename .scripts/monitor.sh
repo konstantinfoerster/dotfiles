@@ -6,7 +6,7 @@ export XAUTHORITY=/home/kg/.Xauthority
 
 XRANDR="xrandr"
 CMD="$XRANDR"
-DEFAULT_DISPLAY="LVDS2"
+DEFAULT_DISPLAY="LVDS1"
 connectedDisplays=$(xrandr | grep " connected" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
 displayCount=`echo $connectedDisplays | wc --words`
 
@@ -26,17 +26,17 @@ beforeDisplay=""
 buildDisplayCmd() {
 	local display=${1}
 	if [[ "${2}" == 'connected' ]]; then
-		if [[ $display == $DEFAULT_DISPLAY ]] && [[ $displayCount > 2 ]]; then		
+		#if [[ $display == $DEFAULT_DISPLAY ]] && [[ $displayCount > 2 ]]; then		
 			#deactivate internal display
-                        CMD="${CMD} --output $display --off"
-		else
+        #                CMD="${CMD} --output $display --off"
+	#	else
 			local displayPositon=""
 			if [[ -n $beforeDisplay ]]; then
-				displayPosition=" --right-of $beforeDisplay"
+				displayPosition=" --left-of $beforeDisplay"
 			fi
 			CMD="${CMD} --output $display --auto $displayPosition"
 			beforeDisplay=$display
-		fi
+	#	fi
 	else
 		CMD="${CMD} --output ${1} --off"
 	fi	
@@ -54,10 +54,43 @@ configureDisplays() {
 	set +x
 }
 
+onlyIntern() {
+    set -x
+
+    # maybe event isn't finished so we just wait 
+    sleep 1
+	
+    if [ $(pgrep -fc intel-virtual-output) -gt 0   ] ; then
+        echo "Killing interl-virtual-output"
+        pkill -f intel-virtual-output
+    fi
+
+    local -A VOUTS
+	eval VOUTS=$($XRANDR | awk 'BEGIN {printf("(")} /^\S.*connected/{printf("[%s]=%s ", $1, $2)} END{printf(")")}')
+	for VOUT in ${!VOUTS[*]}; do
+        if [ "${VOUT}" == "$DEFAULT_DISPLAY" ]; then
+		    buildDisplayCmd ${VOUT} ${VOUTS[${VOUT}]}
+        else
+            buildDisplayCmd ${VOUT} "disconnected"
+        fi
+    done
+    $CMD
+    set +x
+}
+
 configureWork() {
     set -x
-#    xrandr --output LVDS1 --auto --output VIRTUAL9 --off --output VIRTUAL8 --off --output VIRTUAL3 --off --output VIRTUAL2 --off --output VIRTUAL1 --off --output VIRTUAL7 --auto --left-of LVDS1 --output VIRTUAL6 --off --output VIRTUAL5 --off --output VIRTUAL4 --off --output VGA1 --off
-xarndr --output LVDS1 --auto --right-of VIRTUAL5 --output VIRTUAL7 --auto --left-of VIRTUAL5 --output VIRTUAL5 --auto
+    sleep 1
+    if [ $(pgrep -fc intel-virtual-output) -eq 0 ] ; then 
+        echo "intel-virtual-output not running. Starting!"
+        intel-virtual-output
+    fi
+    sleep 1
+    xrandr --output LVDS1 --auto --output VIRTUAL9 --off --output VIRTUAL8 --off --output VIRTUAL3 --off --output VIRTUAL2 --off --output VIRTUAL1 --off --output VIRTUAL7 --off  --output VIRTUAL6 --off --output VIRTUAL5 --auto --output VIRTUAL4 --off --output VGA1 --off
+    sleep 1
+#    configureDisplays
+#    sleep 1
+    xrandr --output LVDS1 --auto --right-of VIRTUAL5 --output VIRTUAL7 --auto --left-of VIRTUAL5 --output VIRTUAL5 --auto
     set +x
 }
 
@@ -106,13 +139,15 @@ case "$1" in
 	workspaces)
 	    configureWorkspaces
 	    ;;
-
 	swap)
         swapDisplays
         ;;
     work)
         configureWork
         ;;      
+    disable)
+        onlyIntern
+        ;;
     *)
 	    configureDisplays	
  	    ;;

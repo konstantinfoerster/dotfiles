@@ -33,10 +33,10 @@ URxvt.underlineURLs: true
 
 ! Font
 URxvt.allow_bold: true
-*font: xft:Hack:pixelsize=12:antialias=true,hinting=true,-misc-stlarch-medium-r-normal--10-100-75-75-c-80-iso10646-1
-*boldFont: xft:Hack:pixelsize=12:antialias=true,hinting=true
-*italicFont: xft:Hack:pixelsize=12:antialias=true,hinting=true
-*bolditalicFont: xft:Hack:pixelsize=12:antialias=true,hinting=true
+*font: xft:Hack:pixelsize=14:antialias=true,hinting=true,-misc-stlarch-medium-r-normal--10-100-75-75-c-80-iso10646-1
+*boldFont: xft:Hack:pixelsize=14:antialias=true,hinting=true
+*italicFont: xft:Hack:pixelsize=14:antialias=true,hinting=true
+*bolditalicFont: xft:Hack:pixelsize=14:antialias=true,hinting=true
 
 Xft.autohint: 0
 Xft.antialias: 1
@@ -46,14 +46,11 @@ Xft.hintstyle: hintslight
 Xft.rgba: rgb
 Xft.dpi: 96 
 
-! x11-ssh-askpass ------------------------------------------------------------
-
-! x11-ssh-askpass*font:                   -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
-! x11-ssh-askpass*background:             #000000
-! x11-ssh-askpass*foreground:             #ffffff
-! x11-ssh-askpass.Button*background:      #000000
-! x11-ssh-askpass.Indicator*foreground:   #ff9900
-! x11-ssh-askpass.Indicator*background:   #090909
-x11-ssh-askpass*topShadowColor:         #000000
-x11-ssh-askpass*bottomShadowColor:      #000000
-x11-ssh-askpass.*borderWidth:           1
+! x11-ssh-askpass
+ssh-askpass*font: -misc-fixed-medium-r-semicondensed--13-130-75-75-c-60-iso8859-1
+ssh-askpass*background: base00
+ssh-askpass*foreground: base05
+ssh-askpass*topShadowColor: base05
+ssh-askpass*shadowThickness: 1
+ssh-askpass*borderWidth: 1
+*Button.shadowThickness: 1

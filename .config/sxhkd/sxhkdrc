@@ -1,6 +1,8 @@
 #
 # wm independent hotkeys
 #
+{XF86Display}
+    ~/.scripts/monitor.sh work
 
 {XF86AudioRaiseVolume,XF86AudioLowerVolume}
     amixer set Master 5%{+,-}
