@@ -87,10 +87,10 @@ configureWork() {
     fi
     sleep 1
     xrandr --output LVDS1 --auto --output VIRTUAL9 --off --output VIRTUAL8 --off --output VIRTUAL3 --off --output VIRTUAL2 --off --output VIRTUAL1 --off --output VIRTUAL7 --off  --output VIRTUAL6 --off --output VIRTUAL5 --auto --output VIRTUAL4 --off --output VGA1 --off
-    sleep 1
+    sleep 2
 #    configureDisplays
 #    sleep 1
-    xrandr --output LVDS1 --auto --right-of VIRTUAL5 --output VIRTUAL7 --auto --left-of VIRTUAL5 --output VIRTUAL5 --auto
+    xrandr --output LVDS1 --auto  --output VIRTUAL7 --auto --left-of VIRTUAL5 --output VIRTUAL5 --auto --left-of LVDS1
     set +x
 }
 

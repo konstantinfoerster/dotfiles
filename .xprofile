@@ -38,8 +38,8 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 #Swap escape with caps key
 setxkbmap -option caps:swapescape
 
-xset +fp $HOME/.local/share/fonts/glyph-fonts
-xset +fp $HOME/.local/share/fonts/hack
-xset fp rehash
+#xset +fp $HOME/.local/share/fonts/glyph-fonts
+#xset +fp $HOME/.local/share/fonts/hack
+#xset fp rehash
 
 # vim: set ft=sh:

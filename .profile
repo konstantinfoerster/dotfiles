@@ -10,7 +10,7 @@ export EDITOR=vim
 
 export FT2_SUBPIXEL_HINTING=0  # Classic mode
 #export FT2_SUBPIXEL_HINTING=1  # Infinality mode 
-#FT2_SUBPIXEL_HINTING=2  # Default mode
+#export FT2_SUBPIXEL_HINTING=2  # Default mode
 
 #export TERM='xterm-256color'
 
@@ -22,7 +22,7 @@ if [ -n "$BASH_VERSION" ]; then
     [[ -f $HOME/.bashrc ]] && . $HOME/.bashrc
 fi
 if [ -f /usr/local/bin/bspwm ]; then
-    [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && ssh-agent startx
+    [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
 fi
 
 # vim: ft=sh:

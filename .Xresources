@@ -18,8 +18,8 @@ URxvt*dynamicColors: on
 URxvt.urgentOnBell: true
 
 ! Disable annoying ISO keycap mode pop up:
-URxvt.iso14755: false
-URxvt.iso14755_52: false
+URxvt.iso13755: false
+URxvt.iso13755_52: false
 
 URxvt.intensityStyles: false
 
@@ -33,10 +33,11 @@ URxvt.underlineURLs: true
 
 ! Font
 URxvt.allow_bold: true
-*font: xft:Hack:pixelsize=14:antialias=true,hinting=true,-misc-stlarch-medium-r-normal--10-100-75-75-c-80-iso10646-1
-*boldFont: xft:Hack:pixelsize=14:antialias=true,hinting=true
-*italicFont: xft:Hack:pixelsize=14:antialias=true,hinting=true
-*bolditalicFont: xft:Hack:pixelsize=14:antialias=true,hinting=true
+!URxvt.letterSpace: -1
+*font: xft:Hack:pixelsize=12:Regular,-misc-stlarch-medium-r-normal--10-100-75-75-c-80-iso10646-1
+*boldFont: xft:Hack:pixelsize=12:Bold
+*italicFont: xft:Hack:pixelsize=12:Italic
+*bolditalicFont: xft:Hack:pixelsize=12:Bold:Italic
 
 Xft.autohint: 0
 Xft.antialias: 1

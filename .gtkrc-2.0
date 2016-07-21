@@ -4,7 +4,7 @@
 include "/home/kg/.gtkrc-2.0.mine"
 gtk-theme-name="Numix"
 gtk-icon-theme-name="Adwaita"
-gtk-font-name="Hack 10"
+gtk-font-name="Droid Sans 9"
 gtk-cursor-theme-name="DMZ-Black"
 gtk-cursor-theme-size=24
 gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ

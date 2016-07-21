@@ -5,23 +5,23 @@ sourceDir /etc/X11/xinit/xinitrc.d
 
 [ -f ~/.xprofile ] && source ~/.xprofile
 
-if [ -f /usr/bin/ssh-agent ]; then
-    if [ -z "$SSH_AUTH_SOCK" ]; then
-        echo "shh-agent not running, starting"
-        eval `ssh-agent`
-    fi
-    if [ -f /usr/lib/ssh/x11-ssh-askpass ]; then
-        export SSH_ASKPASS=ssh-askpass
-    fi
-    
-    if [ -f /usr/bin/keychain ]; then
-        keychain id_dsa id_rsa
-        [ -f ~/.keychain/$HOSTNAME-sh  ] && . ~/.keychain/$HOSTNAME-sh 2>/dev/null
-        [ -f ~/.keychain/$HOSTNAME-sh-gpg  ] && . ~/.keychain/$HOSTNAME-sh-gpg 2>/dev/null
-    fi
-fi
+#if [ -f /usr/bin/ssh-agent ]; then
+#    if [ -z "$SSH_AUTH_SOCK" ]; then
+#        echo "shh-agent not running, starting"
+#        eval `ssh-agent`
+#    fi
+#    if [ -f /usr/lib/ssh/x11-ssh-askpass ]; then
+#        export SSH_ASKPASS=ssh-askpass
+#    fi
+#    
+#    if [ -f /usr/bin/keychain ]; then
+#        keychain id_dsa id_rsa
+#        [ -f ~/.keychain/$HOSTNAME-sh  ] && . ~/.keychain/$HOSTNAME-sh 2>/dev/null
+#        [ -f ~/.keychain/$HOSTNAME-sh-gpg  ] && . ~/.keychain/$HOSTNAME-sh-gpg 2>/dev/null
+#    fi
+#fi
 # TODO check if on dock
-intel-virtual-output
+#intel-virtual-output
 
 sxhkd &
 
@@ -29,6 +29,8 @@ xsetroot -solid '#333'
 xsetroot -cursor_name left_ptr &
 xautolock -detectsleep -time 5 -locker $HOME/.scripts/lock.sh &
 xset dpms 240 600 0
+# disable beep
+xset -b
 #compton -f -b
 devmon 	--sync --no-gui \
 	--exec-on-drive "notify-send \"Devmon\" \"Mounted %f on %d\"" \
