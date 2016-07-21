@@ -10,9 +10,9 @@ sourceDir /etc/X11/xinit/xinitrc.d
 #        echo "shh-agent not running, starting"
 #        eval `ssh-agent`
 #    fi
-#    if [ -f /usr/lib/ssh/x11-ssh-askpass ]; then
-#        export SSH_ASKPASS=ssh-askpass
-#    fi
+    if [ -f /usr/lib/ssh/x11-ssh-askpass ]; then
+        export SSH_ASKPASS=ssh-askpass
+    fi
 #    
 #    if [ -f /usr/bin/keychain ]; then
 #        keychain id_dsa id_rsa
@@ -29,6 +29,7 @@ xsetroot -solid '#333'
 xsetroot -cursor_name left_ptr &
 xautolock -detectsleep -time 5 -locker $HOME/.scripts/lock.sh &
 xset dpms 240 600 0
+
 # disable beep
 xset -b
 #compton -f -b
