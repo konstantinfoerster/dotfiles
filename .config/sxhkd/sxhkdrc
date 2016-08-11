@@ -111,6 +111,8 @@ alt + {_,shift + }{1-9,0}
 alt + w
         bspc monitor -f next
 
+super + h
+    bspc node @/ -R 90
 #
 # preselect
 #
