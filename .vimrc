@@ -227,6 +227,10 @@ omap / <Plug>(easymotion-tn)
 map n <Plug>(easymotion-next)
 map N <Plug>(easymotion-prev)
 
+" Syntastic next/prev erro
+nmap <Leader>n :lnext<CR>
+nmap <Leader>p :lprev<CR>
+
 " Airline
 "
 let g:airline_powerline_fonts = 1
@@ -241,7 +245,7 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 1
 "
 " Enables syntax highlighting for JSDocs
 let g:javascript_plugin_jsdoc = 1
-"Enables some additional syntax highlighting for NGDocs. Requires JSDoc plugin to be enabled as well.
+" Enables some additional syntax highlighting for NGDocs. Requires JSDoc plugin to be enabled as well.
 let g:javascript_plugin_ngdoc = 1
 
 " vim json
@@ -274,8 +278,14 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_loc_list_height = 5
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+" Checks in background
+let g:syntastic_javascript_eslint_exec = 'eslint_d'
+let g:syntastic_json_checkers = ['jsonlint']
+let g:syntastic_html_checkers = ['tidy']
 
 " vim:set ft=vim et sw=2:
