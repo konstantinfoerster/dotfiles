@@ -17,7 +17,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'  }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Shougo/neocomplete.vim'
+
 Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
 
@@ -25,6 +28,8 @@ Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
 Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
 Plug 'elzr/vim-json', { 'for': ['javascript', 'json'] }
+
+Plug 'fatih/vim-go', { 'for': ['go'] }
 
 "function! BuildYCM(info)
 "  if a:info.status == 'installed' || a:info.force
@@ -189,6 +194,10 @@ let mapleader="\<Space>"
 
 set pastetoggle=<F2>
 
+" Autocomplete on space
+inoremap <Nul> <C-n>
+
+" Nerdtree toggle
 map <C-n> :NERDTreeToggle<CR>
 
 " Use <C-L> to clear the highlighting of :set hlsearch.
@@ -198,15 +207,31 @@ nnoremap <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 " map <C-c> "+y<CR>"
 
 " disable arrow keys
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
+nnoremap <PageUp> <Nop>
+nnoremap <PageDown> <Nop>
+
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+inoremap <PageUp> <Nop>
+inoremap <PageDown> <Nop>
+
+vnoremap <Left> <Nop>
+vnoremap <Right> <Nop>
+vnoremap <Up> <Nop>
+vnoremap <Down> <Nop>
+vnoremap <PageUp> <Nop>
+vnoremap <PageDown> <Nop>
 
 " disable ex mode
 nnoremap Q <NOP>
 
-nmap <C-N><C-N> :set invnumber<CR>:set invrelativenumber<CR>
+nmap <F3> :set invnumber<CR>:set invrelativenumber<CR>
 
 " Easy window navigation
 "map <C-h> <C-w>h
@@ -230,6 +255,22 @@ map N <Plug>(easymotion-prev)
 " Syntastic next/prev erro
 nmap <Leader>n :lnext<CR>
 nmap <Leader>p :lprev<CR>
+
+" neocomplete
+" 
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Airline
 "
@@ -287,5 +328,6 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
 let g:syntastic_json_checkers = ['jsonlint']
 let g:syntastic_html_checkers = ['tidy']
+let g:syntastic_scala_checkers = ['scalac']
 
 " vim:set ft=vim et sw=2:

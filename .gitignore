@@ -1,2 +1,3 @@
 *.swp
 .bin/*
+.bashrc.d/bash-env.sh

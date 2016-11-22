@@ -36,6 +36,11 @@ if [ -f ~/.bashrc.d/bash-aliases.sh ]; then
     source ~/.bashrc.d/bash-aliases.sh
 fi
 
+if [ -f ~/.bashrc.d/bash-env.sh ]; then
+    source ~/.bashrc.d/bash-env.sh
+fi
+
+
 #### GPG
 
 # Start the gpg-agent if not already running
