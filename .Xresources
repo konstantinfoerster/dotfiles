@@ -23,8 +23,6 @@ URxvt.iso13755_52: false
 
 URxvt.intensityStyles: false
 
-! URxvt.letterSpace: -1
-
 ! Amount that I can scroll up
 URxvt.saveLines: 12000
 
@@ -33,16 +31,16 @@ URxvt.underlineURLs: true
 
 ! Font
 URxvt.allow_bold: true
-!URxvt.letterSpace: -1
-*font: xft:Hack:pixelsize=12:Regular, xft:PowerlineSymbols:pixelsize=12:medium
-*boldFont: xft:Hack:pixelsize=12:Bold
-*italicFont: xft:Hack:pixelsize=12:Italic
-*bolditalicFont: xft:Hack:pixelsize=12:Bold:Italic
+URxvt.letterSpace: -2
+*font: xft:Hack:size=11:Regular
+*boldFont: xft:Hack:size=11:Bold
+*italicFont: xft:Hack:size=11:Italic
+*bolditalicFont: xft:Hack:size=11:Bold:Italic
 
-Xft.autohint: 0
-Xft.antialias: 1
+Xft.autohint: false
+Xft.antialias: true
 Xft.lcdfilter: lcddefault
-Xft.hinting: 1
+Xft.hinting: true
 Xft.hintstyle: hintslight
 Xft.rgba: rgb
 Xft.dpi: 96 
