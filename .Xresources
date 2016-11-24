@@ -34,7 +34,7 @@ URxvt.underlineURLs: true
 ! Font
 URxvt.allow_bold: true
 !URxvt.letterSpace: -1
-*font: xft:Hack:pixelsize=12:Regular,-misc-stlarch-medium-r-normal--10-100-75-75-c-80-iso10646-1
+*font: xft:Hack:pixelsize=12:Regular, xft:PowerlineSymbols:pixelsize=12:medium
 *boldFont: xft:Hack:pixelsize=12:Bold
 *italicFont: xft:Hack:pixelsize=12:Italic
 *bolditalicFont: xft:Hack:pixelsize=12:Bold:Italic

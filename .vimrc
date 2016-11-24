@@ -20,15 +20,19 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'  }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/neocomplete.vim'
+Plug 'tpope/vim-surround'
 
 Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
 
-Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-surround'
+" Linter
+"Plug 'scrooloose/syntastic'
+Plug 'neomake/neomake'
+Plug 'dojoteef/neomake-autolint'
+"Plug 'w0rp/ale'
+
 Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
 Plug 'elzr/vim-json', { 'for': ['javascript', 'json'] }
-
 Plug 'fatih/vim-go', { 'for': ['go'] }
 
 "function! BuildYCM(info)
@@ -54,6 +58,12 @@ autocmd FileType gitcommit setlocal spell
 set ttimeout
 set ttimeoutlen=100
 
+if $COLORTERM == 'truecolor'
+  let g:base16_shell_path="~/.vim/base16-shell/scripts/"
+  let base16colorspace="256"
+  set t_Co=256
+endif
+set t_ut=
 set background=dark
 colorscheme base16-atelier-dune
 
@@ -252,9 +262,13 @@ omap / <Plug>(easymotion-tn)
 map n <Plug>(easymotion-next)
 map N <Plug>(easymotion-prev)
 
-" Syntastic next/prev erro
-nmap <Leader>n :lnext<CR>
-nmap <Leader>p :lprev<CR>
+" next/prev erro
+nmap <C-j> :lnext<CR>
+nmap <C-k> :lprev<CR>
+
+" Neomake next/prev erro
+"nmap <Leader>n :ll<CR>
+"nmap <Leader>p :lprev<CR>
 
 " neocomplete
 " 
@@ -280,7 +294,7 @@ let g:airline_theme='dark'
 "   let g:airline_symbols = {}
 "endif
 "let g:airline_symbols.space = "\ua0"
-let g:airline#extensions#whitespace#mixed_indent_algo = 1
+"let g:airline#extensions#whitespace#mixed_indent_algo = 1
 
 " vim javascript
 "
@@ -313,21 +327,29 @@ if executable('ag')
   "let g:ctrlp_extensions = ['line']
 endif
 
-" syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"ale
 
-let g:syntastic_always_populate_loc_list = 1
+
+" syntastic
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_javascript_checkers = ['eslint']
 " Checks in background
-let g:syntastic_javascript_eslint_exec = 'eslint_d'
-let g:syntastic_json_checkers = ['jsonlint']
-let g:syntastic_html_checkers = ['tidy']
-let g:syntastic_scala_checkers = ['scalac']
+"let g:syntastic_javascript_eslint_exec = 'eslint_d'
+"let g:syntastic_json_checkers = ['jsonlint']
+"let g:syntastic_html_checkers = ['tidy']
+"let g:syntastic_scala_checkers = ['scalac']
+
+"Neomake
+"
+let g:neomake_autolint_cachedir='/tmp/'
+let g:neomake_javascript_enabled_makers = ['eslint']
 
 " vim:set ft=vim et sw=2:
