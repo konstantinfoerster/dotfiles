@@ -1,3 +1,4 @@
 *.swp
 .bin/*
+.gnupg/*
 .bashrc.d/bash-env.sh
