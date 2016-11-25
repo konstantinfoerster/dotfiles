@@ -1,9 +1,6 @@
 #!/bin/sh
 echo "Loading .xprofile"
 
-#will be read from .xinitrc and gdm
-source $HOME/.scripts/common.sh
-
 usermodmap=$HOME/.Xmodmap
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
@@ -38,10 +35,6 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 #Swap escape with caps key
 setxkbmap -option caps:swapescape
-
-xset +fp $HOME/.local/share/fonts/glyph-fonts
-xset +fp $HOME/.local/share/fonts/hack
-xset fp rehash
 
 intel-virtual-output
 # vim: set ft=sh:

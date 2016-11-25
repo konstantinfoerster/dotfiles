@@ -38,6 +38,8 @@ if [ -f ~/.bashrc.d/bash-env.sh ]; then
     source ~/.bashrc.d/bash-env.sh
 fi
 
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 #### GPG
 

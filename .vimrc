@@ -58,14 +58,18 @@ autocmd FileType gitcommit setlocal spell
 set ttimeout
 set ttimeoutlen=100
 
-if $COLORTERM == 'truecolor'
-  let g:base16_shell_path="~/.vim/base16-shell/scripts/"
+"if $COLORTERM == 'truecolor'
+"  let g:base16_shell_path="~/.vim/base16-shell/scripts/"
   let base16colorspace="256"
-  set t_Co=256
-endif
+"  set t_Co=256
+"endif
 set t_ut=
 set background=dark
-colorscheme base16-atelier-dune
+"colorscheme base16-atelier-dune
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
 " show line numbers
 set number
@@ -80,14 +84,9 @@ set textwidth=120
 
 " highlight current line number and line
 set cursorline
-" already set by colorschema
-"hi CursorLine   cterm=NONE ctermbg=10 ctermfg=NONE
-"hi CursorLineNr ctermfg=13
 
 " highlight column after 'textwidth'
 set colorcolumn=+1
-" already set by colorschema
-" hi ColorColumn ctermbg=10
 
 " Copy indent from current line when starting a new line
 set autoindent
@@ -199,7 +198,7 @@ if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
 
-" Change the mapleader from \ to ,
+" Change the mapleader from \ to space
 let mapleader="\<Space>"
 
 set pastetoggle=<F2>
@@ -266,10 +265,6 @@ map N <Plug>(easymotion-prev)
 nmap <C-j> :lnext<CR>
 nmap <C-k> :lprev<CR>
 
-" Neomake next/prev erro
-"nmap <Leader>n :ll<CR>
-"nmap <Leader>p :lprev<CR>
-
 " neocomplete
 " 
 let g:neocomplete#enable_at_startup = 1
@@ -290,11 +285,6 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 "
 let g:airline_powerline_fonts = 1
 let g:airline_theme='dark' 
-"if !exists('g:airline_symbols')
-"   let g:airline_symbols = {}
-"endif
-"let g:airline_symbols.space = "\ua0"
-"let g:airline#extensions#whitespace#mixed_indent_algo = 1
 
 " vim javascript
 "
@@ -326,9 +316,6 @@ if executable('ag')
 
   "let g:ctrlp_extensions = ['line']
 endif
-
-"ale
-
 
 " syntastic
 "set statusline+=%#warningmsg#
