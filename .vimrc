@@ -58,14 +58,7 @@ autocmd FileType gitcommit setlocal spell
 set ttimeout
 set ttimeoutlen=100
 
-"if $COLORTERM == 'truecolor'
-"  let g:base16_shell_path="~/.vim/base16-shell/scripts/"
-  let base16colorspace="256"
-"  set t_Co=256
-"endif
-set t_ut=
 set background=dark
-"colorscheme base16-atelier-dune
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background

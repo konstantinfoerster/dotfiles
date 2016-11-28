@@ -1,6 +1,7 @@
 ### dotfiles
 Dotfiles repository
 
+Theme: base16-atelier-dune
 
 cd ~
 
