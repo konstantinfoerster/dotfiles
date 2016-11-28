@@ -28,7 +28,8 @@ if [ -f ~/.bashrc.d/git-prompt.sh ]; then
     GIT_PS1_SHOWCOLORHINTS=1
     GIT_PS1_SHOWUNTRACKEDFILES=1 # can be slow
     GIT_PS1_SHOWSTASHSTATE=1
-    PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
+    #PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
+    PROMPT_COMMAND='__git_ps1 "\w" "\\\$ "'
  fi
 
 if [ -f ~/.bashrc.d/bash-aliases.sh ]; then
