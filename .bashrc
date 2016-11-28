@@ -26,7 +26,8 @@ if [ -f ~/.bashrc.d/git-prompt.sh ]; then
     source ~/.bashrc.d/git-prompt.sh
     GIT_PS1_SHOWDIRTYSTATE=1
     GIT_PS1_SHOWCOLORHINTS=1
-    #export GIT_PS1_SHOWUNTRACKEDFILES=1 # can be slow
+    GIT_PS1_SHOWUNTRACKEDFILES=1 # can be slow
+    GIT_PS1_SHOWSTASHSTATE=1
     PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
  fi
 

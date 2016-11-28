@@ -1,0 +1,126 @@
+[org/gnome/settings-daemon/plugins/power]
+sleep-inactive-battery-type='nothing'
+sleep-inactive-ac-timeout=3600
+sleep-inactive-ac-type='nothing'
+sleep-inactive-battery-timeout=1800
+
+[org/gnome/settings-daemon/plugins/media-keys]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+binding='<Shift><Alt><Meta>Return'
+command='/home/kg/.scripts/tmux-gnome.sh'
+name='Terminal Tmux'
+
+[org/gnome/settings-daemon/peripherals/keyboard]
+numlock-state='on'
+
+[org/gnome/settings-daemon/peripherals/mouse]
+locate-pointer=false
+
+[org/gnome/shell]
+enabled-extensions=['apps-menu@gnome-shell-extensions.gcampax.github.com', 'alternate-tab@gnome-shell-extensions.gcampax.github.com', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'native-window-placement@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'impatience@gfxmonk.net', 'nohotcorner@azuri.free.fr', 'Panel_Favorites@rmy.pobox.com', 'System_Monitor@bghome.gmail.com', 'user-theme@gnome-shell-extensions.gcampax.github.com']
+
+[org/gnome/shell/overrides]
+dynamic-workspaces=false
+workspaces-only-on-primary=false
+
+[org/gnome/nautilus/preferences]
+default-folder-viewer='icon-view'
+search-filter-time-type='last_modified'
+click-policy='single'
+show-delete-permanently=true
+
+[org/gnome/nautilus/window-state]
+geometry='890x550+26+23'
+maximized=false
+
+[org/gnome/nautilus/icon-view]
+default-zoom-level='standard'
+
+[org/gnome/nautilus/list-view]
+default-visible-columns=['name', 'size', 'date_modified']
+default-column-order=['name', 'size', 'type', 'owner', 'group', 'permissions', 'mime_type', 'where', 'date_modified', 'date_modified_with_time', 'date_accessed']
+
+[org/gnome/system/location]
+enabled=false
+
+[org/gnome/evolution-data-server]
+network-monitor-gio-name=''
+migrated=true
+
+[org/gnome/desktop/interface]
+clock-show-date=true
+font-name='Hack 10'
+document-font-name='Hack 11'
+gtk-im-module='gtk-im-context-simple'
+enable-animations=true
+gtk-theme='Numix'
+monospace-font-name='Hack 11'
+
+[org/gnome/desktop/media-handling]
+autorun-never=true
+
+[org/gnome/desktop/search-providers]
+sort-order=['org.gnome.Contacts.desktop', 'org.gnome.Documents.desktop', 'org.gnome.Nautilus.desktop']
+disabled=['epiphany.desktop']
+
+[org/gnome/desktop/peripherals/mouse]
+speed=0.33096085409252662
+accel-profile='flat'
+
+[org/gnome/desktop/calendar]
+show-weekdate=true
+
+[org/gnome/desktop/session]
+idle-delay=uint32 600
+
+[org/gnome/desktop/privacy]
+report-technical-problems=true
+
+[org/gnome/desktop/wm/preferences]
+titlebar-font='Hack Bold 11'
+
+[org/gnome/desktop/wm/keybindings]
+toggle-maximized=['<Alt><Meta>m']
+close=['<Shift><Alt><Meta>x']
+switch-to-workspace-1=['<Alt><Meta>1']
+switch-to-workspace-2=['<Alt><Meta>2']
+move-to-workspace-2=['<Shift><Alt><Meta>quotedbl']
+move-to-workspace-1=['<Shift><Alt><Meta>exclam']
+move-to-workspace-4=['<Shift><Alt><Meta>dollar']
+move-to-workspace-3=['<Shift><Alt><Meta>section']
+switch-to-workspace-4=['<Alt><Meta>4']
+switch-to-workspace-3=['<Alt><Meta>3']
+
+[org/gnome/desktop/background]
+show-desktop-icons=false
+
+[org/gnome/desktop/input-sources]
+current=uint32 0
+sources=[('xkb', 'de')]
+xkb-options=['caps:swapescape']
+
+[org/gnome/terminal/legacy/keybindings]
+full-screen='Delete'
+help='Delete'
+new-tab='<Primary><Shift>t'
+
+[org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+foreground-color='rgb(131,148,150)'
+visible-name='kg'
+palette=['rgb(0,0,0)', 'rgb(204,0,0)', 'rgb(78,154,6)', 'rgb(196,160,0)', 'rgb(52,101,164)', 'rgb(117,80,123)', 'rgb(6,152,154)', 'rgb(211,215,207)', 'rgb(85,87,83)', 'rgb(239,41,41)', 'rgb(138,226,52)', 'rgb(252,233,79)', 'rgb(114,159,207)', 'rgb(173,127,168)', 'rgb(52,226,226)', 'rgb(238,238,236)']
+use-system-font=false
+use-theme-colors=false
+font='Hack 11'
+background-color='rgb(0,43,54)'
+scrollbar-policy='never'
+audible-bell=false
+
+[org/gnome/terminal/legacy]
+schema-version=uint32 3
+default-show-menubar=false
+
+[org/gnome/nm-applet/eap/a9a4bc88-34a1-31b0-8c73-6a094f0c53f8]
+ignore-phase2-ca-cert=false
+ignore-ca-cert=false
