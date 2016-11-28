@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ "7" -eq "$1" ]; then
+    echo "Switch to java 7"
+    sudo archlinux-java set java-7-openjdk
+else
+    echo "Switch to java 8"
+    sudo archlinux-java set java-8-openjdk
+fi
