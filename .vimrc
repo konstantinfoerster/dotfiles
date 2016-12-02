@@ -34,6 +34,7 @@ Plug 'dojoteef/neomake-autolint'
 Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
 Plug 'elzr/vim-json', { 'for': ['javascript', 'json'] }
 Plug 'fatih/vim-go', { 'for': ['go'] }
+Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
 
 "function! BuildYCM(info)
 "  if a:info.status == 'installed' || a:info.force
