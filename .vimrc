@@ -31,8 +31,8 @@ Plug 'neomake/neomake'
 Plug 'dojoteef/neomake-autolint'
 "Plug 'w0rp/ale'
 
-Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
-Plug 'elzr/vim-json', { 'for': ['javascript', 'json'] }
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'json'] }
+"Plug 'elzr/vim-json', { 'for': ['javascript', 'json'] }
 Plug 'fatih/vim-go', { 'for': ['go'] }
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
 
@@ -77,7 +77,8 @@ set hidden
 set textwidth=120
 
 " highlight current line number and line
-set cursorline
+" error text is unreadable if enabled. https://github.com/chriskempson/base16-vim/issues/125
+"set cursorline
 
 " highlight column after 'textwidth'
 set colorcolumn=+1
