@@ -9,4 +9,4 @@ npm nodejs scala sbt
 ### Others
 openssh x11-ssh-askpass
 
-tmux vim
+tmux vim the_silver_searcher

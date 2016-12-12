@@ -13,15 +13,17 @@ call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
 
 Plug 'chriskempson/base16-vim'
+Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'  }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/neocomplete.vim'
-Plug 'tpope/vim-surround'
 
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
 
@@ -31,6 +33,7 @@ Plug 'neomake/neomake'
 Plug 'dojoteef/neomake-autolint'
 "Plug 'w0rp/ale'
 
+Plug 'editorconfig/editorconfig-vim'
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'json'] }
 "Plug 'elzr/vim-json', { 'for': ['javascript', 'json'] }
 Plug 'fatih/vim-go', { 'for': ['go'] }
@@ -60,9 +63,22 @@ set ttimeout
 set ttimeoutlen=100
 
 set background=dark
+"if has("termguicolors")
+"  set termguicolors
+"endif
+"let g:gruvbox_italic=1
+"colorscheme gruvbox
+
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
+endif
+
+if &term =~ '256color'
+    " disable Background Color Erase (BCE) so that color schemes
+    " render properly when inside 256-color tmux and GNU screen.
+    " see also http://sunaku.github.io/vim-256color-bce.html
+    set t_ut=
 endif
 
 " show line numbers
@@ -260,6 +276,9 @@ map N <Plug>(easymotion-prev)
 nmap <C-j> :lnext<CR>
 nmap <C-k> :lprev<CR>
 
+"Editorconfig
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
 " neocomplete
 " 
 let g:neocomplete#enable_at_startup = 1
@@ -294,6 +313,8 @@ let g:vim_json_syntax_conceal = 0
 
 " ctrlp
 
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip 
+
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   " Use Ag over Grep
@@ -302,9 +323,9 @@ if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
   " respect git ignore files
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  "let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 
-  let g:ctrlp_working_path_mode = 'r'
+  let g:ctrlp_working_path_mode = 'ra'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0

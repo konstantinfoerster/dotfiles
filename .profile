@@ -24,4 +24,3 @@ if [ -f /usr/local/bin/bspwm ]; then
     [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
 fi
 # vim: ft=sh:
-
