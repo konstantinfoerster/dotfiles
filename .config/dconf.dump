@@ -27,7 +27,7 @@ magnifier=''
 
 [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
 binding='<Shift><Alt>Return'
-command='tmux-gnome'
+command='/home/kg/.scripts/tmux-gnome.sh'
 name='tmux+terminal'
 
 [org/gnome/settings-daemon/plugins/xsettings]
@@ -208,47 +208,6 @@ switch-to-tab-1='<Super>1'
 switch-to-tab-2='<Super>2'
 switch-to-tab-3='<Super>3'
 switch-to-tab-4='<Super>4'
-
-[org/gnome/terminal/legacy/profiles:]
-list=['b1dcc9dd-5262-4d8d-a863-c897e6d979b9', '06f5b4cf-9c3b-4ce1-aad7-fe34bdc8ac9b', '4ed1269a-9ac9-4629-8c2d-da7b0c7cc584']
-default='06f5b4cf-9c3b-4ce1-aad7-fe34bdc8ac9b'
-
-[org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
-scrollbar-policy='never'
-use-theme-colors=false
-use-system-font=false
-audible-bell=false
-font='Hack 11'
-
-[org/gnome/terminal/legacy/profiles:/:4ed1269a-9ac9-4629-8c2d-da7b0c7cc584]
-foreground-color='#d8d8d8'
-visible-name='Base 16 Default Dark'
-palette=['#181818', '#ab4642', '#a1b56c', '#f7ca88', '#7cafc2', '#ba8baf', '#86c1b9', '#d8d8d8', '#585858', '#ab4642', '#a1b56c', '#f7ca88', '#7cafc2', '#ba8baf', '#86c1b9', '#f8f8f8']
-use-theme-colors=false
-use-theme-background=false
-bold-color-same-as-fg=true
-bold-color='#d8d8d8'
-background-color='#181818'
-
-[org/gnome/terminal/legacy/profiles:/:06f5b4cf-9c3b-4ce1-aad7-fe34bdc8ac9b]
-foreground-color='#a6a28c'
-cjk-utf8-ambiguous-width='narrow'
-visible-name='Base 16 Atelier Dune Dark'
-login-shell=false
-palette=['#20201d', '#d73737', '#60ac39', '#ae9513', '#6684e1', '#b854d4', '#1fad83', '#a6a28c', '#7d7a68', '#d73737', '#60ac39', '#ae9513', '#6684e1', '#b854d4', '#1fad83', '#fefbec']
-custom-command=''
-scroll-on-keystroke=false
-use-system-font=false
-use-custom-command=false
-use-theme-colors=false
-font='Hack 11'
-allow-bold=true
-use-theme-background=false
-bold-color-same-as-fg=true
-bold-color='#a6a28c'
-background-color='#20201d'
-audible-bell=false
-scrollbar-policy='never'
 
 [org/gnome/terminal/legacy]
 schema-version=uint32 3
