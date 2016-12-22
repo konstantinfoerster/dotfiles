@@ -72,10 +72,8 @@ endif
 " colorscheme gruvbox
 set background=dark
 
-if filereadable(expand("~/.vimrc_background"))
 "  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+colorscheme base16-atelier-dune
 
 "if &term =~ '256color'
     " disable Background Color Erase (BCE) so that color schemes
