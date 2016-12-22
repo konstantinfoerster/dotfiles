@@ -24,8 +24,10 @@ Plug 'Shougo/neocomplete.vim'
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Linter
 "Plug 'scrooloose/syntastic'
@@ -62,24 +64,25 @@ autocmd FileType gitcommit setlocal spell
 set ttimeout
 set ttimeoutlen=100
 
+if has("termguicolors")
+  set termguicolors
+endif
+" let g:gruvbox_italic=1
+" let g:gruvbox_contrast_dark='hard'
+" colorscheme gruvbox
 set background=dark
-"if has("termguicolors")
-"  set termguicolors
-"endif
-"let g:gruvbox_italic=1
-"colorscheme gruvbox
 
 if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
+"  let base16colorspace=256
   source ~/.vimrc_background
 endif
 
-if &term =~ '256color'
+"if &term =~ '256color'
     " disable Background Color Erase (BCE) so that color schemes
     " render properly when inside 256-color tmux and GNU screen.
     " see also http://sunaku.github.io/vim-256color-bce.html
     set t_ut=
-endif
+"endif
 
 " show line numbers
 set number
@@ -253,12 +256,6 @@ nnoremap Q <NOP>
 
 nmap <F3> :set invnumber<CR>:set invrelativenumber<CR>
 
-" Easy window navigation
-"map <C-h> <C-w>h
-"map <C-j> <C-w>j
-"map <C-k> <C-w>k
-"map <C-l> <C-w>l
-
 map <Leader> <Plug>(easymotion-prefix)
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
@@ -272,9 +269,9 @@ omap / <Plug>(easymotion-tn)
 map n <Plug>(easymotion-next)
 map N <Plug>(easymotion-prev)
 
-" next/prev erro
-nmap <C-j> :lnext<CR>
-nmap <C-k> :lprev<CR>
+" next/prev error
+nmap <Leader>n :lnext<CR>
+nmap <Leader>p :lprev<CR>
 
 "Editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
@@ -312,7 +309,7 @@ let g:javascript_plugin_ngdoc = 1
 let g:vim_json_syntax_conceal = 0
 
 " ctrlp
-
+"
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip 
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
@@ -352,7 +349,6 @@ endif
 
 "Neomake
 "
-let g:neomake_autolint_cachedir='/tmp/'
 let g:neomake_javascript_enabled_makers = ['eslint']
 
 " vim:set ft=vim et sw=2:
