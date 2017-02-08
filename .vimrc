@@ -37,9 +37,10 @@ Plug 'dojoteef/neomake-autolint'
 
 Plug 'editorconfig/editorconfig-vim'
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'json'] }
-"Plug 'elzr/vim-json', { 'for': ['javascript', 'json'] }
+Plug 'elzr/vim-json', { 'for': ['javascript', 'json'] }
 Plug 'fatih/vim-go', { 'for': ['go'] }
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
+Plug 'IN3D/vim-raml', { 'for': ['raml'] }
 
 "function! BuildYCM(info)
 "  if a:info.status == 'installed' || a:info.force
@@ -59,6 +60,11 @@ syntax enable
 
 " Git commits.
 autocmd FileType gitcommit setlocal spell
+
+
+set backup
+set backupdir=~/.vim/backup
+set directory=~/.vim/backup
 
 " enable timout for commands
 set ttimeout
@@ -95,7 +101,7 @@ set textwidth=120
 
 " highlight current line number and line
 " error text is unreadable if enabled. https://github.com/chriskempson/base16-vim/issues/125
-"set cursorline
+" set cursorline
 
 " highlight column after 'textwidth'
 set colorcolumn=+1
@@ -168,10 +174,6 @@ endif
 " as much as possible of the last line in a window will be displayed
 set display+=lastline
 
-if &encoding ==# 'latin1' && has('gui_running')
-  set encoding=utf-8
-endif
-
 if &listchars ==# 'eol:$'
   set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 endif
@@ -181,18 +183,16 @@ if has('path_extra')
   setglobal tags-=./tags tags-=./tags; tags^=./tags;
 endif
 
-if &shell =~# 'fish$'
-  set shell=/bin/bash
-endif
-
 set autoread
 
 if &history < 1000
   set history=1000
 endif
+
 if &tabpagemax < 50
   set tabpagemax=50
 endif
+
 if !empty(&viminfo)
   set viminfo^=!
 endif
@@ -348,5 +348,6 @@ endif
 "Neomake
 "
 let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_autolint_cachedir = "/tmp"
 
 " vim:set ft=vim et sw=2:

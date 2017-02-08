@@ -1,5 +1,5 @@
 # will be executed on login
-echo "Loading .profile"
+#echo "Loading .profile"
 
 # set PATH so it includes user's private bin if it exist
 if [ -d "$HOME/.bin" ]; then

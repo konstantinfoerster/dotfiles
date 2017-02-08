@@ -21,8 +21,10 @@ cd ~
 git clone --recursive https://github.com/kgeorgiew/dotfiles.git
 
 
-Link all needed files to $HOME
 
+mkdir -p $HOME/.vim/backup
+
+Link all needed files to $HOME
 
 ## Gnome Terminal
 source .config/base16-gnome-terminal/base16-atelierdune.dark.sh
