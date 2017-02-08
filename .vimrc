@@ -37,9 +37,10 @@ Plug 'dojoteef/neomake-autolint'
 
 Plug 'editorconfig/editorconfig-vim'
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'json'] }
-"Plug 'elzr/vim-json', { 'for': ['javascript', 'json'] }
+Plug 'elzr/vim-json', { 'for': ['javascript', 'json'] }
 Plug 'fatih/vim-go', { 'for': ['go'] }
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
+Plug 'IN3D/vim-raml', { 'for': ['raml'] }
 
 "function! BuildYCM(info)
 "  if a:info.status == 'installed' || a:info.force
@@ -100,7 +101,7 @@ set textwidth=120
 
 " highlight current line number and line
 " error text is unreadable if enabled. https://github.com/chriskempson/base16-vim/issues/125
-"set cursorline
+" set cursorline
 
 " highlight column after 'textwidth'
 set colorcolumn=+1
