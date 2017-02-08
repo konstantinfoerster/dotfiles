@@ -11,7 +11,9 @@ export EDITOR=vim
 
 #export TERM='xterm-256color'
 
-#export GDK_BACKEND=wayland
+if [ "$HOSTNAME" = "kg-pc" ]; then
+    export GDK_BACKEND=wayland
+fi
 stty -ixon
 
 # if running bash
