@@ -23,3 +23,5 @@ npm nodejs scala sbt
 openssh x11-ssh-askpass
 
 tmux vim the_silver_searcher
+
+docker docker-compose lxc btrfs-progs
