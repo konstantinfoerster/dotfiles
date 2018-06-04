@@ -13,14 +13,12 @@ call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
 
 Plug 'chriskempson/base16-vim'
-Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'  }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
-Plug 'Shougo/neocomplete.vim'
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-surround'
@@ -29,25 +27,12 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
 Plug 'christoomey/vim-tmux-navigator'
 
-" Linter
-"Plug 'scrooloose/syntastic'
 Plug 'neomake/neomake'
-Plug 'dojoteef/neomake-autolint'
-"Plug 'w0rp/ale'
 
 Plug 'editorconfig/editorconfig-vim'
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'json'] }
 Plug 'elzr/vim-json', { 'for': ['javascript', 'json'] }
-Plug 'fatih/vim-go', { 'for': ['go'] }
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
-Plug 'IN3D/vim-raml', { 'for': ['raml'] }
-
-"function! BuildYCM(info)
-"  if a:info.status == 'installed' || a:info.force
-"    !./install.sh
-"  endif
-"endfunction
-"Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -61,10 +46,9 @@ syntax enable
 " Git commits.
 autocmd FileType gitcommit setlocal spell
 
-
-set backup
-set backupdir=~/.vim/backup
-set directory=~/.vim/backup
+"set backup
+"set backupdir=~/.vim/backup
+"set directory=~/.vim/backup
 
 " enable timout for commands
 set ttimeout
@@ -73,12 +57,10 @@ set ttimeoutlen=100
 if has("termguicolors")
   set termguicolors
 endif
-" let g:gruvbox_italic=1
-" let g:gruvbox_contrast_dark='hard'
-" colorscheme gruvbox
+
 set background=dark
 
-"  let base16colorspace=256
+"let base16colorspace=256
 colorscheme base16-atelier-dune
 
 "if &term =~ '256color'
@@ -101,7 +83,9 @@ set textwidth=120
 
 " highlight current line number and line
 " error text is unreadable if enabled. https://github.com/chriskempson/base16-vim/issues/125
-" set cursorline
+"set cursorline
+" highlight only the firs 200 characters
+"set synmaxcol=200
 
 " highlight column after 'textwidth'
 set colorcolumn=+1
@@ -219,7 +203,7 @@ set pastetoggle=<F2>
 inoremap <Nul> <C-n>
 
 " Nerdtree toggle
-map <C-n> :NERDTreeToggle<CR>
+map <Leader>n :NERDTreeToggle<CR>
 
 " Use <C-L> to clear the highlighting of :set hlsearch.
 nnoremap <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
@@ -268,27 +252,12 @@ map n <Plug>(easymotion-next)
 map N <Plug>(easymotion-prev)
 
 " next/prev error
-nmap <Leader>n :lnext<CR>
-nmap <Leader>p :lprev<CR>
+nmap <C-n> :cnext<CR>
+nmap <C-m> :cprev<CR>
+nnoremap <leader>a :cclose<CR>
 
 "Editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
-
-" neocomplete
-" 
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Airline
 "
@@ -328,26 +297,20 @@ if executable('ag')
   "let g:ctrlp_extensions = ['line']
 endif
 
-" syntastic
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
-"let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_loc_list_height = 5
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-"let g:syntastic_javascript_checkers = ['eslint']
-" Checks in background
-"let g:syntastic_javascript_eslint_exec = 'eslint_d'
-"let g:syntastic_json_checkers = ['jsonlint']
-"let g:syntastic_html_checkers = ['tidy']
-"let g:syntastic_scala_checkers = ['scalac']
-
 "Neomake
 "
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_autolint_cachedir = "/tmp"
+let g:neomake_open_list = 2
+
+function! MyOnBattery()
+  return readfile('/sys/class/power_supply/AC/online') == ['0']
+endfunction
+
+if MyOnBattery()
+  call neomake#configure#automake('w')
+else
+  call neomake#configure#automake('nw', 1000)
+endif
 
 " vim:set ft=vim et sw=2:
