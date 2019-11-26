@@ -11,28 +11,28 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
-
-Plug 'chriskempson/base16-vim'
+function FixupBase16(info)
+    !sed -i '/Base16hi/\! s/a:\(attr\|guisp\)/l:\1/g' ~/.vim/plugged/base16-vim/colors/*.vim
+endfunction
+Plug 'chriskempson/base16-vim', { 'do': function('FixupBase16') }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'  }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
+"Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
 Plug 'christoomey/vim-tmux-navigator'
 
-Plug 'neomake/neomake'
+"Plug 'neomake/neomake'
 
 Plug 'editorconfig/editorconfig-vim'
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'json'] }
-Plug 'elzr/vim-json', { 'for': ['javascript', 'json'] }
-Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
+Plug 'sheerun/vim-polyglot'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -299,18 +299,8 @@ endif
 
 "Neomake
 "
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_autolint_cachedir = "/tmp"
-let g:neomake_open_list = 2
-
-function! MyOnBattery()
-  return readfile('/sys/class/power_supply/AC/online') == ['0']
-endfunction
-
-if MyOnBattery()
-  call neomake#configure#automake('w')
-else
-  call neomake#configure#automake('nw', 1000)
-endif
+"let g:neomake_javascript_enabled_makers = ['eslint']
+"let g:neomake_autolint_cachedir = "/tmp"
+"let g:neomake_open_list = 2
 
 " vim:set ft=vim et sw=2:

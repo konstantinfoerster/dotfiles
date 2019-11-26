@@ -1,9 +1,21 @@
 #!/bin/sh
 
-if [ "7" = "$1" ]; then
+if [ "11" = "$1" ]; then
+    echo "Switch to java 11"
+    sudo archlinux-java set java-11-openjdk
+elif [ "7" = "$1" ]; then
     echo "Switch to java 7"
     sudo archlinux-java set java-7-openjdk
 else
-    echo "Switch to java 8"
+    echo "Version $1 not found or no version provided. Fallback to java 8"
     sudo archlinux-java set java-8-openjdk
 fi
+
+RESULT=$?
+if [ "$RESULT" = "0" ]; then
+    echo "Switch was successful"
+else
+    echo "Switch failed. Exit code $CODE"
+fi
+
+exit $CODE

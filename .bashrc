@@ -45,6 +45,11 @@ if [ -f ~/.bashrc.d/gpg.sh ]; then
     source ~/.bashrc.d/gpg.sh
 fi
 
+if [ -f ~/.bashrc.d/k8s.sh ]; then
+    source ~/.bashrc.d/k8s.sh
+fi
+
+export PIPENV_VENV_IN_PROJECT=1
 
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"

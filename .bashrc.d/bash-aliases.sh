@@ -14,6 +14,7 @@ alias egrep='egrep --color=auto'
 alias play="/usr/local/play_framework/current/play"
 alias playa="/usr/local/play_framework/currenta/play"
 alias play1.4="/usr/local/play_framework/play1.4/play"
+alias play1.5="/usr/local/play_framework/play1.5/play"
 alias playdeps="play deps --sync && play idea && java -jar /usr/local/play_framework/playideafix.jar *.iml"
 
 alias pacu="sudo pacman -Syu"
