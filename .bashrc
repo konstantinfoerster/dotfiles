@@ -1,7 +1,10 @@
 #!/bin/sh
 
 # If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+if [[ $- != *i* ]]; then
+    echo "no interactive shell, skipping"
+    return
+fi
 
 # Don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
@@ -23,8 +26,10 @@ PROMPT_DIRTRIM=4
 # \u user \h hostname \w pwd
 PS1="\u@\h \w\\$ "
 
+find $HOME/.bashrc.d/ -maxdepth 1 -type f -iname '*.sh' -exec sh -c 'source $1' _ {} \;
+
 if [ -f ~/.bashrc.d/git-prompt.sh ]; then
-    source ~/.bashrc.d/git-prompt.sh
+#    source ~/.bashrc.d/git-prompt.sh # already added
     GIT_PS1_SHOWDIRTYSTATE=1
     GIT_PS1_SHOWCOLORHINTS=1
     GIT_PS1_SHOWUNTRACKEDFILES=1 # can be slow
@@ -33,23 +38,8 @@ if [ -f ~/.bashrc.d/git-prompt.sh ]; then
     PROMPT_COMMAND='__git_ps1 "\w" "\\\$ "'
 fi
 
-if [ -f ~/.bashrc.d/bash-aliases.sh ]; then
-    source ~/.bashrc.d/bash-aliases.sh
-fi
-
-if [ -f ~/.bashrc.d/bash-env.sh ]; then
-    source ~/.bashrc.d/bash-env.sh
-fi
-
-if [ -f ~/.bashrc.d/gpg.sh ]; then
-    source ~/.bashrc.d/gpg.sh
-fi
-
-if [ -f ~/.bashrc.d/k8s.sh ]; then
-    source ~/.bashrc.d/k8s.sh
-fi
-
 export PIPENV_VENV_IN_PROJECT=1
 
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+

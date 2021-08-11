@@ -1,22 +1,24 @@
 # will be executed on login
-#echo "Loading .profile"
+echo "Loading .profile"
 
 # set PATH so it includes user's private bin if it exist
 if [ -d "$HOME/.bin" ]; then
-    PATH=$HOME/.bin:$PATH
+    export PATH=$HOME/.bin:$PATH
 fi
 
 if [ -d "$HOME/.local/bin/" ]; then
-    PATH=$HOME/.local/bin:$PATH
+    export PATH=$HOME/.local/bin:$PATH
 fi
 
 if [ -d "$HOME/.gem/ruby/2.4.0/bin" ]; then
-    PATH=$HOME/.gem/ruby/2.4.0/bin:$PATH
+    export PATH=$HOME/.gem/ruby/2.4.0/bin:$PATH
 fi
 
-export PATH=~/.npm-global/bin:$PATH
-export JAVA_HOME=/usr/lib/jvm/default
+if [ -d "$HOME/.npm-global/bin" ]; then
+    export PATH=$HOME/.npm-global/bin:$PATH
+fi
 
+export JAVA_HOME=/usr/lib/jvm/default
 export GOPATH=$HOME/go
 
 export VISUAL=vim

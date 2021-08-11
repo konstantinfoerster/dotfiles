@@ -2,3 +2,4 @@
 .bin/*
 .gnupg/*
 .bashrc.d/bash-env.sh
+.bashrc.d/go-env.sh

@@ -1,8 +1,7 @@
 # DO NOT EDIT! This file will be overwritten by LXAppearance.
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
-include "/home/kg/.gtkrc-2.0.mine"
-gtk-theme-name="Numix"
+gtk-theme-name="Adwaita"
 gtk-icon-theme-name="Adwaita"
 gtk-font-name="Droid Sans 9"
 gtk-cursor-theme-name="DMZ-Black"

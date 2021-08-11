@@ -1,30 +1,27 @@
-### dotfiles
+# Dotfiles
 Dotfiles repository
 
-Theme: base16-atelier-dune
+Vim / Terminal Theme: base16-atelier-dune
 
+## Setup
+```
 cd ~
-
-git clone https://github.com/kgeorgiew/dotfiles.git
-
+git clone https://github.com/konstantinfoerster/dotfiles.git
 cd dotfiles
-
 git submodule init
-
 git submodule update
-
+```
 
 or
 
+```
 cd ~
-
-git clone --recursive https://github.com/kgeorgiew/dotfiles.git
-
-
+git clone --recursive https://github.com/konstantinfoerster/dotfiles.git
+```
 
 mkdir -p $HOME/.vim/backup
 
 Link all needed files to $HOME
 
-## Gnome Terminal
-source .config/base16-gnome-terminal/base16-atelierdune.dark.sh
+### Gnome terminal theme
+source ~/.config/base16-gnome-terminal/color-scripts/base16-atelier-dune.sh
