@@ -29,7 +29,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
 Plug 'christoomey/vim-tmux-navigator'
 
-"Plug 'neomake/neomake'
+Plug 'neomake/neomake'
 
 Plug 'editorconfig/editorconfig-vim'
 Plug 'sheerun/vim-polyglot'

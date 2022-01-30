@@ -15,5 +15,8 @@ ttf-dejavu ttf-droid ttf-hack powerline-fonts
 
 # develop
 jdk8-openjdk openjdk8-doc openjdk8-src
+jdk11-openjdk openjdk11-doc openjdk11-src
+go
 docker docker-compose lxc
+kubectl kubectx
 

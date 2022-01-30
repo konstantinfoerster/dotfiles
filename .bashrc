@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # If not running interactively, don't do anything
 if [[ $- != *i* ]]; then
@@ -26,7 +26,9 @@ PROMPT_DIRTRIM=4
 # \u user \h hostname \w pwd
 PS1="\u@\h \w\\$ "
 
-find $HOME/.bashrc.d/ -maxdepth 1 -type f -iname '*.sh' -exec sh -c 'source $1' _ {} \;
+for filename in "$HOME"/.bashrc.d/*.sh; do
+    source $filename
+done
 
 if [ -f ~/.bashrc.d/git-prompt.sh ]; then
 #    source ~/.bashrc.d/git-prompt.sh # already added
@@ -38,8 +40,4 @@ if [ -f ~/.bashrc.d/git-prompt.sh ]; then
     PROMPT_COMMAND='__git_ps1 "\w" "\\\$ "'
 fi
 
-export PIPENV_VENV_IN_PROJECT=1
-
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-
+setxkbmap  de
