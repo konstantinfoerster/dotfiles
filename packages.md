@@ -1,22 +1,46 @@
-# base
-base-devel bash-completion openssh x11-ssh-askpass
+# Base
 
-# desktop
-gnome gnome-extra
+pacman -S base-devel bash-completion openssh gnupg gcr git
+> systemctl enable sshd
 
-# terminal
-gnome-terminal tmux vim the_silver_searcher
+## Hints
 
-# drivers
-mesa-vdpau mesa-libgl
+gvim for +clipboard support
 
-# fonts
-ttf-dejavu ttf-droid ttf-hack powerline-fonts
+# Desktop
 
-# develop
-jdk8-openjdk openjdk8-doc openjdk8-src
-jdk11-openjdk openjdk11-doc openjdk11-src
-go
-docker docker-compose lxc
-kubectl kubectx
+pacman -S gnome gnome-tweaks gdm gnome-software-packagekit-plugin
+> systemctl enable gdm
+
+# Terminal
+
+pacman -S tmux gvim the_silver_searcher
+
+# Drivers
+
+pacman -S mesa mesa-vdpau mesa-libgl libva-utils
+
+## Thinkpad W520 (i965)
+
+pacman -S libva-intel-driver
+
+# Audio
+
+pacman -S pipewire pipewire-alsa pipewire-jack pipewire-pulse gst-plugin-pipewire libpulse wireplumber
+> systemctl enable --user pipewire-pulse.service
+
+# Fonts
+
+pacman -S ttf-dejavu ttf-droid ttf-hack powerline-fonts
+
+# Develop
+
+pacman -S jdk8-openjdk openjdk8-doc openjdk8-src \
+  jdk11-openjdk openjdk11-doc openjdk11-src \
+  jdk17-openjdk openjdk17-doc openjdk17-src \
+  go \
+  docker docker-compose \
+  kubectl kubectx \
+  ansible-core
+> systemctl enable docker
 

@@ -17,6 +17,8 @@ if [ -d "$HOME/.npm-global/bin" ]; then
     export PATH=$HOME/.npm-global/bin:$PATH
 fi
 
+export XDG_CONFIG_HOME=$HOME/.config
+
 export JAVA_HOME=/usr/lib/jvm/default
 export GOPATH=$HOME/go
 
