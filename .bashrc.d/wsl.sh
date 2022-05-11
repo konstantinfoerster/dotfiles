@@ -5,6 +5,7 @@ if grep -iq microsoft /proc/version ; then
     export DISPLAY=$display_target
     export LIBGL_ALWAYS_INDIRECT=1
     export NO_AT_BRIDGE=1
+    export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
     unset display_target
 fi
 
