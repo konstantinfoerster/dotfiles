@@ -1,0 +1,118 @@
+---
+- name: encrypt root partition
+  community.crypto.luks_device:
+    device: "{{ main_disk }}2"
+    force_remove_last_key: true
+    state: "absent"
+  tags:
+    - wipe
+    - never
+
+- name: Remove all partitions from disk
+  community.general.parted:
+    device: "{{ main_disk }}"
+    number: '{{ item.num }}'
+    state: absent
+  loop: '{{ sdb_info.partitions }}'
+  tags:
+    - wipe
+    - never
+
+- name: create boot partition
+  community.general.parted:
+    device: "{{ main_disk }}"
+    number: 1
+    part_end: 256MiB
+    flags: [boot]
+    state: present
+  tags:
+    - storage
+
+- name: format Boot Partition
+  community.general.filesystem:
+    fstype: ext4
+    dev: "{{ main_disk }}1"
+    state: present
+  tags:
+    - storage
+
+- name: create root partition
+  community.general.parted:
+    device: "{{ main_disk }}"
+    number: 2
+    part_end: 100%
+    state: present
+  tags:
+    - storage
+    - never
+
+- name: encrypt root partition
+  community.crypto.luks_device:
+    device: "{{ main_disk }}2"
+    type: luks2
+    hash: "sha512"
+    keysize: 512
+    force_remove_last_key: true
+    name: cryptdisc
+    passphrase: "{{ main_disk_password }}"
+    state: "present"
+  tags:
+    - storage
+    - never
+
+- name: encrypt root partition
+  community.crypto.luks_device:
+    device: "{{ main_disk }}2"
+    name: cryptdisc
+    passphrase: "{{ main_disk_password }}"
+    state: "opened"
+  tags:
+    - storage
+    - never
+
+- name: format root Partition
+  community.general.filesystem:
+    fstype: ext4
+    dev: /dev/mapper/cryptdisc
+    state: present
+  tags:
+    - storage
+
+- name: mount root partition
+  ansible.posix.mount:
+    path: /dev/mapper/cryptdisc
+    src: /mnt
+    state: mounted
+  tags:
+    - storage
+    - never
+
+- name: Create boot directory if it does not exist
+  ansible.builtin.file:
+    path: /mnt/boot
+    state: directory
+    mode: '0755'
+  tags:
+    - storage
+    - never
+
+- name: mount boot partition
+  ansible.posix.mount:
+    path: "{{ main_disk }}1"
+    src: /mnt/boot
+    state: mounted
+  tags:
+    - storage
+    - never
+
+- name: install based packages into chroot
+  ansible.builtin.command: pacstrap /mnt base linux linux-firmware gvim ansible
+  tags:
+    - storage
+    - never
+
+- name: generate filesystem mount configuration
+  ansible.builtin.command: genfstab -U /mnt/ >> /mnt/etc/fstab
+  tags:
+    - storage
+    - never

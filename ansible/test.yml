@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  become: false
+  gather_facts: false
+  vars:
+    - main_disk: "/dev/sda"
+    - main_disk_password: "test123"
+ 
+  tasks:
+    - name: Create encrypted partitions
+      include_tasks: tasks/storage.yml
