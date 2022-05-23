@@ -1,27 +1,32 @@
 ---
 - hosts: localhost
   become: true
-  gather_facts: false
+  gather_facts: true
   vars:
     - main_disk: "/dev/sda"
     - main_disk_password: "test123"
  
   tasks:
-    - name: delete keys from root partition
+    - name: "Read device information from {{ main_disk }}"
+      community.general.parted: "device={{ main_disk }} unit=MiB"
+      register: main_disk_info
+
+    - name: Delete keys from {{ main_disk }} root partition
       community.crypto.luks_device:
         device: "{{ main_disk }}2"
         force_remove_last_key: true
         state: "absent"
+      when: "main_disk_info.partitions | length > 1"
       tags:
         - never
         - wipe
-
+    
     - name: Remove all partitions from disk
       community.general.parted:
         device: "{{ main_disk }}"
         number: '{{ item.num }}'
         state: absent
-      loop: '{{ sdb_info.partitions }}'
+      loop: "{{ main_disk_info.partitions }}"
       tags:
         - never
         - wipe
