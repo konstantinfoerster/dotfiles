@@ -1,11 +1,129 @@
 ---
 - hosts: localhost
-  become: false
+  become: true
   gather_facts: false
   vars:
     - main_disk: "/dev/sda"
     - main_disk_password: "test123"
  
   tasks:
-    - name: Create encrypted partitions
-      include_tasks: tasks/storage.yml
+    - name: delete keys from root partition
+      community.crypto.luks_device:
+        device: "{{ main_disk }}2"
+        force_remove_last_key: true
+        state: "absent"
+      tags:
+        - never
+        - wipe
+
+    - name: Remove all partitions from disk
+      community.general.parted:
+        device: "{{ main_disk }}"
+        number: '{{ item.num }}'
+        state: absent
+      loop: '{{ sdb_info.partitions }}'
+      tags:
+        - never
+        - wipe
+
+    - name: create boot partition
+      community.general.parted:
+        device: "{{ main_disk }}"
+        number: 1
+        part_end: 256MiB
+        flags: [boot]
+        state: present
+      tags:
+        - never
+        - storage
+
+    - name: format Boot Partition
+      community.general.filesystem:
+        fstype: ext4
+        dev: "{{ main_disk }}1"
+        state: present
+      tags:
+        - never
+        - storage
+
+    - name: create root partition
+      community.general.parted:
+        device: "{{ main_disk }}"
+        number: 2
+        part_end: 100%
+        state: present
+      tags:
+        - never
+        - storage
+
+    - name: encrypt root partition
+      community.crypto.luks_device:
+        device: "{{ main_disk }}2"
+        type: luks2
+        hash: "sha512"
+        keysize: 512
+        force_remove_last_key: true
+        name: cryptdisc
+        passphrase: "{{ main_disk_password }}"
+        state: "present"
+      tags:
+        - never
+        - storage
+
+    - name: encrypt root partition
+      community.crypto.luks_device:
+        device: "{{ main_disk }}2"
+        name: cryptdisc
+        passphrase: "{{ main_disk_password }}"
+        state: "opened"
+      tags:
+        - never
+        - storage
+
+    - name: format root Partition
+      community.general.filesystem:
+        fstype: ext4
+        dev: /dev/mapper/cryptdisc
+        state: present
+      tags:
+        - never
+        - storage
+
+    - name: mount root partition
+      ansible.posix.mount:
+        path: /dev/mapper/cryptdisc
+        src: /mnt
+        state: mounted
+      tags:
+        - never
+        - storage
+
+    - name: Create boot directory if it does not exist
+      ansible.builtin.file:
+        path: /mnt/boot
+        state: directory
+        mode: '0755'
+      tags:
+        - never
+        - storage
+
+    - name: mount boot partition
+      ansible.posix.mount:
+        path: "{{ main_disk }}1"
+        src: /mnt/boot
+        state: mounted
+      tags:
+        - never
+        - storage
+
+    - name: install based packages into chroot
+      ansible.builtin.command: pacstrap /mnt base linux linux-firmware gvim ansible
+      tags:
+        - never
+        - storage
+
+    - name: generate filesystem mount configuration
+      ansible.builtin.command: genfstab -U /mnt/ >> /mnt/etc/fstab
+      tags:
+        - never
+        - storage
