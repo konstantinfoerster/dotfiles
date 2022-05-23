@@ -10,6 +10,10 @@
     - name: "Read device information from {{ main_disk }}"
       community.general.parted: "device={{ main_disk }} unit=MiB"
       register: main_disk_info
+      tags:
+        - never
+        - wipe
+        - storage
 
     - name: Delete keys from {{ main_disk }} root partition
       community.crypto.luks_device:
@@ -55,6 +59,7 @@
       community.general.parted:
         device: "{{ main_disk }}"
         number: 2
+        part_start: 256MiB
         part_end: 100%
         state: present
       tags:
@@ -67,8 +72,6 @@
         type: luks2
         hash: "sha512"
         keysize: 512
-        force_remove_last_key: true
-        name: cryptdisc
         passphrase: "{{ main_disk_password }}"
         state: "present"
       tags:
