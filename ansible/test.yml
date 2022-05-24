@@ -108,6 +108,7 @@
 
     - name: mount boot partition
       ansible.posix.mount:
+        fstype: ext4
         src: "{{ main_disk }}1"
         path: /mnt/boot
         state: mounted
