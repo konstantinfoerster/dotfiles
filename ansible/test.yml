@@ -19,6 +19,7 @@
       community.crypto.luks_device:
         device: "{{ main_disk }}2"
         force_remove_last_key: true
+        passphrase: "{{ main_disk_password }}"
         state: "absent"
       when: "main_disk_info.partitions | length > 1"
       tags:
@@ -116,14 +117,23 @@
         - never
         - storage
 
-    - name: install based packages into chroot
+    - name: Install based packages into chroot
       ansible.builtin.command: pacstrap /mnt base linux linux-firmware gvim ansible
       tags:
         - never
         - storage
 
-    - name: generate filesystem mount configuration
+    - name: Reade file stats of /mnt/etc/fstab
+      stat:
+        path: /mnt/etc/fstab
+      register: fstab_result
+      tags:
+        - never
+        - storage
+
+    - name: Generate filesystem mount configuration
       ansible.builtin.command: genfstab -U /mnt/ >> /mnt/etc/fstab
+      when: not fstab_result.stat.exists
       tags:
         - never
         - storage
