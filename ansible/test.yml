@@ -73,16 +73,6 @@
         hash: "sha512"
         keysize: 512
         passphrase: "{{ main_disk_password }}"
-        state: "present"
-      tags:
-        - never
-        - storage
-
-    - name: encrypt root partition
-      community.crypto.luks_device:
-        device: "{{ main_disk }}2"
-        name: cryptdisc
-        passphrase: "{{ main_disk_password }}"
         state: "opened"
       tags:
         - never
@@ -99,8 +89,9 @@
 
     - name: mount root partition
       ansible.posix.mount:
-        path: /dev/mapper/cryptdisc
-        src: /mnt
+        fstype: ext4
+        src: /dev/mapper/cryptdisc
+        path: /mnt
         state: mounted
       tags:
         - never
@@ -117,8 +108,8 @@
 
     - name: mount boot partition
       ansible.posix.mount:
-        path: "{{ main_disk }}1"
-        src: /mnt/boot
+        src: "{{ main_disk }}1"
+        path: /mnt/boot
         state: mounted
       tags:
         - never
