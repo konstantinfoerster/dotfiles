@@ -15,7 +15,8 @@
       include_tasks: tasks/storage.yml
     - name: Prepare base system
       include_tasks: tasks/prepare_base.yml
-    - import_playbook: main.yml
-      vars:
-        hostlist: all
-        connection_type: chroot
+
+- import_playbook: main.yml
+  vars:
+    hostlist: all
+    connection_type: chroot
