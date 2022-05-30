@@ -1,0 +1,21 @@
+---
+- name: Change root Password
+  ansible.builtin.user:
+    name: root
+    password: "{{ root_password | password_hash('sha512') }}"
+    state: present
+
+- name: "Add user {{ user }}"
+  ansible.builtin.user:
+    name: "{{ user }}"
+    password: "{{ user_password | password_hash('sha512') }}"
+    state: present
+
+- name: "Ensure user {{ user }} is added to sudoers"
+  ansible.builtin.lineinfile:
+    dest: "/etc/sudoers.d/001_{{ user }}"
+    content: "{{ user }} ALL=(ALL) ALL"
+    mode: 0640
+    force: false
+    validate: "visudo -cf %s"
+    state: present

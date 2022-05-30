@@ -1,0 +1,254 @@
+[org/freedesktop/tracker/miner/files]
+index-recursive-directories=['&DESKTOP', '&DOCUMENTS', '&MUSIC', '&PICTURES', '&VIDEOS', '&DOWNLOAD']
+
+[org/gnome/desktop/app-folders]
+folder-children=['Utilities', 'YaST']
+
+[org/gnome/desktop/app-folders/folders/Utilities]
+apps=['gnome-abrt.desktop', 'gnome-system-log.desktop', 'nm-connection-editor.desktop', 'org.gnome.baobab.desktop', 'org.gnome.Connections.desktop', 'org.gnome.DejaDup.desktop', 'org.gnome.Dictionary.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.eog.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.fonts.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.tweaks.desktop', 'org.gnome.Usage.desktop', 'vinagre.desktop']
+categories=['X-GNOME-Utilities']
+name='X-GNOME-Utilities.directory'
+translate=true
+
+[org/gnome/desktop/app-folders/folders/YaST]
+categories=['X-SuSE-YaST']
+name='suse-yast.directory'
+translate=true
+
+[org/gnome/desktop/background]
+color-shading-type='solid'
+picture-options='zoom'
+picture-uri='file:///usr/share/backgrounds/gnome/pixels-l.png'
+picture-uri-dark='file:///usr/share/backgrounds/gnome/pixels-d.png'
+primary-color='#3465a4'
+secondary-color='#000000'
+
+[org/gnome/desktop/calendar]
+show-weekdate=true
+
+[org/gnome/desktop/input-sources]
+sources=[('xkb', 'de'), ('xkb', 'us')]
+xkb-options=['caps:escape']
+
+[org/gnome/desktop/interface]
+clock-show-weekday=true
+color-scheme='prefer-dark'
+document-font-name='Droid Sans 11'
+enable-animations=false
+enable-hot-corners=false
+font-antialiasing='grayscale'
+font-hinting='slight'
+font-name='Droid Sans 11'
+monospace-font-name='Hack 11'
+show-battery-percentage=true
+
+[org/gnome/desktop/media-handling]
+autorun-never=true
+autorun-x-content-ignore=['x-content/unix-software', 'x-content/image-dcf']
+autorun-x-content-open-folder=@as []
+autorun-x-content-start-app=['x-content/ostree-repository']
+
+[org/gnome/desktop/notifications]
+application-children=['org-gnome-software', 'org-gnome-settings']
+
+[org/gnome/desktop/notifications/application/org-gnome-settings]
+application-id='org.gnome.Settings.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-software]
+application-id='org.gnome.Software.desktop'
+
+[org/gnome/desktop/peripherals/touchpad]
+two-finger-scrolling-enabled=true
+
+[org/gnome/desktop/privacy]
+disable-camera=true
+disable-microphone=true
+old-files-age=uint32 30
+recent-files-max-age=-1
+
+[org/gnome/desktop/screensaver]
+color-shading-type='solid'
+picture-options='zoom'
+picture-uri='file:///usr/share/backgrounds/gnome/pixels-l.png'
+primary-color='#3465a4'
+secondary-color='#000000'
+
+[org/gnome/desktop/search-providers]
+disabled=['org.gnome.Boxes.desktop', 'org.gnome.Epiphany.desktop', 'org.gnome.Characters.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.Software.desktop', 'org.gnome.Calendar.desktop']
+sort-order=['org.gnome.Contacts.desktop', 'org.gnome.Documents.desktop', 'org.gnome.Nautilus.desktop']
+
+[org/gnome/desktop/session]
+idle-delay=uint32 900
+
+[org/gnome/desktop/sound]
+event-sounds=true
+theme-name='__custom'
+
+[org/gnome/desktop/wm/keybindings]
+activate-window-menu=@as []
+begin-move=@as []
+begin-resize=@as []
+close=['<Shift><Alt>x']
+cycle-group=@as []
+cycle-group-backward=@as []
+cycle-panels=@as []
+cycle-panels-backward=@as []
+cycle-windows=@as []
+cycle-windows-backward=@as []
+maximize=@as []
+minimize=@as []
+move-to-monitor-down=@as []
+move-to-monitor-left=@as []
+move-to-monitor-right=@as []
+move-to-monitor-up=@as []
+move-to-workspace-1=['<Shift><Alt>exclam']
+move-to-workspace-2=['<Shift><Alt>quotedbl']
+move-to-workspace-3=['<Shift><Alt>section']
+move-to-workspace-4=['<Shift><Alt>dollar']
+move-to-workspace-last=@as []
+move-to-workspace-left=@as []
+move-to-workspace-right=@as []
+switch-group=@as []
+switch-group-backward=@as []
+switch-input-source=@as []
+switch-input-source-backward=@as []
+switch-panels=@as []
+switch-panels-backward=@as []
+switch-to-workspace-1=['<Alt>1']
+switch-to-workspace-2=['<Alt>2']
+switch-to-workspace-3=['<Alt>3']
+switch-to-workspace-4=['<Alt>4']
+switch-to-workspace-last=@as []
+switch-to-workspace-left=@as []
+switch-to-workspace-right=@as []
+toggle-maximized=['<Alt>m']
+unmaximize=@as []
+
+[org/gnome/desktop/wm/preferences]
+button-layout='appmenu:close'
+titlebar-font='Droid Sans Semi-Bold 11'
+
+
+[org/gnome/gedit/plugins]
+active-plugins=['docinfo', 'quickhighlight', 'openlinks', 'sort', 'modelines', 'spell', 'filebrowser']
+
+[org/gnome/gedit/preferences/editor]
+background-pattern='none'
+display-overview-map=false
+display-right-margin=false
+insert-spaces=true
+scheme='oblivion'
+tabs-size=uint32 2
+wrap-last-split-mode='word'
+
+[org/gnome/gedit/preferences/ui]
+show-tabs-mode='auto'
+
+[org/gnome/mutter]
+dynamic-workspaces=false
+
+[org/gnome/nautilus/preferences]
+click-policy='single'
+default-folder-viewer='icon-view'
+search-filter-time-type='last_modified'
+
+[org/gnome/nautilus/window-state]
+initial-size=(1156, 699)
+maximized=true
+
+[org/gnome/settings-daemon/plugins/media-keys]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']
+help=@as []
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+binding='<Shift><Alt>Return'
+command='~/.scripts/tmux-gnome.sh'
+name='tmux-session'
+
+[org/gnome/settings-daemon/plugins/power]
+power-button-action='suspend'
+sleep-inactive-ac-type='nothing'
+sleep-inactive-battery-type='suspend'
+
+[org/gnome/shell]
+disabled-extensions=@as []
+enabled-extensions=['apps-menu@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'native-window-placement@gnome-shell-extensions.gcampax.github.com', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'drive-menu@gnome-shell-extensions.gcampax.github.com']
+favorite-apps=['org.gnome.Terminal.desktop', 'google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop']
+welcome-dialog-last-shown-version='42.1'
+
+[org/gnome/shell/app-switcher]
+current-workspace-only=false
+
+[org/gnome/shell/world-clocks]
+locations=@av []
+
+[org/gnome/software]
+check-timestamp=int64 1652554243
+download-updates=false
+download-updates-notify=false
+first-run=false
+update-notification-timestamp=int64 1653590195
+
+[org/gnome/terminal/legacy]
+menu-accelerator-enabled=false
+
+[org/gnome/terminal/legacy/profiles:]
+list=['854ee7bc-687b-488a-b045-6a9e1f05f0fc', 'bac4c931-6297-4819-8f34-314a155f0d17']
+
+[org/gnome/terminal/legacy/profiles:/:854ee7bc-687b-488a-b045-6a9e1f05f0fc]
+audible-bell=false
+background-color='#20201d'
+bold-color='#a6a28c'
+bold-color-same-as-fg=true
+cursor-background-color='#a6a28c'
+cursor-colors-set=true
+cursor-foreground-color='#20201d'
+font='Hack 12'
+foreground-color='#a6a28c'
+palette=['#20201d', '#d73737', '#60ac39', '#ae9513', '#6684e1', '#b854d4', '#1fad83', '#a6a28c', '#7d7a68', '#b65611', '#292824', '#6e6b5e', '#999580', '#e8e4cf', '#d43552', '#fefbec']
+use-system-font=false
+use-theme-background=false
+use-theme-colors=false
+visible-name='Base 16 Atelier Dune'
+
+[org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+audible-bell=false
+background-color='rgb(23,20,33)'
+foreground-color='rgb(208,207,204)'
+use-theme-colors=false
+
+[org/gnome/terminal/legacy/profiles:/:bac4c931-6297-4819-8f34-314a155f0d17]
+audible-bell=false
+background-color='#181818'
+bold-color='#d8d8d8'
+bold-color-same-as-fg=true
+cursor-background-color='#d8d8d8'
+cursor-colors-set=true
+cursor-foreground-color='#181818'
+font='Hack 12'
+foreground-color='#d8d8d8'
+palette=['#181818', '#ab4642', '#a1b56c', '#f7ca88', '#7cafc2', '#ba8baf', '#86c1b9', '#d8d8d8', '#585858', '#dc9656', '#282828', '#383838', '#b8b8b8', '#e8e8e8', '#a16946', '#f8f8f8']
+use-system-font=false
+use-theme-background=false
+use-theme-colors=false
+visible-name='Base 16 Default Dark'
+
+[org/gnome/tweaks]
+show-extensions-notice=false
+
+[org/gtk/settings/file-chooser]
+date-format='regular'
+location-mode='path-bar'
+show-hidden=false
+show-size-column=true
+show-type-column=true
+sidebar-width=160
+sort-column='name'
+sort-directories-first=false
+sort-order='ascending'
+type-format='category'
+window-position=(26, 23)
+window-size=(1203, 936)
+
+[system/locale]
+region='de_DE.UTF-8'

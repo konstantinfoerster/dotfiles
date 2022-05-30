@@ -1,0 +1,9 @@
+---
+- name: Install terminal packages
+  community.general.pacman:
+    name:
+      - tmux
+      - gvim # gvim for vim with +clipboard support
+      - the_silver_searcher
+      - jq
+    state: latest

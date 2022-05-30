@@ -1,0 +1,8 @@
+---
+- name: Install vm and ops packages
+  community.general.pacman:
+    name:
+      - virtualbox-host-modules-arch
+      - vagrant
+      - ansible
+    state: latest

@@ -1,0 +1,44 @@
+---
+# - name: Configure available keyboard layouts
+#   community.general.dconf:
+#     key: "/org/gnome/desktop/input-sources/sources"
+#     value: "[('xkb', 'de'), ('xkb', 'us')]"
+#     state: present
+
+# - name: Capslock as escape key
+#   community.general.dconf:
+#     key: "/org/gnome/desktop/input-sources/xkb-options"
+#     value: "['caps:escape']"
+#     state: present
+
+# - name: Read xkb-options
+#   ansible.builtin.command: gsettings get org.gnome.desktop.input-sources xkb-options
+#   changed_when: false
+#   register: xkb_options
+# - name: "Display xkb-options result"
+#   ansible.builtin.debug: var=xkb_options.stdout
+
+# - name: Capslock as escape key
+#   ansible.builtin.command: "gsettings set org.gnome.desktop.input-sources xkb-options \"['caps:escape']\""
+#   when: xkb_options.stdout != "['caps:escape']"
+
+- name: Check if custom options already applied
+  ansible.builtin.command: gsettings get org.gnome.desktop.input-sources xkb-options
+  changed_when: false
+  register: xkb_options
+
+- name: Load dconf backup
+  ansible.builtin.shell: "dconf load / < {{ dotfiles_dir }}/backup.dconf"
+  when: xkb_options.stdout != "['caps:escape']"
+
+- name: Set git user email
+  community.general.git_config:
+    name: user.email
+    scope: global
+    value: "{{ git_user_email }}"
+
+- name: Set git user name
+  community.general.git_config:
+    name: user.name
+    scope: global
+    value: "{{ git_user_name }}"

@@ -1,0 +1,51 @@
+---
+- name: Enable locales
+  ansible.builtin.lineinfile:
+    dest: /etc/locale.gen
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+  with_items:
+    - regexp: "^#de_DE.UTF-8 UTF-8"
+      line: "de_DE.UTF-8 UTF-8"
+    - regexp: "^#en_US.UTF-8 UTF-8"
+      line: "en_US.UTF-8 UTF-8"
+  register: localegen
+
+- name: Generate locales
+  ansible.builtin.command: locale-gen
+  when: localegen.changed
+
+- name: Ensure language is set
+  ansible.builtin.lineinfile:
+    dest: /etc/locale.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    group: root
+    owner: root
+    state: present
+    mode: 0644
+  with_items:
+    - regexp: "^LANG"
+      line: "LANG=en_US.UTF-8"
+    - regexp: "^LC_NUMERIC"
+      line: "LC_NUMERIC=de_DE.UTF-8"
+    - regexp: "^LC_TIME"
+      line: "LC_TIME=de_DE.UTF-8"
+    - regexp: "^LC_MONETARY"
+      line: "LC_MONETARY=de_DE.UTF-8"
+    - regexp: "^LC_PAPER"
+      line: "LC_PAPER=de_DE.UTF-8"
+    - regexp: "^LC_MEASUREMENT"
+      line: "LC_MEASUREMENT=de_DE.UTF-8"
+
+- name: Set system keymap
+  ansible.builtin.lineinfile:
+    dest: /etc/vconsole.conf
+    create: true
+    regexp: "^KEYMAP="
+    line: "KEYMAP=de-latin1"
+    group: root
+    owner: root
+    mode: 0644
+    state: present

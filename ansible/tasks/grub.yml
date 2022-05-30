@@ -1,0 +1,50 @@
+---
+- name: Install grub package
+  community.general.pacman:
+    name:
+      - grub
+    state: present
+
+- name: Configure grub cryptdevice
+  ansible.builtin.lineinfile:
+    dest: /etc/default/grub
+    regexp: "^GRUB_CMDLINE_LINUX="
+    line: 'GRUB_CMDLINE_LINUX="cryptdevice={{ main_disk }}2:cryptdisk"'
+    group: root
+    owner: root
+    mode: 0644
+    state: present
+  register: grub
+
+- name: Enable encrypt module
+  ansible.builtin.lineinfile:
+    dest: /etc/mkinitcpio.conf
+    regexp: "^HOOKS="
+    insertafter: ''
+    line: 'HOOKS=(base udev autodetect keymap modconf block encrypt filesystems keyboard fsck)'
+    group: root
+    owner: root
+    mode: 0644
+    state: present
+  register: mkinitcpio
+
+# - name: Enable encrypt module
+#   ansible.builtin.replace:
+#     path: /etc/mkinitcpio.conf
+#     regexp: '(HOOKS=\(.*)block filesystems(.*\))'
+#     replace: '\1block keymap encrypt filesystems \2'
+#     group: root
+#     owner: root
+#     mode: 0644
+
+- name: Generate mkinitcpio
+  ansible.builtin.command: mkinitcpio -p linux
+  when: mkinitcpio.changed
+
+- name: Install grub
+  ansible.builtin.command: "grub-install --target=i386-pc {{ main_disk }}"
+  when: grub.changed
+
+- name: Generate grub config
+  ansible.builtin.command: "grub-mkconfig -o /boot/grub/grub.cfg"
+  when: grub.changed

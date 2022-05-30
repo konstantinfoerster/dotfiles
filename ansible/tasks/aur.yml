@@ -1,0 +1,16 @@
+---
+- name: "Create dir {{ aur_dir }}"
+  ansible.builtin.file:
+    path: "{{ aur_dir }}"
+    mode: 0755
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    state: directory
+
+- include_tasks: tasks/helper/aur_download.yml
+  with_items:
+    - visual-studio-code-bin
+    - nvm
+    - google-chrome
+  loop_control:
+    loop_var: aur_package

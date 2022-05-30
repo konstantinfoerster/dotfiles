@@ -1,0 +1,26 @@
+---
+- name: Set hostname
+  ansible.builtin.replace:
+    path: /etc/hostname
+    regexp: '^(.+)$'
+    replace: '{{ hostname }}'
+    group: root
+    owner: root
+    mode: 0644
+
+- name: Ensure localhost is configured in hosts file
+  ansible.builtin.lineinfile:
+    dest: /etc/hosts
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    group: root
+    owner: root
+    state: present
+    mode: 0644
+  with_items:
+    - regexp: '^127\.0\.0\.1.*localhost'
+      line: "127.0.0.1\tlocalhost"
+    - regexp: '^::1.*localhost'
+      line: "::1\t\tlocalhost"
+    - regexp: '^127\.0\.1\.1.*\.local*\t.*'
+      line: "127.0.1.1\t{{ hostname }}.local\t{{ hostname }}"

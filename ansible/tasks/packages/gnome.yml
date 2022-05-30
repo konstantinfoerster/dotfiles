@@ -1,0 +1,14 @@
+---
+- name: Install desktop packages
+  community.general.pacman:
+    name:
+      - gnome
+      - gnome-tweaks
+      - gdm
+      - gnome-software-packagekit-plugin
+    state: latest
+
+- name: Enable gdm
+  ansible.builtin.systemd:
+    name: gdm
+    enabled: true

@@ -1,0 +1,47 @@
+---
+- name: Check out dotfiles from personal repository
+  ansible.builtin.git:
+    repo: "{{ dotfiles_repo }}"
+    dest: "{{ dotfiles_dir }}"
+    force: true
+    recursive: true
+    version: master
+
+- name: Remove existing .bash_profile since we use .profile
+  ansible.builtin.file:
+    path: "/home/{{ user }}/.bash_profile"
+    state: absent
+
+- include_tasks: tasks/helper/link_file.yml
+  with_items:
+    - .bash_logout
+    - .bashrc
+    - .bashrc.d
+    - .bin
+    - .profile
+    - .scripts
+    - .tmux.conf
+    - .vimrc
+    - .config/Code/User/settings.json
+    - .config/base16-shell
+    - .gnupg/gpg.conf
+    - .gnupg/gpg-agent.conf
+  loop_control:
+    loop_var: file
+
+- name: Ensure vim backup folder exists
+  ansible.builtin.file:
+    path: "$/home/{{ user }}/.vim/backup"
+    mode: 0755
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    state: directory
+
+# - name: Read existing gnome terminal profiles
+#   ansible.builtin.command: dconf list /org/gnome/terminal/legacy/profiles:/
+#   changed_when: false
+#   register: terminal_profiles
+
+# - name: Add Base16 gnome terminal profile
+#   ansible.builtin.command: "{{ dotfiles_dir }}/.config/base16-gnome-terminal/color-scripts/base16-default-dark.sh"
+#   when: terminal_profiles.stdout_lines | length < 3
