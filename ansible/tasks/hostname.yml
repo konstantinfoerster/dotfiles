@@ -11,6 +11,7 @@
 - name: Ensure localhost is configured in hosts file
   ansible.builtin.lineinfile:
     dest: /etc/hosts
+    create: true
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
     group: root
