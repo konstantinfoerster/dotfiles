@@ -14,7 +14,7 @@
 
 - name: Generate locales
   ansible.builtin.command: locale-gen
-  when: localegen.changed
+  when: localegen.changed # noqa no-handler
 
 - name: Ensure language is set
   ansible.builtin.lineinfile:

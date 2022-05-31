@@ -19,8 +19,8 @@
     mode: 0644
   with_items:
     - regexp: '^127\.0\.0\.1.*localhost'
-      line: "127.0.0.1\tlocalhost"
+      line: "127.0.0.1        localhost"
     - regexp: '^::1.*localhost'
-      line: "::1\t\tlocalhost"
-    - regexp: '^127\.0\.1\.1.*\.local*\t.*'
-      line: "127.0.1.1\t{{ hostname }}.local\t{{ hostname }}"
+      line: "::1              localhost"
+    - regexp: '^127\.0\.1\.1\s+\w+\.local\s+\w+$'
+      line: "127.0.1.1        {{ hostname }}.local        {{ hostname }}"
