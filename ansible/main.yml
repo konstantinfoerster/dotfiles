@@ -19,7 +19,7 @@
     - name: Print connection type
       debug:
         msg:
-          "Connection: {{ host_vars[connection }}"
+          "Connection: {{ hostlist }} | {{ connection_type }}"
     - name: Set timezone and sync hw clock
       include_tasks: tasks/time.yml
 #     - name: Set correct language and keymap

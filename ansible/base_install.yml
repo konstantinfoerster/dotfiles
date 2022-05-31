@@ -19,4 +19,4 @@
 - import_playbook: main.yml
   vars:
     connection_type: chroot
-    hostlist: "chroot"
+    hostlist: chroot
