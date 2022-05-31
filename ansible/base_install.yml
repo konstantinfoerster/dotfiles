@@ -10,11 +10,11 @@
     - main_disk_password: "test123"
     - crypted_disk_name: cryptdisk
 
-  tasks:
-    - name: Setup hard drive
-      include_tasks: tasks/storage.yml
-    - name: Prepare base system
-      include_tasks: tasks/prepare_base.yml
+  # tasks:
+  #   - name: Setup hard drive
+  #     include_tasks: tasks/storage.yml
+  #   - name: Prepare base system
+  #     include_tasks: tasks/prepare_base.yml
 
 - import_playbook: main.yml
   vars:
