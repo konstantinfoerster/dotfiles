@@ -18,5 +18,4 @@
 
 - import_playbook: main.yml
   vars:
-    hostlist: all
     connection_type: chroot
