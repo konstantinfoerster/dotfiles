@@ -19,6 +19,7 @@
 - name: Ensure language is set
   ansible.builtin.lineinfile:
     dest: /etc/locale.conf
+    create: true
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
     group: root
