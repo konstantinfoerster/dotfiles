@@ -2,9 +2,6 @@
 - hosts: localhost
   become: true
   gather_facts: false
-  tags:
-    - never
-    - prepare
   vars:
     - main_disk: "/dev/sda"
     - main_disk_password: "test123"
