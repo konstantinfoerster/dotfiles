@@ -1,44 +1,32 @@
 ---
-
-- name: print user
-  command: whoami
-  register: who
-
-- debug: var=who.stdout
-
-- name: print user
-  become: true
-  command: whoami
-  register: who
-
-- debug: var=who.stdout
-
-- name: "{{ aur_package }}: Checkout from aur repository"
-  ansible.builtin.git:
-    repo: "https://aur.archlinux.org/{{ aur_package }}.git"
-    dest: "{{ aur_dir }}/{{ aur_package }}"
-    force: true
-    update: true
-    version: master
+- name: "Prepare aur package {{ aur_package}}"
   become_user: "{{ user }}"
+  block:
+  - name: "{{ aur_package }}: Checkout from aur repository"
+    ansible.builtin.git:
+      repo: "https://aur.archlinux.org/{{ aur_package }}.git"
+      dest: "{{ aur_dir }}/{{ aur_package }}"
+      force: true
+      update: true
+      version: master
 
-# - name: "{{ aur_package }}: Reset git directory"
-#   ansible.builtin.command:
-#     cmd: git clean -xf # noqa command-instead-of-module remove files that are in .gitignore
-#     chdir: "{{ aur_dir }}/{{ aur_package }}"
-#   changed_when: false
+  - name: "{{ aur_package }}: Reset git directory"
+    ansible.builtin.command:
+      cmd: git clean -xf # noqa command-instead-of-module remove files that are in .gitignore
+      chdir: "{{ aur_dir }}/{{ aur_package }}"
+    changed_when: false
 
-# - name: "{{ aur_package }}: Build package"
-#   ansible.builtin.command:
-#     chdir: "{{ aur_dir }}/{{ aur_package }}"
-#     cmd: makepkg --force --syncdeps --rmdeps --clean --noconfirm
-#   changed_when: false
+  - name: "{{ aur_package }}: Build package"
+    ansible.builtin.command:
+      chdir: "{{ aur_dir }}/{{ aur_package }}"
+      cmd: makepkg --force --syncdeps --rmdeps --clean --noconfirm
+    changed_when: false
 
-- name: "{{ aur_package }}: Find newly build package"
-  ansible.builtin.find:
-    paths: "{{ aur_dir }}/{{ aur_package }}"
-    patterns: '*.pkg.tar.zst'
-  register: aur_build_packages
+  - name: "{{ aur_package }}: Find newly build package"
+    ansible.builtin.find:
+      paths: "{{ aur_dir }}/{{ aur_package }}"
+      patterns: '*.pkg.tar.zst'
+    register: aur_build_packages
 
 - name: "{{ aur_package }}: Install package"
   community.general.pacman:
