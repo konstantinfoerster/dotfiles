@@ -1,13 +1,13 @@
 ---
 
 - name: print user
-  become_user: "{{ user }}"
   command: whoami
   register: who
 
 - debug: var=who.stdout
 
-- name: print root
+- name: print user
+  become: true
   command: whoami
   register: who
 
