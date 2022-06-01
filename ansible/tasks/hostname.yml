@@ -1,20 +1,9 @@
 ---
 
-- name: Ensure hostname file exists
-  ansible.builtin.file:
-    path: /etc/hostname
-    group: root
-    owner: root
-    mode: 0644
-    state: touch
-
-- name: Set hostname
-  ansible.builtin.replace:
-    path: /etc/hostname
-    regexp: '^(.+)$'
-    replace: "{{ hostname }}"
-    group: root
-    owner: root
+- name: Ensure hostname is set
+  ansible.builtin.copy:
+    dest: /etc/hostname
+    content: "{{ hostname }}"
     mode: 0644
 
 - name: Ensure localhost is configured in hosts file

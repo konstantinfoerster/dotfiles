@@ -12,10 +12,8 @@
     state: present
 
 - name: "Ensure user {{ user }} is added to sudoers"
-  ansible.builtin.lineinfile:
+  ansible.builtin.copy:
     dest: "/etc/sudoers.d/001_{{ user }}"
     content: "{{ user }} ALL=(ALL) ALL"
     mode: 0640
-    force: false
     validate: "visudo -cf %s"
-    state: present
