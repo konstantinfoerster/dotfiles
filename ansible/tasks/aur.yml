@@ -20,7 +20,7 @@
   register: c
 
 - shell: whoami
-  become_user: test
+  become_user: "{{ user }}"
   register: d
 
 - debug: var=c.stdout
