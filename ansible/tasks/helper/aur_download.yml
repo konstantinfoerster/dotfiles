@@ -31,7 +31,7 @@
   command: whoami
   register: username_on_the_host
 
-- debug: var=username_on_the_host
+- debug: var=username_on_the_host.stdout
 
 - name: "{{ aur_package }}: Install package"
   community.general.pacman:
