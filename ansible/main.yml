@@ -52,7 +52,7 @@
       become_user: "{{ user }}"
       block:
         - name: Setup aur packages
-          include_tasks: tasks/aur.yml
+          import_tasks: tasks/aur.yml
         - name: Apply user specific settings
           import_tasks: tasks/user_settings.yml
         - name: Setup dotiles

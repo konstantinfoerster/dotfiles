@@ -7,14 +7,15 @@
     group: "{{ user }}"
     state: directory
 
-- include_tasks: tasks/helper/aur_download.yml
-  args:
-      apply:
-        become: no
-        become_user: "{{ user }}"
-  with_items:
-    - visual-studio-code-bin
-    - nvm
-    - google-chrome
-  loop_control:
-    loop_var: aur_package
+- name: Install AUR packages
+  become: false
+  become_user: "{{ user }}"
+  block:
+    - include_tasks: tasks/helper/aur_download.yml
+      with_items:
+      - visual-studio-code-bin
+      - nvm
+      - google-chrome
+      loop_control:
+        loop_var: aur_package
+
