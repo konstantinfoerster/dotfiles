@@ -16,6 +16,6 @@
 - name: "Ensure user {{ user }} is added to sudoers"
   ansible.builtin.copy:
     dest: "/etc/sudoers.d/001_{{ user }}"
-    content: "{{ user }} ALL=(ALL) ALL"
+    content: "{{ user }} ALL=(ALL) NOPASSWD: ALL"
     mode: 0640
     validate: "visudo -cf %s"
