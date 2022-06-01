@@ -12,15 +12,15 @@
   become_method: "sudo"
   command: whoami
   register: username_on_the_host
-  
-- name: Install AUR packages
-  include_tasks: tasks/helper/aur_download.yml
-  args:
-    apply:
-      become_user: "{{ user }}"
-  with_items:
-  - visual-studio-code-bin
-  - nvm
-  - google-chrome
-  loop_control:
-    loop_var: aur_package
+
+# - name: Install AUR packages
+#   include_tasks: tasks/helper/aur_download.yml
+#   args:
+#     apply:
+#       become_user: "{{ user }}"
+#   with_items:
+#   - visual-studio-code-bin
+#   - nvm
+#   - google-chrome
+#   loop_control:
+#     loop_var: aur_package
