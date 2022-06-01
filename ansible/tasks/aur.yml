@@ -7,38 +7,11 @@
     group: "{{ user }}"
     state: directory
 
-# - name: Install AUR packages
-#   include_tasks: tasks/helper/aur_download.yml
-#   with_items:
-#   - visual-studio-code-bin
-#   - nvm
-#   - google-chrome
-#   loop_control:
-#     loop_var: aur_package
-
-- name: "nvm: Checkout from aur repository"
-  ansible.builtin.git:
-    repo: "https://aur.archlinux.org/nvm.git"
-    dest: "{{ aur_dir }}/nvm"
-    force: true
-    update: true
-    version: master
-  become: false
-  become_user: "{{ user }}"
-
-- name: "nvm: Reset git directory"
-  ansible.builtin.command:
-    cmd: git clean -xf # noqa command-instead-of-module remove files that are in .gitignore
-    chdir: "{{ aur_dir }}/nvm"
-  changed_when: false
-  become: false
-  become_user: "{{ user }}"
-
-- name: "nvm: Build package"
-  ansible.builtin.command:
-    chdir: "{{ aur_dir }}/nvm"
-    cmd: makepkg --force --syncdeps --rmdeps --clean --noconfirm
-  changed_when: false
-  become: false
-  become_user: "{{ user }}"
-
+- name: Install AUR packages
+  include_tasks: tasks/helper/aur_download.yml
+  with_items:
+  - visual-studio-code-bin
+  - nvm
+  - google-chrome
+  loop_control:
+    loop_var: aur_package

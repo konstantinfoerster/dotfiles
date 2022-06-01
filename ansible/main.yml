@@ -50,16 +50,6 @@
     - name: Apply user specific settings
       become_user: "{{ user }}"
       block:
-        - shell: whoami
-          register: c
-
-        - shell: whoami
-          become_user: "{{ user }}"
-          register: d
-
-        - debug: var=c.stdout
-
-        - debug: var=d.stdout
         - name: Setup aur packages
           import_tasks: tasks/aur.yml
     #     - name: Apply user specific settings
