@@ -10,10 +10,3 @@
       - libpulse
       - wireplumber
     state: latest
-
-- name: Enable pipewire-pulse service
-  become_user: "{{ user }}"
-  ansible.builtin.systemd:
-    name: pipewire-pulse
-    enabled: true
-    scope: user
