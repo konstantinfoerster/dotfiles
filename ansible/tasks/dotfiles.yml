@@ -13,10 +13,6 @@
     state: absent
 
 - include_tasks: tasks/helper/link_file.yml
-  args:
-      apply:
-        become: no
-        become_user: "{{ user }}"
   with_items:
     - .bash_logout
     - .bashrc
