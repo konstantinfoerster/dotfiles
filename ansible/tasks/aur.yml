@@ -25,7 +25,7 @@
 
 - debug: var=c.stdout
 
-- debug: var=d.stdout
+- debug: var="{{ d.stdout }} | {{ ansible_become_user }}"
 
 - name: "nvm: Checkout from aur repository"
   ansible.builtin.git:
