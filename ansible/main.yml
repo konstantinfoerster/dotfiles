@@ -48,7 +48,6 @@
         # - name: Install docker
         #   import_tasks: tasks/packages/docker.yml
     - name: Apply user specific settings
-      become: false
       become_user: "{{ user }}"
       block:
         - shell: whoami
