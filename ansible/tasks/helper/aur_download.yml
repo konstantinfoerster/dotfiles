@@ -25,6 +25,13 @@
     patterns: '*.pkg.tar.zst'
   register: aur_build_packages
 
+- name: print user
+  become: true
+  command: whoami
+  register: username_on_the_host
+
+- debug: var=username_on_the_host
+
 - name: "{{ aur_package }}: Install package"
   community.general.pacman:
     name: "{{ aur_build_packages.files[0].path }}"
