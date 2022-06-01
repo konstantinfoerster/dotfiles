@@ -23,6 +23,7 @@
   become_user: "{{ user }}"
   vars:
     ansible_become: false
+    ansible_become_user: "{{ user }}"
   register: d
 
 - debug: var=c.stdout
