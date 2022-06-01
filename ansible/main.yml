@@ -50,6 +50,8 @@
     - name: Apply user specific settings
       become: false
       become_user: "{{ user }}"
+      vars:
+        - ansible_become_user: "{{ user }}"
       block:
         - name: Setup aur packages
           include_tasks: tasks/aur.yml

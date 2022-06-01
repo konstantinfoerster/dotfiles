@@ -21,7 +21,6 @@
 
 - shell: whoami
   become_user: "{{ user }}"
-  become: false
   register: d
 
 - debug: var=c.stdout
