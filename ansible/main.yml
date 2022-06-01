@@ -27,10 +27,10 @@
       import_tasks: tasks/grub.yml
     - name: Set root password and add user
       import_tasks: tasks/user.yml
-    # - name: Install packages
-    #   block:
-    #     - name: Install base packages
-    #       import_tasks: tasks/packages/base.yml
+    - name: Install packages
+      block:
+        - name: Install base packages
+          import_tasks: tasks/packages/base.yml
     #     - name: Install video driver packages
     #       import_tasks: tasks/packages/driver.yml
     #     - name: Install audio packages
