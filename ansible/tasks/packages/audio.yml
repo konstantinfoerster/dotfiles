@@ -12,7 +12,6 @@
     state: latest
 
 - name: Enable pipewire-pulse service
-  become: false
   become_user: "{{ user }}"
   ansible.builtin.systemd:
     name: pipewire-pulse
