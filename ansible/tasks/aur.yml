@@ -21,7 +21,8 @@
 
 - shell: whoami
   become_user: "{{ user }}"
-  become_method: "su"
+  vars:
+    ansible_become: false
   register: d
 
 - debug: var=c.stdout
