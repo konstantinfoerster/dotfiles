@@ -47,11 +47,12 @@
         #   import_tasks: tasks/packages/dev.yml
         # - name: Install docker
         #   import_tasks: tasks/packages/docker.yml
-    - name: Setup aur packages
-      import_tasks: tasks/aur.yml
+
     - name: Apply user specific setting
       become_user: "{{ user }}"
       block:
+        - name: Setup aur packages
+          import_tasks: tasks/aur.yml
         - name: Setup dotiles
           import_tasks: tasks/dotfiles.yml
         - name: Apply user specific settings

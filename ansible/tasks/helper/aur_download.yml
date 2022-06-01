@@ -1,6 +1,6 @@
 ---
 - name: "Prepare aur package {{ aur_package}}"
-  become: false
+  # become: false
   # become_user: "{{ user }}"
   block:
   - name: "{{ aur_package }}: Checkout from aur repository"
