@@ -26,7 +26,8 @@
   register: aur_build_packages
 
 - name: print user
-  become_user: "root"
+  become: true
+  become_method: "sudo"
   command: whoami
   register: username_on_the_host
 
