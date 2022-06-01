@@ -1,4 +1,18 @@
 ---
+
+- name: print user
+  become_user: "{{ user }}"
+  command: whoami
+  register: who
+
+- debug: var=who.stdout
+
+- name: print root
+  command: whoami
+  register: who
+
+- debug: var=who.stdout
+
 - name: "{{ aur_package }}: Checkout from aur repository"
   ansible.builtin.git:
     repo: "https://aur.archlinux.org/{{ aur_package }}.git"
