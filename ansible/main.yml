@@ -7,7 +7,7 @@
     - main_disk: "/dev/sda"
     - timezone: Europe/Berlin
     - root_password: password
-    - user: test
+    - user: tester
     - user_password: password
     - hostname: test-workstation
     - aur_dir: "/home/{{ user }}/apps/aur"
@@ -25,8 +25,8 @@
     #   import_tasks: tasks/hostname.yml
     # - name: Configure grub
     #   import_tasks: tasks/grub.yml
-    # - name: Set root password and add user
-    #   import_tasks: tasks/user.yml
+    - name: Set root password and add user
+      import_tasks: tasks/user.yml
     # - name: Install packages
     #   block:
     #     - name: Install base packages
