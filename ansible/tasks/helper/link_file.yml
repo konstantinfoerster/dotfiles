@@ -1,33 +1,29 @@
 ---
-- name: "Link file {{ file }}"
-  become: false
-  become_user: "{{ user }}"
-  block:
-  - name: "Check existing {{ file }}"
-    ansible.builtin.stat:
-      path: "/home/{{ user }}/{{ file }}"
-    register: file_available
+- name: "Check existing {{ file }}"
+  ansible.builtin.stat:
+    path: "/home/{{ user }}/{{ file }}"
+  register: file_available
 
-  - name: "Remove existing {{ file }} if it's not a link"
-    ansible.builtin.file:
-      path: "/home/{{ user }}/{{ file }}"
-      state: absent
-    when: file_available.stat.exists and not file_available.stat.islnk
+- name: "Remove existing {{ file }} if it's not a link"
+  ansible.builtin.file:
+    path: "/home/{{ user }}/{{ file }}"
+    state: absent
+  when: file_available.stat.exists and not file_available.stat.islnk
 
-  - name: Make sure destination dir exists
-    ansible.builtin.file:
-      path: "{{ '/home/' + user + '/' + file | dirname }}"
-      mode: 0755
-      owner: "{{ user }}"
-      group: "{{ user }}"
-      state: directory
-    when: not file_available.stat.exists
+- name: Make sure destination dir exists
+  ansible.builtin.file:
+    path: "{{ '/home/' + user + '/' + file | dirname }}"
+    mode: 0755
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    state: directory
+  when: not file_available.stat.exists
 
-  - name: "Link {{ file }} if it does not exists yet"
-    ansible.builtin.file:
-      src: "{{ dotfiles_dir }}/{{ file }}"
-      dest: "/home/{{ user }}/{{ file }}"
-      owner: "{{ user }}"
-      group: "{{ user }}"
-      state: link
-    when: not file_available.stat.exists
+- name: "Link {{ file }} if it does not exists yet"
+  ansible.builtin.file:
+    src: "{{ dotfiles_dir }}/{{ file }}"
+    dest: "/home/{{ user }}/{{ file }}"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    state: link
+  when: not file_available.stat.exists
