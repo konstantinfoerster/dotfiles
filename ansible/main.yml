@@ -18,45 +18,45 @@
 
   tasks:
     - name: Set timezone and sync hw clock
-      include_tasks: tasks/time.yml
+      import_tasks: tasks/time.yml
     - name: Set correct language and keymap
-      include_tasks: tasks/language.yml
+      import_tasks: tasks/language.yml
     - name: Set hostname and add hosts
-      include_tasks: tasks/hostname.yml
+      import_tasks: tasks/hostname.yml
     - name: Configure grub
-      include_tasks: tasks/grub.yml
+      import_tasks: tasks/grub.yml
     - name: Set root password and add user
-      include_tasks: tasks/user.yml
+      import_tasks: tasks/user.yml
     - name: Install packages
       block:
         - name: Install base packages
-          include_tasks: tasks/packages/base.yml
+          import_tasks: tasks/packages/base.yml
         - name: Install video driver packages
-          include_tasks: tasks/packages/driver.yml
+          import_tasks: tasks/packages/driver.yml
         - name: Install audio packages
-          include_tasks: tasks/packages/audio.yml
+          import_tasks: tasks/packages/audio.yml
         - name: Install font packages
-          include_tasks: tasks/packages/font.yml
+          import_tasks: tasks/packages/font.yml
         - name: Install terminal packages
-          include_tasks: tasks/packages/terminal.yml
+          import_tasks: tasks/packages/terminal.yml
         - name: Install gnome packages
-          include_tasks: tasks/packages/gnome.yml
+          import_tasks: tasks/packages/gnome.yml
         - name: Install vm and ops packages
-          include_tasks: tasks/packages/vm.yml
-        - name: Install development packages
-          include_tasks: tasks/packages/dev.yml
-        - name: Install docker
-          include_tasks: tasks/packages/docker.yml
+          import_tasks: tasks/packages/vm.yml
+        # - name: Install development packages
+        #   import_tasks: tasks/packages/dev.yml
+        # - name: Install docker
+        #   import_tasks: tasks/packages/docker.yml
     - name: Apply user specific settings
       become: false
       become_user: "{{ user }}"
       block:
         - name: Setup aur packages
-          include_tasks: tasks/aur.yml
+          import_tasks: tasks/aur.yml
         - name: Apply user specific settings
-          include_tasks: tasks/user_settings.yml
+          import_tasks: tasks/user_settings.yml
         - name: Setup dotiles
-          include_tasks: tasks/dotfiles.yml
+          import_tasks: tasks/dotfiles.yml
 
 # # TODO
 # * Configure Chrome

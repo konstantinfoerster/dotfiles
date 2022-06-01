@@ -3,12 +3,14 @@
   ansible.builtin.user:
     name: root
     password: "{{ root_password | password_hash('sha512') }}"
+    update_password: always
     state: present
 
 - name: "Add user {{ user }}"
   ansible.builtin.user:
     name: "{{ user }}"
     password: "{{ user_password | password_hash('sha512') }}"
+    update_password: always
     state: present
 
 - name: "Ensure user {{ user }} is added to sudoers"
