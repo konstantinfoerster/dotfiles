@@ -13,6 +13,8 @@
   command: whoami
   register: username_on_the_host
 
+- debug: var=username_on_the_host.stdout
+
 # - name: Install AUR packages
 #   include_tasks: tasks/helper/aur_download.yml
 #   args:
