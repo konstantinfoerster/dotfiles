@@ -7,7 +7,7 @@
     group: "{{ user }}"
     state: directory
 
-- import_tasks: tasks/helper/aur_download.yml
+- include_tasks: tasks/helper/aur_download.yml
   with_items:
     - visual-studio-code-bin
     - nvm
