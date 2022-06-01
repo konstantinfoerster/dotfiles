@@ -1,2 +1,2 @@
 [chroot]
-/mnt ansible_become_user=test
+/mnt
