@@ -17,32 +17,32 @@
     - git_user_email: "tester@mailinator.com"
 
   tasks:
-    - name: Set timezone and sync hw clock
-      import_tasks: tasks/time.yml
-    - name: Set correct language and keymap
-      import_tasks: tasks/language.yml
-    - name: Set hostname and add hosts
-      import_tasks: tasks/hostname.yml
-    - name: Configure grub
-      import_tasks: tasks/grub.yml
-    - name: Set root password and add user
-      import_tasks: tasks/user.yml
-    - name: Install packages
-      block:
-        - name: Install base packages
-          import_tasks: tasks/packages/base.yml
-        - name: Install video driver packages
-          import_tasks: tasks/packages/driver.yml
-        - name: Install audio packages
-          import_tasks: tasks/packages/audio.yml
-        - name: Install font packages
-          import_tasks: tasks/packages/font.yml
-        - name: Install terminal packages
-          import_tasks: tasks/packages/terminal.yml
-        - name: Install gnome packages
-          import_tasks: tasks/packages/gnome.yml
-        - name: Install vm and ops packages
-          import_tasks: tasks/packages/vm.yml
+    # - name: Set timezone and sync hw clock
+    #   import_tasks: tasks/time.yml
+    # - name: Set correct language and keymap
+    #   import_tasks: tasks/language.yml
+    # - name: Set hostname and add hosts
+    #   import_tasks: tasks/hostname.yml
+    # - name: Configure grub
+    #   import_tasks: tasks/grub.yml
+    # - name: Set root password and add user
+    #   import_tasks: tasks/user.yml
+    # - name: Install packages
+    #   block:
+    #     - name: Install base packages
+    #       import_tasks: tasks/packages/base.yml
+    #     - name: Install video driver packages
+    #       import_tasks: tasks/packages/driver.yml
+    #     - name: Install audio packages
+    #       import_tasks: tasks/packages/audio.yml
+    #     - name: Install font packages
+    #       import_tasks: tasks/packages/font.yml
+    #     - name: Install terminal packages
+    #       import_tasks: tasks/packages/terminal.yml
+    #     - name: Install gnome packages
+    #       import_tasks: tasks/packages/gnome.yml
+    #     - name: Install vm and ops packages
+    #      import_tasks: tasks/packages/vm.yml
         # - name: Install development packages
         #   import_tasks: tasks/packages/dev.yml
         # - name: Install docker
