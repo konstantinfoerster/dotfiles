@@ -34,7 +34,7 @@
 
 - name: Ensure vim backup folder exists
   ansible.builtin.file:
-    path: "$/home/{{ user }}/.vim/backup"
+    path: "/home/{{ user }}/.vim/backup"
     mode: 0755
     owner: "{{ user }}"
     group: "{{ user }}"
