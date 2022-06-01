@@ -8,6 +8,10 @@
     state: directory
 
 - include_tasks: tasks/helper/aur_download.yml
+  args:
+      apply:
+        become: no
+        become_user: "{{ user }}"
   with_items:
     - visual-studio-code-bin
     - nvm
