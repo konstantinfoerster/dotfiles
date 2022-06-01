@@ -8,7 +8,7 @@
     state: directory
 
 - name: print user
-  become: true
+  become_user: "{{ user }}"
   command: whoami
   register: username_on_the_host
 
