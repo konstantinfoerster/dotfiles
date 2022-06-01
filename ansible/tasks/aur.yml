@@ -8,14 +8,15 @@
     state: directory
 
 - name: Install AUR packages
-  become: false
-  become_user: "{{ user }}"
-  block:
-    - include_tasks: tasks/helper/aur_download.yml
-      with_items:
-      - visual-studio-code-bin
-      - nvm
-      - google-chrome
-      loop_control:
-        loop_var: aur_package
+  include_tasks: tasks/helper/aur_download.yml
+  args:
+    apply:
+      become: false
+      become_user: "{{ user }}"
+  with_items:
+  - visual-studio-code-bin
+  - nvm
+  - google-chrome
+  loop_control:
+    loop_var: aur_package
 
