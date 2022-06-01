@@ -9,8 +9,8 @@
 
   tasks:
     - name: Setup hard drive
-      include_tasks:
-        file: tasks/storage.yml
+      include_tasks: tasks/storage.yml
+      args:
         apply:
           tags:
             - storage
