@@ -2,6 +2,7 @@
 - name: Set hostname
   ansible.builtin.replace:
     path: /etc/hostname
+    create: true
     regexp: '^(.+)$'
     replace: '{{ hostname }}'
     group: root
