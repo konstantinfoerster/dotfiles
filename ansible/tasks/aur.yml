@@ -7,8 +7,22 @@
     group: "{{ user }}"
     state: directory
 
+- shell: whoami
+  register: c
+
+- shell: whoami
+  become_user: "{{ user }}"
+  register: d
+
+- debug: var=c.stdout
+
+- debug: var=d.stdout
+
 - name: Install AUR packages
   include_tasks: tasks/helper/aur_download.yml
+  args:
+    apply:
+      become_user: "{{ user }}"
   with_items:
   - visual-studio-code-bin
   - nvm
