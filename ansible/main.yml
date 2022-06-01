@@ -17,16 +17,16 @@
     - git_user_email: "tester@mailinator.com"
 
   tasks:
-    # - name: Set timezone and sync hw clock
-    #   import_tasks: tasks/time.yml
-    # - name: Set correct language and keymap
-    #   import_tasks: tasks/language.yml
-    # - name: Set hostname and add hosts
-    #   import_tasks: tasks/hostname.yml
-    # - name: Configure grub
-    #   import_tasks: tasks/grub.yml
-    # - name: Set root password and add user
-    #   import_tasks: tasks/user.yml
+    - name: Set timezone and sync hw clock
+      import_tasks: tasks/time.yml
+    - name: Set correct language and keymap
+      import_tasks: tasks/language.yml
+    - name: Set hostname and add hosts
+      import_tasks: tasks/hostname.yml
+    - name: Configure grub
+      import_tasks: tasks/grub.yml
+    - name: Set root password and add user
+      import_tasks: tasks/user.yml
     # - name: Install packages
     #   block:
     #     - name: Install base packages
