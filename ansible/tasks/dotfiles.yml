@@ -25,7 +25,7 @@
     - .scripts
     - .tmux.conf
     - .vimrc
-#    - .config/Code/User/settings.json
+    - .config/Code/User/settings.json
     - .config/base16-shell
     - .gnupg/gpg.conf
     - .gnupg/gpg-agent.conf

@@ -28,7 +28,7 @@
   register: xkb_options
 
 - name: Load dconf backup
-  ansible.builtin.shell: "dconf load / < {{ dotfiles_dir }}/saved_settings.dconf"
+  ansible.builtin.shell: "dconf load / < {{ dotfiles_dir }}/ansible/saved_settings.dconf"
   when: xkb_options.stdout != "['caps:escape']"
 
 - name: Set git user email
