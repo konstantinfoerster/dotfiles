@@ -20,6 +20,7 @@
     force: true
     update: true
     version: master
+  become_user: "{{ user }}"
 
 # - name: "{{ aur_package }}: Reset git directory"
 #   ansible.builtin.command:
@@ -38,14 +39,6 @@
     paths: "{{ aur_dir }}/{{ aur_package }}"
     patterns: '*.pkg.tar.zst'
   register: aur_build_packages
-
-- name: print user
-  become: true
-  become_method: "sudo"
-  command: whoami
-  register: username_on_the_host
-
-- debug: var=username_on_the_host.stdout
 
 - name: "{{ aur_package }}: Install package"
   community.general.pacman:
