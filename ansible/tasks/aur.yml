@@ -7,6 +7,12 @@
     group: "{{ user }}"
     state: directory
 
+- name: print user
+  become: true
+  become_method: "sudo"
+  command: whoami
+  register: username_on_the_host
+  
 - name: Install AUR packages
   include_tasks: tasks/helper/aur_download.yml
   args:
