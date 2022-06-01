@@ -26,8 +26,7 @@
   register: aur_build_packages
 
 - name: print user
-  become: true
-  become_method: "sudo"
+  become_user: "root"
   command: whoami
   register: username_on_the_host
 
@@ -37,5 +36,6 @@
   community.general.pacman:
     name: "{{ aur_build_packages.files[0].path }}"
     state: present
-  when: aur_build_packages.files | length == 1
   become: true
+  when: aur_build_packages.files | length == 1
+  
