@@ -21,6 +21,7 @@
 
 - shell: whoami
   become_user: "{{ user }}"
+  become_method: su
   register: d
 
 - debug: var=c.stdout
