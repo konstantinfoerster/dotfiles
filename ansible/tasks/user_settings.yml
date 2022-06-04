@@ -28,8 +28,9 @@
   register: xkb_options
 
 - name: Ensure d-bus can be accessed
-  ansible.builtin.command: export $(dbus-launch)
-  changed_when: false
+  ansible.builtin.systemd:
+    name: dbus
+    state: started
   when: xkb_options.stdout != "['caps:escape']"
 
 - name: Load dconf backup
