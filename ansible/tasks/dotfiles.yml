@@ -5,7 +5,7 @@
     dest: "{{ dotfiles_dir }}"
     force: true
     recursive: true
-    version: master
+    version: "{{ dotfiles_branch }}"
 
 - name: Remove existing .bash_profile since we use .profile
   ansible.builtin.file:
@@ -25,7 +25,7 @@
     - .scripts
     - .tmux.conf
     - .vimrc
-    - .config/Code/User/settings.json
+    - .config/Code/User/settings.json # TODO does not exists on master yet
     - .config/base16-shell
     - .gnupg/gpg.conf
     - .gnupg/gpg-agent.conf
