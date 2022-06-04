@@ -27,6 +27,11 @@
   changed_when: false
   register: xkb_options
 
+- name: Ensure d-bus can be accessed
+  ansible.builtin.command: export $(dbus-launch)
+  changed_when: false
+  when: xkb_options.stdout != "['caps:escape']"
+
 - name: Load dconf backup
   ansible.builtin.shell: "dconf load / < {{ dotfiles_dir }}/ansible/saved_settings.dconf"
   when: xkb_options.stdout != "['caps:escape']"
