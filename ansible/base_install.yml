@@ -14,11 +14,11 @@
       import_tasks: tasks/prepare_base.yml
     - name: Setting host based on given groups
       ansible.builtin.set_fact:
-        hostlist: "{{ 'chroot' if 'chroot' in group_names else 'localhost' }}"
+        hostlist: "{{ 'chroot' if 'chroot' in groups else 'localhost' }}"
         cacheable: yes
     - name: output the content of the 'hostlist' variable
       debug:
-        var: group_names
+        var: groups
 
 - import_playbook: main.yml
   tags:
