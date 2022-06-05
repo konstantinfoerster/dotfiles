@@ -2,6 +2,7 @@
 - name: Prepare base system
   tags:
     - prepare
+    - never
   block:
   - name: Check if pacstrap already executed
     ansible.builtin.stat:
