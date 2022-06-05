@@ -10,7 +10,7 @@
   tasks:
     - name: Show facts
       debug: 
-        var: ansible_facts
+        var: "{{ ansible_facts }}"
 
     - name: Setup hard drive
       import_tasks: tasks/storage.yml
