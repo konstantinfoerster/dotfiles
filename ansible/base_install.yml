@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   become: true
-  gather_facts: true
+  gather_facts: false
   vars:
     - main_disk: /dev/sda
     - main_disk_password: "test123"
@@ -16,9 +16,6 @@
       ansible.builtin.set_fact:
         hostlist: "{{ 'chroot' if 'chroot' in groups else 'localhost' }}"
         cacheable: yes
-    - name: output the content of the 'hostlist' variable
-      debug:
-        var: groups
 
 - import_playbook: main.yml
   tags:

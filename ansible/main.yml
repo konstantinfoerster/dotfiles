@@ -19,9 +19,6 @@
     - git_user_email: "tester@mailinator.com"
 
   tasks:
-    - name: output the content of the 'hostlist' variable
-      debug:
-        var: hostlist
     - name: Set timezone and sync hw clock
       import_tasks: tasks/time.yml
     - name: Set correct language and keymap
