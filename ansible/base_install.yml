@@ -14,8 +14,7 @@
       import_tasks: tasks/prepare_base.yml
 
 - import_playbook: main.yml
-#  vars:
-#    connection_type: chroot
-#    hostlist: chroot
+  vars:
+    hostlist: "{{ 'chroot' if 'chroot' in group_names else 'localhost' }}"
   tags:
     - always
