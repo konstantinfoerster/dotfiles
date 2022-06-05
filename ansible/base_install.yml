@@ -10,6 +10,7 @@
   tasks:
     - name: Running from iso?
       ansible.builtin.command: uname -a
+      changed_when: false
       register: uname_out
     - ansible.builtin.set_fact:
         hostlist: "{{ 'chroot' if 'archiso' in uname_out.stdout else 'localhost' }}"
