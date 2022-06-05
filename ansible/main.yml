@@ -18,14 +18,15 @@
           changed_when: false
           register: uname_out
 
-        - name: Set archiso fact
+        - name: Set hostlist based on running system
           ansible.builtin.set_fact:
+            hostlist: "{{ 'chroot' if 'archiso' in uname_out.stdout else 'localhost' }}"
             is_archiso: "{{ true if 'archiso' in uname_out.stdout else false }}"
             cacheable: true
 
         - name: Running from iso?
           ansible.builtin.debug:
-            msg: "Is iso? {{ is_archiso }}"
+            msg: "Is iso {{ is_archiso }}. System installations runs on {{ hostlist }}"
 
   tasks:
     - name: Setup encrypted hard drive
@@ -38,6 +39,6 @@
 
 - ansible.builtin.import_playbook: local_system.yml
   vars:
-    hostlist: "{{ 'chroot' if is_archiso else 'localhost' }}"
+    hostlist: "{{ hostvars['localhost']]['hostlist'] }}"
   tags:
     - always
