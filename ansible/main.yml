@@ -6,6 +6,7 @@
   vars:
     - main_disk: "/dev/sda"
     - timezone: Europe/Berlin
+    - root_user: root
     - root_password: password
     - user: tester
     - user_password: password
@@ -48,9 +49,6 @@
         #   import_tasks: tasks/packages/dev.yml
         # - name: Install docker
         #   import_tasks: tasks/packages/docker.yml
-
-
-
     - name: Apply user specific setting
       become_user: "{{ user }}"
       block:
