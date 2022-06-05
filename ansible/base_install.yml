@@ -15,6 +15,14 @@
 
 - import_playbook: main.yml
   vars:
-    hostlist: "{{ 'chroot' if 'chroot' in group_names else 'localhost' }}"
+    hostlist: "chroot"
   tags:
     - always
+  when: "'chroot' in group_names"
+
+- import_playbook: main.yml
+  vars:
+    hostlist: "localhost"
+  tags:
+    - always
+  when: "'chroot' not in group_names"
