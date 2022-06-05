@@ -12,9 +12,10 @@
       import_tasks: tasks/storage.yml
     - name: Prepare base system
       import_tasks: tasks/prepare_base.yml
-
-- set_fact:
-    hostlist: "{{ 'chroot' if 'chroot' in group_names else 'localhost' }}"
+    - name: Setting host based on given groups
+      ansible.builtin.set_fact:
+        hostlist: "{{ 'chroot' if 'chroot' in group_names else 'localhost' }}"
+      cacheable: yes
 
 - import_playbook: main.yml
   tags:
