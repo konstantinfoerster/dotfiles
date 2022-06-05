@@ -15,7 +15,7 @@
     - name: Setting host based on given groups
       ansible.builtin.set_fact:
         hostlist: "{{ 'chroot' if 'chroot' in group_names else 'localhost' }}"
-      cacheable: yes
+        cacheable: yes
 
 - import_playbook: main.yml
   tags:
