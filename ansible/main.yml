@@ -39,6 +39,6 @@
 
 - ansible.builtin.import_playbook: local_system.yml
   vars:
-    hostlist: "{{ hostvars['localhost']]['hostlist'] }}"
+    hostlist: hostvars['localhost']]['hostlist']
   tags:
     - always
