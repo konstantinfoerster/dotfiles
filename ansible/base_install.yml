@@ -18,5 +18,7 @@
         cacheable: yes
 
 - import_playbook: main.yml
+  vars: 
+    hostlist: "{{ hostlist }}"
   tags:
     - always
