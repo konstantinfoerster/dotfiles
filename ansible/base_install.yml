@@ -16,9 +16,10 @@
       ansible.builtin.set_fact:
         hostlist: "{{ 'chroot' if 'chroot' in group_names else 'localhost' }}"
         cacheable: yes
+    - name: output the content of the 'hostlist' variable
+      debug:
+        var: hostlist
 
 - import_playbook: main.yml
-  vars: 
-    hostlist: "{{ hostlist }}"
   tags:
     - always
