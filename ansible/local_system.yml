@@ -9,6 +9,8 @@
       ansible.builtin.include_vars: "{{ item }}"
       loop:
         - config.yml
+      tags:
+        - always
 
   tasks:
     - name: Set timezone and sync hw clock
