@@ -25,7 +25,7 @@
 
         - name: Running from iso?
           ansible.builtin.debug:
-            msg: "Is iso {{ is_archiso }}. System installations runs on {{ hostlist }}"
+            msg: "Is iso? {{ is_archiso }}"
 
   tasks:
     - name: Setup encrypted hard drive
