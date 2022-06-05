@@ -14,11 +14,16 @@
     - name: Show facts
       debug: 
         var: uname_out.stdout
+    - ansible.builtin.set_fact:
+        hostlist: "{{ 'chroot' if 'archiso' in uname_out.stdout else 'localhost' }}"
+        is_archiso: "{{ true if 'archiso' in uname_out.stdout else false }}"
+        cacheable: yes
     - name: Setup hard drive
       import_tasks: tasks/storage.yml
+      when: is_archiso == true
     - name: Prepare base system
       import_tasks: tasks/prepare_base.yml
-
+      when: is_archiso == true
 
 - import_playbook: main.yml
   tags:
