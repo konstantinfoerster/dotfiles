@@ -11,13 +11,13 @@
     - name: Running from iso?
       ansible.builtin.command: uname -a
       register: uname_out
-    - name: Show facts
-      debug: 
-        var: uname_out.stdout
     - ansible.builtin.set_fact:
         hostlist: "{{ 'chroot' if 'archiso' in uname_out.stdout else 'localhost' }}"
         is_archiso: "{{ true if 'archiso' in uname_out.stdout else false }}"
         cacheable: yes
+    - name: Running from iso?
+      debug: 
+        var: "Is iso {{ is_archiso }}"
     - name: Setup hard drive
       import_tasks: tasks/storage.yml
       when: is_archiso == true
