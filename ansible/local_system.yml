@@ -48,19 +48,16 @@
           ansible.builtin.import_tasks: tasks/packages/gnome.yml
         - name: Install vm and ops packages
           ansible.builtin.import_tasks: tasks/packages/vm.yml
-        # - name: Install development packages
-        #   ansible.builtin.import_tasks: tasks/packages/dev.yml
-        # - name: Install docker
-        #   ansible.builtin.import_tasks: tasks/packages/docker.yml
+        - name: Install development packages
+          ansible.builtin.import_tasks: tasks/packages/dev.yml
+        - name: Install docker
+          ansible.builtin.import_tasks: tasks/packages/docker.yml
     - name: Apply user specific setting
       become_user: "{{ user }}"
       block:
-        # - name: Setup aur packages
-        #   import_tasks: tasks/aur.yml
+        - name: Setup aur packages
+          import_tasks: tasks/aur.yml
         - name: Setup dotiles
           ansible.builtin.import_tasks: tasks/dotfiles.yml
         - name: Apply user specific settings
           ansible.builtin.import_tasks: tasks/user_settings.yml
-
-# # TODO
-# * Configure Chrome

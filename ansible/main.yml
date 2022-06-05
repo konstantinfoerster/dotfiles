@@ -25,7 +25,7 @@
         msg: "Is iso {{ is_archiso }}"
 
   tasks:
-    - name: Setup hard drive
+    - name: Setup encrypted hard drive
       ansible.builtin.import_tasks: tasks/storage.yml
       when: is_archiso == true
 
