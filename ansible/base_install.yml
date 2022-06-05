@@ -8,18 +8,17 @@
     - crypted_disk_name: cryptdisk
 
   tasks:
+    - name: Running from iso?
+      ansible.builtin.command: uname -a
+      register: uname_out
     - name: Show facts
       debug: 
-        var: "{{ ansible_facts }}"
-
+        var: "Target host {{ uname_out }}"
     - name: Setup hard drive
       import_tasks: tasks/storage.yml
     - name: Prepare base system
       import_tasks: tasks/prepare_base.yml
-    - name: Setting host based on given groups
-      ansible.builtin.set_fact:
-        hostlist: "{{ 'chroot' if 'chroot' in groups else 'localhost' }}"
-        cacheable: yes
+
 
 - import_playbook: main.yml
   tags:
