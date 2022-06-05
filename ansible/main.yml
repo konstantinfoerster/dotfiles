@@ -48,21 +48,22 @@
         #   import_tasks: tasks/packages/dev.yml
         # - name: Install docker
         #   import_tasks: tasks/packages/docker.yml
-    - name: print user
-      command: whoami
-      register: username_on_the_host
 
-    - debug: var=username_on_the_host
-
-    - name: print user
-      become: true
-      command: whoami
-      register: username_on_the_host
 
     - debug: var=username_on_the_host
     - name: Apply user specific setting
-      become_user: "{{ user }}"
+      #become_user: "{{ user }}"
       block:
+        - name: print user
+          command: whoami
+          register: username_on_the_host
+
+        - debug: var=username_on_the_host
+
+        - name: print user
+          become: true
+          command: whoami
+          register: username_on_the_host
         - name: Setup aur packages
           import_tasks: tasks/aur.yml
         - name: Setup dotiles
