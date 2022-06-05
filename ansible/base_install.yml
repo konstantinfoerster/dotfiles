@@ -8,6 +8,10 @@
     - crypted_disk_name: cryptdisk
 
   tasks:
+    - name: Show facts
+      debug: 
+        var: ansible_facts
+
     - name: Setup hard drive
       import_tasks: tasks/storage.yml
     - name: Prepare base system
