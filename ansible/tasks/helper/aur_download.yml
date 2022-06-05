@@ -7,17 +7,17 @@
     update: true
     version: master
 
-# - name: "{{ aur_package }}: Reset git directory"
-#   ansible.builtin.command:
-#     cmd: git clean -xf # noqa command-instead-of-module remove files that are in .gitignore
-#     chdir: "{{ aur_dir }}/{{ aur_package }}"
-#   changed_when: false
+- name: "{{ aur_package }}: Reset git directory"
+  ansible.builtin.command:
+    cmd: git clean -xf # noqa command-instead-of-module remove files that are in .gitignore
+    chdir: "{{ aur_dir }}/{{ aur_package }}"
+  changed_when: false
 
-# - name: "{{ aur_package }}: Build package"
-#   ansible.builtin.command:
-#     chdir: "{{ aur_dir }}/{{ aur_package }}"
-#     cmd: makepkg --force --syncdeps --rmdeps --clean --noconfirm
-#   changed_when: false
+- name: "{{ aur_package }}: Build package"
+  ansible.builtin.command:
+    chdir: "{{ aur_dir }}/{{ aur_package }}"
+    cmd: makepkg --force --syncdeps --rmdeps --clean --noconfirm
+  changed_when: false
 
 - name: "{{ aur_package }}: Find newly build package"
   ansible.builtin.find:
@@ -31,4 +31,3 @@
     state: present
   become: true
   when: aur_build_packages.files | length == 1
-  

@@ -8,10 +8,10 @@
     state: directory
 
 - name: Install AUR packages
-  include_tasks: tasks/helper/aur_download.yml  
+  include_tasks: tasks/helper/aur_download.yml
   with_items:
-  - visual-studio-code-bin
-  - nvm
-  - google-chrome
+    - visual-studio-code-bin
+    - nvm
+    - google-chrome
   loop_control:
     loop_var: aur_package

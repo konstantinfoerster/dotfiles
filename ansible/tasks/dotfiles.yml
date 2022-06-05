@@ -39,12 +39,3 @@
     owner: "{{ user }}"
     group: "{{ user }}"
     state: directory
-
-# - name: Read existing gnome terminal profiles
-#   ansible.builtin.command: dconf list /org/gnome/terminal/legacy/profiles:/
-#   changed_when: false
-#   register: terminal_profiles
-
-# - name: Add Base16 gnome terminal profile
-#   ansible.builtin.command: "{{ dotfiles_dir }}/.config/base16-gnome-terminal/color-scripts/base16-default-dark.sh"
-#   when: terminal_profiles.stdout_lines | length < 3

@@ -12,7 +12,7 @@
       import_tasks: tasks/storage.yml
     - name: Prepare base system
       import_tasks: tasks/prepare_base.yml
-      tags: 
+      tags:
         - prepare
 
 - import_playbook: main.yml
