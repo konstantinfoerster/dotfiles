@@ -17,7 +17,7 @@
         cacheable: yes
     - name: Running from iso?
       debug: 
-        var: "Is iso {{ is_archiso }}"
+        msg: "Is iso {{ is_archiso }}"
     - name: Setup hard drive
       import_tasks: tasks/storage.yml
       when: is_archiso == true
