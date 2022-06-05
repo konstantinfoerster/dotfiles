@@ -18,7 +18,7 @@
         cacheable: yes
     - name: output the content of the 'hostlist' variable
       debug:
-        var: hostlist
+        var: group_names
 
 - import_playbook: main.yml
   tags:
