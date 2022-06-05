@@ -13,7 +13,7 @@
       register: uname_out
     - name: Show facts
       debug: 
-        var: "Target host {{ uname_out.stdout }}"
+        var: uname_out.stdout
     - name: Setup hard drive
       import_tasks: tasks/storage.yml
     - name: Prepare base system
