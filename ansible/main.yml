@@ -18,9 +18,8 @@
           changed_when: false
           register: uname_out
 
-        - name: Set hostlist based on running system
+        - name: Set archiso fact
           ansible.builtin.set_fact:
-            hostlist: "{{ 'chroot' if 'archiso' in uname_out.stdout else 'localhost' }}"
             is_archiso: "{{ true if 'archiso' in uname_out.stdout else false }}"
             cacheable: true
 
@@ -39,6 +38,6 @@
 
 - ansible.builtin.import_playbook: local_system.yml
   vars:
-    hostlist: "{{ hostlist }}"
+    hostlist: "{{ 'chroot' if is_archiso else 'localhost' }}"
   tags:
     - always
