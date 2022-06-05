@@ -33,7 +33,7 @@
     loop_var: file
 
 - name: Install vim plugins
-  ansible.builtin.command: vim -i NONE -c \"PlugInstall --sync\" -c \"qa\"
+  ansible.builtin.command: vim -i NONE -c 'PlugInstall --sync' -c 'qa'
   changed_when: false
 
 - name: Ensure vim backup folder exists
