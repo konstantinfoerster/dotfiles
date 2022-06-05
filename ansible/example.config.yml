@@ -1,3 +1,4 @@
+---
 main_disk: /dev/sda
 main_disk_password: "test123"
 crypted_disk_name: cryptdisk

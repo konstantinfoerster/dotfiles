@@ -8,12 +8,13 @@
   * This project is only for systems with bios
 * Install pip `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py`
 * Install ansible `pip install ansible`
+* Install it `pacman -Syy && pacman -S git`
 * Clone the dotfiles repository `git clone https://github.com/konstantinfoerster/dotfiles.git`
 * Change into the dotfiles ansible dir `cd dotfiles/ansible`
 * Install dependencies `ansible-galaxy collection install -r requirements.yml`
   * Not required if `ansible` is installed via package manager
 * Copy `example.config.yml` to `config.yml` and make your system dependent changes
-* To run an installation with storage wipe run `ansbile-playbook -K main.yml -t wipe -t storage -prepare`
+* To run an installation with storage wipe run `ansbile-playbook -K main.yml -t wipe -t storage -t prepare`
 * Run `umount -a` to unmount all devices
 * Run `reboot`
 
