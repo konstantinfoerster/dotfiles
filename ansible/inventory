@@ -1,2 +1,2 @@
 [chroot]
-/mnt
+/mnt connection_type=chroot hostlist=chroot

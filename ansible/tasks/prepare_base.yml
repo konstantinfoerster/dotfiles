@@ -1,23 +1,27 @@
 ---
-- name: Check if pacstrap already executed
-  ansible.builtin.stat:
-    path: /mnt/proc
-  register: proc_stats
+- name: Prepare base system
+  tags:
+    - prepare
+  block:
+  - name: Check if pacstrap already executed
+    ansible.builtin.stat:
+      path: /mnt/proc
+    register: proc_stats
 
-- name: Install based packages into chroot
-  ansible.builtin.command:
-    cmd: pacstrap /mnt base linux linux-firmware gvim ansible git sudo
-  when: not proc_stats.stat.exists
+  - name: Install based packages into chroot
+    ansible.builtin.command:
+      cmd: pacstrap /mnt base linux linux-firmware gvim ansible git sudo
+    when: not proc_stats.stat.exists
 
-- name: Check if /mnt/etc/fstab is already configured
-  ansible.builtin.lineinfile:
-    name: /mnt/etc/fstab
-    regexp: '^UUID='
-    state: absent
-  check_mode: true
-  changed_when: false
-  register: fstab_result
+  - name: Check if /mnt/etc/fstab is already configured
+    ansible.builtin.lineinfile:
+      name: /mnt/etc/fstab
+      regexp: '^UUID='
+      state: absent
+    check_mode: true
+    changed_when: false
+    register: fstab_result
 
-- name: Generate filesystem mount configuration
-  ansible.builtin.shell: genfstab -U /mnt >> /mnt/etc/fstab
-  when: not fstab_result.found
+  - name: Generate filesystem mount configuration
+    ansible.builtin.shell: genfstab -U /mnt >> /mnt/etc/fstab
+    when: not fstab_result.found
