@@ -17,25 +17,14 @@
   register: grub
 
 - name: Enable encrypt module
-  ansible.builtin.lineinfile:
-    dest: /etc/mkinitcpio.conf
-    regexp: "^HOOKS="
-    insertafter: ''
-    line: 'HOOKS=(base udev autodetect keymap modconf block encrypt filesystems keyboard fsck)'
+  ansible.builtin.replace:
+    path: /etc/mkinitcpio.conf
+    regexp: '(HOOKS=\(.*)block filesystems(.*\))'
+    replace: '\1block keymap encrypt filesystems \2'
     group: root
     owner: root
     mode: 0644
-    state: present
   register: mkinitcpio
-
-# - name: Enable encrypt module
-#   ansible.builtin.replace:
-#     path: /etc/mkinitcpio.conf
-#     regexp: '(HOOKS=\(.*)block filesystems(.*\))'
-#     replace: '\1block keymap encrypt filesystems \2'
-#     group: root
-#     owner: root
-#     mode: 0644
 
 - name: Generate mkinitcpio
   ansible.builtin.command: mkinitcpio -p linux

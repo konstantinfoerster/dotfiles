@@ -6,6 +6,7 @@
   vars:
     - main_disk: "/dev/sda"
     - timezone: Europe/Berlin
+    - pacman_mirror: "https://mirror.netcologne.de/archlinux/$repo/os/$arch"
     - root_user: root
     - root_password: password
     - user: tester
@@ -23,6 +24,8 @@
       import_tasks: tasks/time.yml
     - name: Set correct language and keymap
       import_tasks: tasks/language.yml
+    - name: Configure pacman mirror
+      import_tasks: tasks/pacman.yml
     - name: Set hostname and add hosts
       import_tasks: tasks/hostname.yml
     - name: Configure grub
@@ -43,12 +46,12 @@
           import_tasks: tasks/packages/terminal.yml
         - name: Install gnome packages
           import_tasks: tasks/packages/gnome.yml
-    #     - name: Install vm and ops packages
-    #      import_tasks: tasks/packages/vm.yml
-        # - name: Install development packages
-        #   import_tasks: tasks/packages/dev.yml
-        # - name: Install docker
-        #   import_tasks: tasks/packages/docker.yml
+        - name: Install vm and ops packages
+          import_tasks: tasks/packages/vm.yml
+        - name: Install development packages
+          import_tasks: tasks/packages/dev.yml
+        - name: Install docker
+          import_tasks: tasks/packages/docker.yml
     - name: Apply user specific setting
       become_user: "{{ user }}"
       block:
@@ -61,4 +64,3 @@
 
 # # TODO
 # * Configure Chrome
-# * vim PlugInstall

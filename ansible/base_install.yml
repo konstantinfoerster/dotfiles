@@ -7,7 +7,7 @@
     - main_disk_password: "test123"
     - crypted_disk_name: cryptdisk
 
-  tasks:
+  pre_tasks:
     - name: Running from iso?
       ansible.builtin.command: uname -a
       changed_when: false
@@ -15,13 +15,16 @@
     - ansible.builtin.set_fact:
         hostlist: "{{ 'chroot' if 'archiso' in uname_out.stdout else 'localhost' }}"
         is_archiso: "{{ true if 'archiso' in uname_out.stdout else false }}"
-        cacheable: yes
+        cacheable: true
     - name: Running from iso?
-      debug: 
+      debug:
         msg: "Is iso {{ is_archiso }}"
+
+  tasks:
     - name: Setup hard drive
       import_tasks: tasks/storage.yml
       when: is_archiso == true
+
     - name: Prepare base system
       import_tasks: tasks/prepare_base.yml
       when: is_archiso == true

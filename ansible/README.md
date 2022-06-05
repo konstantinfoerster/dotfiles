@@ -7,13 +7,9 @@
 * Install ansible `pip install ansible`
 * Check if efi or bios `ls /sys/firmware/efi*`
 * Clone the dotfiles repository `git clone https://github.com/konstantinfoerster/dotfiles`
-* Run `cd dotfiles `
-
-* Run `ansible-pull -U https://github.com/konstantinfoerster/dotfiles/ansible/main.yml --tags wipe` to erase the existing crypted device and all partitions
-* Run `ansible-pull -U https://github.com/konstantinfoerster/dotfiles/ansible/main.yml --tags storage` to setup the disk and encrypt it
-* Run `arch-chroot /mnt/` to change into archlinux installation
-* Run `ansible-pull -U https://github.com/konstantinfoerster/dotfiles/ansible/main.yml` to setup the complete system
-
+* Change into the dotfiles ansible dir `cd dotfiles/ansible`
+* TODO change settings to match your preferences
+* To run an installation with storage wipe run `ansbile-playbook -K base_install.yml -t wipe -t storage -prepare`
 * Run `umount -a` to unmount all devices
 * Run `reboot`
 
