@@ -13,16 +13,9 @@
     - name: Prepare base system
       import_tasks: tasks/prepare_base.yml
 
-- import_playbook: main.yml
-  vars:
-    hostlist: "chroot"
-  tags:
-    - always
-  when: "'chroot' in group_names"
+- set_fact:
+    hostlist: "{{ 'chroot' if 'chroot' in group_names else 'localhost' }}"
 
 - import_playbook: main.yml
-  vars:
-    hostlist: "localhost"
   tags:
     - always
-  when: "'chroot' not in group_names"
