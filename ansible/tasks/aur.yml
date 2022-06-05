@@ -8,7 +8,7 @@
     state: directory
 
 - name: Install AUR packages
-  include_tasks: tasks/helper/aur_download.yml
+  ansible.builtin.include_tasks: tasks/helper/aur_download.yml
   with_items:
     - visual-studio-code-bin
     - nvm

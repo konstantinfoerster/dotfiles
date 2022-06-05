@@ -12,7 +12,8 @@
     path: "/home/{{ user }}/.bash_profile"
     state: absent
 
-- include_tasks: tasks/helper/link_file.yml
+- name: Link dotfiles
+  ansible.builtin.include_tasks: tasks/helper/link_file.yml
   args:
     apply:
       become_user: "{{ user }}"
