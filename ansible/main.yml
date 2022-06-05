@@ -38,5 +38,7 @@
       when: is_archiso == true
 
 - ansible.builtin.import_playbook: local_system.yml
+  vars:
+    hostlist: "{{ hostlist }}"
   tags:
     - always
