@@ -6,6 +6,7 @@
     force: true
     update: true
     version: master
+  register: aur
 
 - name: "{{ aur_package }}: Reset git directory"
   ansible.builtin.command:
@@ -18,6 +19,7 @@
     chdir: "{{ aur_dir }}/{{ aur_package }}"
     cmd: makepkg --force --syncdeps --rmdeps --clean --noconfirm
   changed_when: false
+  when: aur.changed
 
 - name: "{{ aur_package }}: Find newly build package"
   ansible.builtin.find:
