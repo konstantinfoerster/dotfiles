@@ -10,8 +10,8 @@
 - name: Install AUR packages
   ansible.builtin.include_tasks: tasks/helper/aur_download.yml
   with_items:
-    - visual-studio-code-bin
     - nvm
+    - visual-studio-code-bin
     - google-chrome
   loop_control:
     loop_var: aur_package
