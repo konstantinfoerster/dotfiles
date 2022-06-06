@@ -48,7 +48,7 @@ autocmd FileType gitcommit setlocal spell
 
 "set backup
 "set backupdir=~/.vim/backup
-"set directory=~/.vim/backup
+" set directory=~/.vim/backup
 
 " enable timout for commands
 set ttimeout

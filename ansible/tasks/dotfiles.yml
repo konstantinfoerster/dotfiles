@@ -33,10 +33,6 @@
   loop_control:
     loop_var: file
 
-- name: Install vim plugins
-  ansible.builtin.command: vim -i NONE -c 'PlugInstall' -c 'qa'
-  changed_when: false
-
 - name: Ensure vim backup folder exists
   ansible.builtin.file:
     path: "/home/{{ user }}/.vim/backup"
@@ -44,3 +40,11 @@
     owner: "{{ user }}"
     group: "{{ user }}"
     state: directory
+
+- name: Install vim PlugInstall
+  ansible.builtin.command: "vim -es -u /home/{{ user }}/.vimrc -i NONE -c 'PlugInstall' -c 'qa'"
+  changed_when: false
+
+- name: Install vim plugins
+  ansible.builtin.command: vim -i NONE -c 'PlugInstall' -c 'qa'
+  changed_when: false
