@@ -31,5 +31,4 @@
     state: present
   become: true
   become_user: "{{ root_user }}"
-  become_method: sudo
   when: aur_build_packages.files | length == 1
