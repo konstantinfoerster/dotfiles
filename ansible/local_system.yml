@@ -56,7 +56,6 @@
           ansible.builtin.import_tasks: tasks/packages/docker.yml
     - name: Apply user specific setting
       become_user: "{{ user }}"
-      become: false
       block:
         - name: Setup aur packages
           import_tasks: tasks/aur.yml
