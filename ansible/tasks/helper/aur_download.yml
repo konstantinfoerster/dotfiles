@@ -19,7 +19,7 @@
     chdir: "{{ aur_dir }}/{{ aur_package }}"
     cmd: makepkg --force --syncdeps --rmdeps --clean --noconfirm
   changed_when: false
-  when: aur.changed
+  when: aur.changed  # noqa no-handler
 
 - name: "{{ aur_package }}: Find newly build package"
   ansible.builtin.find:
