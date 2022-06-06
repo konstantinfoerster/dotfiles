@@ -14,9 +14,6 @@
 
 - name: Link dotfiles
   ansible.builtin.include_tasks: tasks/helper/link_file.yml
-  args:
-    apply:
-      become_user: "{{ user }}"
   with_items:
     - .bash_logout
     - .bashrc

@@ -4,7 +4,6 @@ main_disk_password: "test123"
 crypted_disk_name: cryptdisk
 timezone: Europe/Berlin
 pacman_mirror: "https://mirror.netcologne.de/archlinux/$repo/os/$arch"
-root_user: root
 root_password: password
 user: tester
 user_password: password
