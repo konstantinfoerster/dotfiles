@@ -24,10 +24,6 @@
             is_archiso: "{{ true if 'archiso' in uname_out.stdout else false }}"
             cacheable: true
 
-        - name: Running from iso?
-          ansible.builtin.debug:
-            msg: "Is iso {{ is_archiso }}. System installations runs on {{ hostlist }}"
-
   tasks:
     - name: Setup encrypted hard drive
       ansible.builtin.import_tasks: tasks/storage.yml

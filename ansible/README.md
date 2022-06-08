@@ -31,3 +31,4 @@ Run `ansible-lint  --offline`
 
 # TODO
 * Rollout Chrome configuration
+* Remove default nautilus favorites

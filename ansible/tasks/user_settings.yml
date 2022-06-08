@@ -19,3 +19,24 @@
     name: user.name
     scope: global
     value: "{{ git_user_name }}"
+
+- name: Remove default nautilus bookmarks
+  ansible.builtin.replace:
+    path: /etc/xdg/user-dirs.defaults
+    regexp: "{{ item.regexp }}"
+    replace: '# \1'
+    group: root
+    owner: root
+    mode: 0644
+  with_items:
+    - '^(TEMPLATES=.*)'
+    - '^(PUBLICSHARE=.*)'
+    - '^(DOCUMENTS=.*)'
+    - '^(MUSIC=.*)'
+    - '^(PICTURES=.*)'
+    - '^(VIDEOS=.*)'
+
+- name: Remove users-dirs config from users dir (will be generated on login)
+  ansible.builtin.file:
+    path: "/home/{{ user }}/.config/user-dirs.dirs"
+    state: absent

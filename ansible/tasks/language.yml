@@ -24,8 +24,8 @@
     line: "{{ item.line }}"
     group: root
     owner: root
-    state: present
     mode: 0644
+    state: present
   with_items:
     - regexp: "^LANG"
       line: "LANG=en_US.UTF-8"
