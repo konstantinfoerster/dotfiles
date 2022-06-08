@@ -35,6 +35,7 @@
     - '^(MUSIC=.*)'
     - '^(PICTURES=.*)'
     - '^(VIDEOS=.*)'
+  become: true
 
 - name: Remove users-dirs config from users dir (will be generated on login)
   ansible.builtin.file:
