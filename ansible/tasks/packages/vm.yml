@@ -5,4 +5,4 @@
       - virtualbox-host-modules-arch
       - vagrant
       - ansible
-    state: latest
+    state: present

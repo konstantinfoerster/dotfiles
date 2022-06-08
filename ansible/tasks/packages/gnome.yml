@@ -6,7 +6,7 @@
       - gnome-tweaks
       - gdm
       - gnome-software-packagekit-plugin
-    state: latest
+    state: present
 
 - name: Enable gdm
   ansible.builtin.systemd:

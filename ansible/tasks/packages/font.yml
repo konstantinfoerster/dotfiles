@@ -6,4 +6,4 @@
       - ttf-droid
       - ttf-hack
       - powerline-fonts
-    state: latest
+    state: present

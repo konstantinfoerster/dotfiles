@@ -9,4 +9,4 @@
       - gst-plugin-pipewire
       - libpulse
       - wireplumber
-    state: latest
+    state: present

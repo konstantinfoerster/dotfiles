@@ -6,4 +6,4 @@
       - gvim # gvim for vim with +clipboard support
       - the_silver_searcher
       - jq
-    state: latest
+    state: present

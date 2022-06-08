@@ -8,4 +8,4 @@
       - mesa-vdpau
       - libva-utils
       - libva-intel-driver # i965
-    state: latest
+    state: present

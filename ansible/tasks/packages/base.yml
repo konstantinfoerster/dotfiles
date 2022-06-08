@@ -10,7 +10,7 @@
       - gcr
       - git
       - man-db
-    state: latest
+    state: present
 
 - name: Enable NetworkManager
   ansible.builtin.systemd:

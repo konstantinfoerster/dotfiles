@@ -4,4 +4,4 @@
     name:
       - keepass
       - meld
-    state: latest
+    state: present

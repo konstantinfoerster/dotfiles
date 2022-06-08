@@ -23,7 +23,7 @@
 - name: Remove default nautilus bookmarks
   ansible.builtin.replace:
     path: /etc/xdg/user-dirs.defaults
-    regexp: "{{ item.regexp }}"
+    regexp: "{{ item }}"
     replace: '# \1'
     group: root
     owner: root

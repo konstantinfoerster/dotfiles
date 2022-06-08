@@ -14,4 +14,4 @@
       - go
       - kubectl
       - kubectx
-    state: latest
+    state: present
