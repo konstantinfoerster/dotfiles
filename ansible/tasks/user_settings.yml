@@ -38,7 +38,20 @@
   become: true
   become_user: root
 
+- name: Ensure default user dirs do not exists
+  ansible.builtin.file:
+    path: "/home/{{ user }}/{{ item }}"
+    state: absent
+  with_item:
+    - "Templates"
+    - "Public"
+    - "Documents"
+    - "Music"
+    - "Pictures"
+    - "Videos"
+
 - name: Remove users-dirs config from users dir (will be generated on login)
   ansible.builtin.file:
     path: "/home/{{ user }}/.config/user-dirs.dirs"
     state: absent
+
