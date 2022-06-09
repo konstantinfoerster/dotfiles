@@ -24,7 +24,7 @@
   ansible.builtin.replace:
     path: /etc/xdg/user-dirs.defaults
     regexp: "{{ item }}"
-    replace: '# \1'
+    replace: '#\1'
     group: root
     owner: root
     mode: 0644
@@ -36,6 +36,7 @@
     - '^(PICTURES=.*)'
     - '^(VIDEOS=.*)'
   become: true
+  become_user: root
 
 - name: Remove users-dirs config from users dir (will be generated on login)
   ansible.builtin.file:
