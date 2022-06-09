@@ -20,7 +20,7 @@
     scope: global
     value: "{{ git_user_name }}"
 
-- name: Remove default nautilus bookmarks
+- name: Remove default user dirs from default configuration
   ansible.builtin.replace:
     path: /etc/xdg/user-dirs.defaults
     regexp: "{{ item }}"
@@ -38,7 +38,12 @@
   become: true
   become_user: root
 
-- name: Ensure default user dirs do not exists
+- name: Delete default user dirs configuration in users home (will be generated on login)
+  ansible.builtin.file:
+    path: "/home/{{ user }}/.config/user-dirs.dirs"
+    state: absent
+
+- name: Ensure default user dirs do not exists in users home
   ansible.builtin.file:
     path: "/home/{{ user }}/{{ item }}"
     state: absent
@@ -50,8 +55,23 @@
     - "Pictures"
     - "Videos"
 
-- name: Remove users-dirs config from users dir (will be generated on login)
-  ansible.builtin.file:
-    path: "/home/{{ user }}/.config/user-dirs.dirs"
+- name: Remove default nautilus bookmarks
+  ansible.builtin.lineinfile:
+    dest: /home/{{ user }}/.config/gtk-3.0/bookmarks
+    regexp: "{{ item }}"
+    group: "{{ user }}"
+    owner: "{{ user }}"
+    mode: 0644
     state: absent
+  with_items:
+    - '^.*/Templates$'
+    - '^.*/Public$'
+    - '^.*/Documents$'
+    - '^.*/Music$'
+    - '^.*/Pictures$'
+    - '^.*/Videos$'
+
+
+
+
 
