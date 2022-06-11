@@ -8,6 +8,12 @@
   ansible.builtin.shell: "dbus-launch dconf load / < {{ dotfiles_dir }}/ansible/saved_settings.dconf"
   when: xkb_options.stdout != "['caps:escape']"
 
+- name: Set git default branch
+  community.general.git_config:
+    name: init.defaultBranch
+    scope: global
+    value: "main"
+
 - name: Set git user email
   community.general.git_config:
     name: user.email
@@ -70,8 +76,3 @@
     - '^.*/Music$'
     - '^.*/Pictures$'
     - '^.*/Videos$'
-
-
-
-
-
