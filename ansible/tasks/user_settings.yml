@@ -53,7 +53,7 @@
   ansible.builtin.file:
     path: "/home/{{ user }}/{{ item }}"
     state: absent
-  with_item:
+  with_items:
     - "Templates"
     - "Public"
     - "Documents"

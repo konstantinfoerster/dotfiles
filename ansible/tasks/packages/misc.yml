@@ -2,6 +2,7 @@
 - name: Install misc packages
   community.general.pacman:
     name:
+      - firefox
       - keepass
       - meld
     state: present

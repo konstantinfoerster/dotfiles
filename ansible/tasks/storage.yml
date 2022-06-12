@@ -54,7 +54,7 @@
       community.general.parted:
         device: "{{ main_disk }}"
         number: 1
-        part_end: 256MiB
+        part_end: 256MB
         flags: [boot]
         state: present
 
@@ -68,7 +68,7 @@
       community.general.parted:
         device: "{{ main_disk }}"
         number: 2
-        part_start: 256MiB
+        part_start: 256MB
         part_end: 100%
         state: present
 

@@ -55,6 +55,8 @@
           ansible.builtin.import_tasks: tasks/packages/dev.yml
         - name: Install docker
           ansible.builtin.import_tasks: tasks/packages/docker.yml
+        - name: Install other packages
+          ansible.builtin.import_tasks: tasks/packages/misc.yml
     - name: Apply user specific setting
       become_user: "{{ user }}"
       become: true

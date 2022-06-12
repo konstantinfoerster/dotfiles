@@ -3,7 +3,7 @@
   ansible.builtin.git:
     repo: "{{ dotfiles_repo }}"
     dest: "{{ dotfiles_dir }}"
-    force: true
+    force: false
     recursive: true
     version: "{{ dotfiles_branch }}"
 
