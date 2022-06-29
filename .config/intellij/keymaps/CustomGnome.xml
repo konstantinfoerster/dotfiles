@@ -1,0 +1,24 @@
+<keymap version="1" name="CustomGnome" parent="Default for GNOME">
+  <action id="CommentByBlockComment">
+    <keyboard-shortcut first-keystroke="shift ctrl slash" />
+    <keyboard-shortcut first-keystroke="shift ctrl divide" />
+    <keyboard-shortcut first-keystroke="shift ctrl 7" />
+  </action>
+  <action id="CommentByLineComment">
+    <keyboard-shortcut first-keystroke="ctrl slash" />
+    <keyboard-shortcut first-keystroke="ctrl divide" />
+    <keyboard-shortcut first-keystroke="ctrl 7" />
+  </action>
+  <action id="GotoBookmark7" />
+  <action id="Refactorings.QuickListPopupAction">
+    <keyboard-shortcut first-keystroke="shift ctrl alt t" />
+    <keyboard-shortcut first-keystroke="alt r" />
+  </action>
+  <action id="SplitHorizontally">
+    <keyboard-shortcut first-keystroke="alt minus" />
+  </action>
+  <action id="SplitVertically">
+    <keyboard-shortcut first-keystroke="alt less" />
+  </action>
+  <action id="ToggleBookmark7" />
+</keymap>
