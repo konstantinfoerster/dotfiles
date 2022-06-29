@@ -3,7 +3,8 @@
   community.general.pacman:
     name:
       - tmux
-      - gvim # gvim for vim with +clipboard support
+      - gvim # vim with +clipboard support
       - the_silver_searcher
       - jq
+      - mediainfo # technical and tag information about a video or audio file
     state: present

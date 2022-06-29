@@ -5,4 +5,6 @@
       - firefox
       - keepass
       - meld
+      - transmission-gtk
+      - transmission-cli
     state: present
