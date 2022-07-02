@@ -1,0 +1,16 @@
+---
+main_disk: /dev/sda
+main_disk_password: "test123"
+crypted_disk_name: cryptdisk
+timezone: Europe/Berlin
+pacman_mirror: "https://mirror.netcologne.de/archlinux/$repo/os/$arch"
+root_password: password
+user: tester
+user_password: password
+hostname: test-workstation
+aur_dir: "/home/{{ user }}/apps/aur"
+dotfiles_repo: 'https://github.com/konstantinfoerster/dotfiles.git'
+dotfiles_dir: "/home/{{ user }}/dotfiles"
+dotfiles_branch: "master"
+git_user_name: "Tester"
+git_user_email: "tester@mailinator.com"

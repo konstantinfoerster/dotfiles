@@ -1,0 +1,23 @@
+---
+- name: Install base system packages
+  community.general.pacman:
+    name:
+      - networkmanager
+      - base-devel
+      - bash-completion
+      - openssh
+      - gnupg
+      - gcr
+      - git
+      - man-db
+    state: present
+
+- name: Enable NetworkManager
+  ansible.builtin.systemd:
+    name: NetworkManager
+    enabled: true
+
+- name: Enable ssh deamon
+  ansible.builtin.systemd:
+    name: sshd
+    enabled: true

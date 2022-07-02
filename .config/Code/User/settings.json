@@ -1,0 +1,10 @@
+{
+    "redhat.telemetry.enabled": false,
+    "telemetry.telemetryLevel": "off",
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.codeLens.enabled": false,
+    "editor.fontFamily": "Hack, 'Droid Sans Mono', 'monospace', monospace",
+    "editor.tabSize": 2,
+    "keyboard.dispatch": "keyCode",
+    "settingsSync.ignoredExtensions": []
+}

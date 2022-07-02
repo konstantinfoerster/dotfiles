@@ -1,0 +1,78 @@
+---
+- name: Check if custom options already applied
+  ansible.builtin.command: gsettings get org.gnome.desktop.input-sources xkb-options
+  changed_when: false
+  register: xkb_options
+
+- name: Load dconf backup
+  ansible.builtin.shell: "dbus-launch dconf load / < {{ dotfiles_dir }}/ansible/saved_settings.dconf"
+  when: xkb_options.stdout != "['caps:escape']"
+
+- name: Set git default branch
+  community.general.git_config:
+    name: init.defaultBranch
+    scope: global
+    value: "main"
+
+- name: Set git user email
+  community.general.git_config:
+    name: user.email
+    scope: global
+    value: "{{ git_user_email }}"
+
+- name: Set git user name
+  community.general.git_config:
+    name: user.name
+    scope: global
+    value: "{{ git_user_name }}"
+
+- name: Remove default user dirs from default configuration
+  ansible.builtin.replace:
+    path: /etc/xdg/user-dirs.defaults
+    regexp: "{{ item }}"
+    replace: '#\1'
+    group: root
+    owner: root
+    mode: 0644
+  with_items:
+    - '^(TEMPLATES=.*)'
+    - '^(PUBLICSHARE=.*)'
+    - '^(DOCUMENTS=.*)'
+    - '^(MUSIC=.*)'
+    - '^(PICTURES=.*)'
+    - '^(VIDEOS=.*)'
+  become: true
+  become_user: root
+
+- name: Delete default user dirs configuration in users home (will be generated on login)
+  ansible.builtin.file:
+    path: "/home/{{ user }}/.config/user-dirs.dirs"
+    state: absent
+
+- name: Ensure default user dirs do not exists in users home
+  ansible.builtin.file:
+    path: "/home/{{ user }}/{{ item }}"
+    state: absent
+  with_items:
+    - "Templates"
+    - "Public"
+    - "Documents"
+    - "Music"
+    - "Pictures"
+    - "Videos"
+
+- name: Remove default nautilus bookmarks
+  ansible.builtin.lineinfile:
+    dest: /home/{{ user }}/.config/gtk-3.0/bookmarks
+    regexp: "{{ item }}"
+    group: "{{ user }}"
+    owner: "{{ user }}"
+    mode: 0644
+    state: absent
+  with_items:
+    - '^.*/Templates$'
+    - '^.*/Public$'
+    - '^.*/Documents$'
+    - '^.*/Music$'
+    - '^.*/Pictures$'
+    - '^.*/Videos$'

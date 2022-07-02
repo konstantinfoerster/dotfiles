@@ -1,0 +1,40 @@
+---
+- hosts: localhost
+  become: true
+  gather_facts: false
+
+  pre_tasks:
+    - name: Run pre tasks
+      tags:
+        - always
+      block:
+        - name: Load configuration
+          ansible.builtin.include_vars: "{{ item }}"
+          loop:
+            - config.yml
+
+        - name: Running from iso?
+          ansible.builtin.command: uname -a
+          changed_when: false
+          register: uname_out
+
+        - name: Set hostlist based on running system
+          ansible.builtin.set_fact:
+            hostlist: "{{ 'chroot' if 'archiso' in uname_out.stdout else 'localhost' }}"
+            is_archiso: "{{ true if 'archiso' in uname_out.stdout else false }}"
+            cacheable: true
+
+  tasks:
+    - name: Setup encrypted hard drive
+      ansible.builtin.import_tasks: tasks/storage.yml
+      when: is_archiso == true
+
+    - name: Prepare base system
+      ansible.builtin.import_tasks: tasks/prepare_base.yml
+      when: is_archiso == true
+
+- ansible.builtin.import_playbook: local_system.yml
+  vars:
+    hostlist: "{{ hostvars['localhost']['hostlist'] }}"
+  tags:
+    - always

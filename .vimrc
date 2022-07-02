@@ -40,15 +40,21 @@ call plug#end()
 " filetype detection and settings
 filetype plugin indent on
 
-" syntax highlighting"
+" syntax highlighting
 syntax enable
 
 " Git commits.
 autocmd FileType gitcommit setlocal spell
 
-"set backup
-"set backupdir=~/.vim/backup
-"set directory=~/.vim/backup
+" Create backup before write
+set backup
+
+" backup file directory
+silent !mkdir ~/.vim/backup > /dev/null 2>&1
+set backupdir=~/.vim/backup
+
+" Swap file directory
+set directory=~/.vim/backup
 
 " enable timout for commands
 set ttimeout
@@ -131,7 +137,7 @@ set incsearch
 " ignore case when searching
 set ignorecase
 
-" case senstive if one character is uppercase
+" case sensitive if one character is uppercase
 set smartcase
 
 " use + (CLIPBOARD) register, so we can just copy with yy

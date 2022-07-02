@@ -1,0 +1,12 @@
+---
+- name: Install audio packages
+  community.general.pacman:
+    name:
+      - pipewire
+      - pipewire-alsa
+      - pipewire-jack
+      - pipewire-pulse
+      - gst-plugin-pipewire
+      - libpulse
+      - wireplumber
+    state: present

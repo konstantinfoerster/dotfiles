@@ -31,9 +31,6 @@ fi
 
 #export TERM='xterm-256color'
 
-#if [ "$HOSTNAME" = "kg-pc" ]; then
-#    export GDK_BACKEND=wayland
-#fi
 stty -ixon
 
 # if running bash

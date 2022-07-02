@@ -1,0 +1,11 @@
+---
+- name: Install driver packages
+  community.general.pacman:
+    name:
+      - ntfs-3g
+      - mesa
+      - mesa-libgl
+      - mesa-vdpau
+      - libva-utils
+      - libva-intel-driver # i965
+    state: present

@@ -1,0 +1,69 @@
+---
+- hosts: "{{ hostlist | default('localhost') }}"
+  connection: "{{ connection_type | default('local')  }}"
+  become: true
+  gather_facts: false
+
+  pre_tasks:
+    - name: Load configuration
+      ansible.builtin.include_vars: "{{ item }}"
+      loop:
+        - config.yml
+      tags:
+        - always
+
+  tasks:
+    - name: Set timezone and sync hw clock
+      ansible.builtin.import_tasks: tasks/time.yml
+
+    - name: Set correct language and keymap
+      ansible.builtin.import_tasks: tasks/language.yml
+
+    - name: Configure pacman mirror
+      ansible.builtin.import_tasks: tasks/pacman.yml
+
+    - name: Set hostname and add hosts
+      ansible.builtin.import_tasks: tasks/hostname.yml
+
+    - name: Configure grub
+      ansible.builtin.import_tasks: tasks/grub.yml
+
+    - name: Set root password and add user
+      ansible.builtin.import_tasks: tasks/user.yml
+
+    - name: Install packages
+      block:
+        - name: Ensure pacman cache and installed packages are up to date
+          community.general.pacman:
+            update_cache: true
+            upgrade: true
+        - name: Install base packages
+          ansible.builtin.import_tasks: tasks/packages/base.yml
+        - name: Install video driver packages
+          ansible.builtin.import_tasks: tasks/packages/driver.yml
+        - name: Install audio packages
+          ansible.builtin.import_tasks: tasks/packages/audio.yml
+        - name: Install font packages
+          ansible.builtin.import_tasks: tasks/packages/font.yml
+        - name: Install terminal packages
+          ansible.builtin.import_tasks: tasks/packages/terminal.yml
+        - name: Install gnome packages
+          ansible.builtin.import_tasks: tasks/packages/gnome.yml
+        - name: Install vm and ops packages
+          ansible.builtin.import_tasks: tasks/packages/vm.yml
+        - name: Install development packages
+          ansible.builtin.import_tasks: tasks/packages/dev.yml
+        - name: Install docker
+          ansible.builtin.import_tasks: tasks/packages/docker.yml
+        - name: Install other packages
+          ansible.builtin.import_tasks: tasks/packages/misc.yml
+    - name: Apply user specific setting
+      become_user: "{{ user }}"
+      become: true
+      block:
+        - name: Setup aur packages
+          ansible.builtin.import_tasks: tasks/aur.yml
+        - name: Setup dotiles
+          ansible.builtin.import_tasks: tasks/dotfiles.yml
+        - name: Apply user specific settings
+          ansible.builtin.import_tasks: tasks/user_settings.yml

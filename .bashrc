@@ -39,5 +39,3 @@ if [ -f ~/.bashrc.d/git-prompt.sh ]; then
     # PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
     PROMPT_COMMAND='__git_ps1 "\w" "\\\$ "'
 fi
-
-setxkbmap  de
