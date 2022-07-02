@@ -11,6 +11,6 @@ hostname: test-workstation
 aur_dir: "/home/{{ user }}/apps/aur"
 dotfiles_repo: 'https://github.com/konstantinfoerster/dotfiles.git'
 dotfiles_dir: "/home/{{ user }}/dotfiles"
-dotfiles_branch: "setup-local-workstation-with-ansible"
+dotfiles_branch: "master"
 git_user_name: "Tester"
 git_user_email: "tester@mailinator.com"

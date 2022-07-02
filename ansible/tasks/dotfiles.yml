@@ -23,20 +23,12 @@
     - .scripts
     - .tmux.conf
     - .vimrc
-    - .config/Code/User/settings.json # TODO does not exists on master yet
+    - .config/Code/User/settings.json
     - .config/base16-shell
     - .gnupg/gpg.conf
     - .gnupg/gpg-agent.conf
   loop_control:
     loop_var: file
-
-- name: Ensure vim backup folder exists
-  ansible.builtin.file:
-    path: "/home/{{ user }}/.vim/backup"
-    mode: 0755
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    state: directory
 
 - name: Install vim PlugInstall
   ansible.builtin.command: "vim -es -u /home/{{ user }}/.vimrc -i NONE -c 'PlugInstall --sync' -c 'qa'"

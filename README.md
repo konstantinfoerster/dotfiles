@@ -19,8 +19,6 @@ cd ~
 git clone --recursive https://github.com/konstantinfoerster/dotfiles.git
 ```
 
-mkdir -p $HOME/.vim/backup
-
 Link all needed files to $HOME
 
 ### Gnome terminal theme
