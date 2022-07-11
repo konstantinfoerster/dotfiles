@@ -25,6 +25,7 @@
     - .vimrc
     - .config/Code/User/settings.json
     - .config/base16-shell
+    - .config/alacritty
     - .gnupg/gpg.conf
     - .gnupg/gpg-agent.conf
   loop_control:

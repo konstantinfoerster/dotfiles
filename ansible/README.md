@@ -12,17 +12,24 @@
 * Clone the dotfiles repository `git clone https://github.com/konstantinfoerster/dotfiles.git`
 * Change into the dotfiles ansible dir `cd dotfiles/ansible`
 * Copy `example.config.yml` to `config.yml` and make your system dependent changes
-* To run an installation with storage wipe run `ansbile-playbook -K main.yml -t wipe -t storage -t prepare`
+* To run an installation with storage wipe run `ansible-playbook -K main.yml -t wipe -t storage -t prepare`
 * Run `umount -a` to unmount all devices
 * Run `reboot`
 
-# Gnome
+# Updates
+
+Just execute `ansible-playbook -K main.yml` to run the playbook on an already installed system (The system needs to be
+installed with this ansible playbook).
+
+# Hints
+
+## Backup Gnome configuration
 
 * Reset dconf `dconf reset -f /`
 * Backup gnome settings `dconf dump / > saved_settings.dconf`
 * Load Backup `dconf load / < saved_settings.dconf`
 
-## Lint
+# Lint
 
 Run `ansible-lint`
 
