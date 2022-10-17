@@ -7,7 +7,6 @@
       - bash-completion
       - openssh
       - gnupg
-      - gcr
       - git
       - man-db
     state: present
