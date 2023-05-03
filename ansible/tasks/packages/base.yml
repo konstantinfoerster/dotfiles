@@ -9,6 +9,7 @@
       - gnupg
       - git
       - man-db
+      - pwgen
     state: present
 
 - name: Enable NetworkManager
