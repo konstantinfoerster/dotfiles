@@ -2,7 +2,7 @@
 - name: Add pacman mirror
   ansible.builtin.replace:
     path: /etc/pacman.conf
-    regexp: '^(\[extra]|\[core]|\[community])\n(Include.*)'
+    regexp: '^(\[extra]|\[core])\n(Include.*)'
     replace: '\1\nServer = {{ pacman_mirror }}\n\2'
     group: root
     owner: root

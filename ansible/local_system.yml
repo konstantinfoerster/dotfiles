@@ -50,7 +50,7 @@
         - name: Install gnome packages
           ansible.builtin.import_tasks: tasks/packages/gnome.yml
         - name: Install vm and ops packages
-          ansible.builtin.import_tasks: tasks/packages/vm.yml
+          ansible.builtin.import_tasks: tasks/packages/ops.yml
         - name: Install development packages
           ansible.builtin.import_tasks: tasks/packages/dev.yml
         - name: Install docker
