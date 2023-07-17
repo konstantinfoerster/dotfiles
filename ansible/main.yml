@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
+- name: "Ensure system is setup"
+  hosts: localhost
   become: true
   gather_facts: false
 
@@ -27,13 +28,14 @@
   tasks:
     - name: Setup encrypted hard drive
       ansible.builtin.import_tasks: tasks/storage.yml
-      when: is_archiso == true
+      when: is_archiso
 
     - name: Prepare base system
       ansible.builtin.import_tasks: tasks/prepare_base.yml
-      when: is_archiso == true
+      when: is_archiso
 
-- ansible.builtin.import_playbook: local_system.yml
+- name: Ensure local system is setup correctly
+  ansible.builtin.import_playbook: local_system.yml
   vars:
     hostlist: "{{ hostvars['localhost']['hostlist'] }}"
   tags:

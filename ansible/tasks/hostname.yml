@@ -4,7 +4,7 @@
   ansible.builtin.copy:
     dest: /etc/hostname
     content: "{{ hostname }}"
-    mode: 0644
+    mode: '0644'
 
 - name: Ensure localhost is configured in hosts file
   ansible.builtin.lineinfile:
@@ -14,7 +14,7 @@
     line: "{{ item.line }}"
     group: root
     owner: root
-    mode: 0644
+    mode: '0644'
     state: present
   with_items:
     - regexp: '^127\.0\.0\.1.*localhost'

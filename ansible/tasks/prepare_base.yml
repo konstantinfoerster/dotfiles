@@ -12,6 +12,7 @@
     - name: Install based packages into chroot
       ansible.builtin.command:
         cmd: pacstrap /mnt base linux linux-firmware gvim ansible git sudo
+      changed_when: true
       when: not proc_stats.stat.exists
 
     - name: Check if /mnt/etc/fstab is already configured
@@ -25,4 +26,5 @@
 
     - name: Generate filesystem mount configuration
       ansible.builtin.shell: genfstab -U /mnt >> /mnt/etc/fstab
+      changed_when: true
       when: not fstab_result.found

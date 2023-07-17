@@ -1,6 +1,8 @@
 ---
 - name: "Read device information from {{ main_disk }}"
-  community.general.parted: "device={{ main_disk }} unit=MiB"
+  community.general.parted:
+    device: "{{ main_disk }}"
+    unit: 'MiB'
   register: main_disk_info
   tags:
     - never
@@ -30,7 +32,7 @@
     - never
     - wipe
   block:
-    - name: Delete keys from {{ main_disk }} root partition
+    - name: "Delete keys from root partition of {{ main_disk }}"
       community.crypto.luks_device:
         device: "{{ main_disk }}2"
         force_remove_last_key: true

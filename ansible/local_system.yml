@@ -1,5 +1,6 @@
 ---
-- hosts: "{{ hostlist | default('localhost') }}"
+- name: Ensure local system is setup correctly
+  hosts: "{{ hostlist | default('localhost') }}"
   connection: "{{ connection_type | default('local')  }}"
   become: true
   gather_facts: false
