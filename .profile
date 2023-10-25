@@ -21,7 +21,6 @@ if [ -d "$HOME/go/bin" ]; then
     export PATH=$HOME/go/bin:$PATH
 fi
 
-
 export XDG_CONFIG_HOME=$HOME/.config
 
 export JAVA_HOME=/usr/lib/jvm/default
@@ -44,7 +43,4 @@ if [ -n "$BASH_VERSION" ]; then
     [[ -f $HOME/.bashrc ]] && . $HOME/.bashrc
 fi
 
-if [ -f /usr/local/bin/bspwm ]; then
-    [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
-fi
 # vim: ft=sh:

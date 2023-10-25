@@ -1,6 +1,0 @@
-#Link this services into /etc/systemd/system/
-#Can be linked with sudo systemctl link serviceName
-
-Services can't be linked into /etc/systemd/system/ see https://github.com/systemd/systemd/issues/3010
-
-So we need to copy them.

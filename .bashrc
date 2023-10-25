@@ -27,7 +27,7 @@ PROMPT_DIRTRIM=4
 PS1="\u@\h \w\\$ "
 
 for filename in "$HOME"/.bashrc.d/*.sh; do
-    source $filename
+    source "$filename"
 done
 
 if [ -f ~/.bashrc.d/git-prompt.sh ]; then

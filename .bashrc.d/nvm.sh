@@ -1,3 +1,5 @@
 #!/bin/sh
 
-. /usr/share/nvm/init-nvm.sh
+if [ -f /usr/share/nvm/init-nvm.sh ]; then
+  . /usr/share/nvm/init-nvm.sh
+fi
