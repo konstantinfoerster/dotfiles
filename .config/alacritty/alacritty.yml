@@ -1,3 +1,6 @@
+window:
+  startup_mode: Maximized
+
 font:
   normal:
     family: Hack
@@ -53,3 +56,11 @@ colors:
     white:   '0xfefbec'
 
 draw_bold_text_with_bright_colors: false
+
+shell:
+  program: /bin/bash
+  args:
+    - -c
+    - -l
+    - "tmux attach || tmux new-session -n$USER -s$USER@$HOSTNAME"
+
