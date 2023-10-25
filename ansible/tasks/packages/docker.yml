@@ -11,7 +11,7 @@
     name: docker
     enabled: true
 
-- name: "Add user {{ user }} to group docker"
+- name: "Assigned group docker to user {{ user }}"
   ansible.builtin.user:
     name: "{{ user }}"
     groups: docker

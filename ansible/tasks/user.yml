@@ -13,9 +13,9 @@
     update_password: on_create
     state: present
 
-- name: "Ensure user {{ user }} is added to sudoers"
+- name: "Allow sudo usage for user {{ user }}"
   ansible.builtin.copy:
     dest: "/etc/sudoers.d/001_{{ user }}"
     content: "{{ user }} ALL=(ALL) ALL"
-    mode: 0640
+    mode: '0440'
     validate: "visudo -cf %s"

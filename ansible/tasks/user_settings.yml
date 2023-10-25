@@ -6,6 +6,7 @@
 
 - name: Load dconf backup
   ansible.builtin.shell: "dbus-launch dconf load / < {{ dotfiles_dir }}/ansible/saved_settings.dconf"
+  changed_when: xkb_options.stdout != "['caps:escape']"
   when: xkb_options.stdout != "['caps:escape']"
 
 - name: Set git default branch
@@ -33,7 +34,7 @@
     replace: '#\1'
     group: root
     owner: root
-    mode: 0644
+    mode: '0644'
   with_items:
     - '^(TEMPLATES=.*)'
     - '^(PUBLICSHARE=.*)'
@@ -67,7 +68,7 @@
     regexp: "{{ item }}"
     group: "{{ user }}"
     owner: "{{ user }}"
-    mode: 0644
+    mode: '0644'
     state: absent
   with_items:
     - '^.*/Templates$'

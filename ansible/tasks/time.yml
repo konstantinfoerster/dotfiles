@@ -5,7 +5,7 @@
     dest: /etc/localtime
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
     state: link
 
 - name: Sync system with hardware time

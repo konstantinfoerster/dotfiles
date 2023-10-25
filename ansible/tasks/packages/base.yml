@@ -9,14 +9,25 @@
       - gnupg
       - git
       - man-db
+      - pwgen
+      - traceroute
+      - ntp
     state: present
 
 - name: Enable NetworkManager
   ansible.builtin.systemd:
     name: NetworkManager
     enabled: true
+    state: started
 
-- name: Enable ssh deamon
+- name: Enable ssh daemon
   ansible.builtin.systemd:
     name: sshd
     enabled: true
+    state: started
+
+- name: Enable ntp daemon
+  ansible.builtin.systemd:
+    name: ntpd
+    enabled: true
+    state: started

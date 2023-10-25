@@ -4,5 +4,8 @@
     name:
       - virtualbox-host-modules-arch
       - vagrant
+      - python-vagrant
       - ansible
+      - ansible-lint
+      - python-passlib
     state: present

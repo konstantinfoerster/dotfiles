@@ -4,7 +4,7 @@
     path: "/home/{{ user }}/{{ file }}"
   register: file_available
 
-- name: "Remove existing {{ file }} if it's not a link"
+- name: "Remove existing none link {{ file }}"
   ansible.builtin.file:
     path: "/home/{{ user }}/{{ file }}"
     state: absent
@@ -13,13 +13,13 @@
 - name: Make sure destination dir exists
   ansible.builtin.file:
     path: "{{ '/home/' + user + '/' + file | dirname }}"
-    mode: 0755
+    mode: '0755'
     owner: "{{ user }}"
     group: "{{ user }}"
     state: directory
   when: not file_available.stat.exists
 
-- name: "Link {{ file }} if it does not exists yet"
+- name: "Link file if require {{ file }}"
   ansible.builtin.file:
     src: "{{ dotfiles_dir }}/{{ file }}"
     dest: "/home/{{ user }}/{{ file }}"
