@@ -8,6 +8,6 @@
       - jq
       - mediainfo # technical and tag information about a video or audio file
       - ripgrep # nvim telescope
-      - fd # nvim telescope
+      - fd # nvim telescope, alternative to find
       - fzf # command-line fuzzy finder
     state: present
