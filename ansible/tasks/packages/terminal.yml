@@ -4,7 +4,10 @@
     name:
       - tmux
       - gvim # vim with +clipboard support
-      - the_silver_searcher
+      - the_silver_searcher # vim
       - jq
       - mediainfo # technical and tag information about a video or audio file
+      - ripgrep # nvim telescope
+      - fd # nvim telescope
+      - fzf # command-line fuzzy finder
     state: present

@@ -21,6 +21,13 @@ if [ -d "$HOME/go/bin" ]; then
     export PATH=$HOME/go/bin:$PATH
 fi
 
+if [ -d "/usr/share/dotnet" ]; then
+    export PATH=$HOME/.dotnet/tools:$PATH
+    export DOTNET_CLI_TELEMETRY_OPTOUT=1
+    export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+    export PATH=$HOME/.bin/dotnet/omnisharp/:$PATH
+fi
+
 export XDG_CONFIG_HOME=$HOME/.config
 
 export JAVA_HOME=/usr/lib/jvm/default
