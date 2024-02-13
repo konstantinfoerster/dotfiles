@@ -26,7 +26,6 @@ return {
         "emmet_ls", -- js
         "pyright", -- python
         "gopls", -- go
-        "omnisharp", -- c#
         "vuels", -- vuejs
 --         "java_language_server",
         "yamlls"

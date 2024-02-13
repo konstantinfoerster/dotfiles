@@ -5,5 +5,6 @@
       - ttf-dejavu
       - ttf-droid
       - ttf-hack
+      - ttf-hack-nerd # patched fonts for nvim-web-devicons
       - powerline-fonts
     state: present

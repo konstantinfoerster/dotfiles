@@ -4,7 +4,6 @@ return {
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     { "antosha417/nvim-lsp-file-operations", config = true },
-    "Hoffs/omnisharp-extended-lsp.nvim",
     "Issafalcon/lsp-overloads.nvim",
     "j-hui/fidget.nvim", -- progress indication for lsp init
     "lvimuser/lsp-inlayhints.nvim", -- rust-tools already provides this feature, but gopls doesn't
@@ -154,15 +153,5 @@ return {
         },
       },
     })
-
-    lspconfig["omnisharp"].setup({
-     handlers = {
-        ["textDocument/definition"] = require("omnisharp_extended").handler,
-      },
-      cmd = {  "/usr/share/dotnet/omnisharp/OmniSharp" },
-      enable_editorconfig_support = true,
-      enable_roslyn_analyzers = true,
-    })
-
   end,
 }
