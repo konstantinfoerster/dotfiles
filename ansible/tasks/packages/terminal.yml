@@ -11,6 +11,5 @@
       - fzf # command-line fuzzy finder
       # nvim
       - fd # telescope alternative to find
-      - yamllint # yaml linter
       - luacheck # lua linter
     state: present

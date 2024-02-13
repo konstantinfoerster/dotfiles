@@ -22,6 +22,12 @@ return {
           },
         },
       },
+      extensions = {
+        fzf = {
+          case_mode = "ignore_case", -- or "smart_case" or "respect_case"
+          -- the default case_mode is "smart_case"
+        },
+      },
     })
     telescope.load_extension("fzf")
     telescope.load_extension("file_browser")
