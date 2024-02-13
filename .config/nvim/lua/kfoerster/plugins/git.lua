@@ -3,7 +3,7 @@ return {
     "sindrets/diffview.nvim",
     opts = {},
     config = function()
-      vim.keymap.set('n', '<leader>gdh', "<cmd>DiffviewOpen origin/HEAD...HEAD --imply-local<CR>") -- toggle file explorer
+      vim.keymap.set("n", "<leader>gdh", "<cmd>DiffviewOpen origin/HEAD...HEAD --imply-local<CR>") -- toggle file explorer
     end,
   },
   {

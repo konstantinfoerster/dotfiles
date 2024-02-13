@@ -6,7 +6,7 @@ return {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "L3MON4D3/LuaSnip",
---    "rafamadriz/friendly-snippets",
+    --    "rafamadriz/friendly-snippets",
     "nvim-tree/nvim-web-devicons",
     "onsails/lspkind-nvim",
   },
@@ -23,20 +23,20 @@ return {
         completeopt = "menu,menuone,preview,noselect",
       },
       view = {
-        entries = {name = "custom", selection_order = "near_cursor" }
+        entries = { name = "custom", selection_order = "near_cursor" },
       },
       formatting = {
         format = lspkind.cmp_format({
-          fields = {"menu", "abbr", "kind"},
+          fields = { "menu", "abbr", "kind" },
           mode = "symbol_text", -- show only symbol annotations
           maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
           ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-          menu = ({
+          menu = {
             buffer = "[Buffer]",
             nvim_lsp = "[LSP]",
             luasnip = "[LuaSnip]",
             path = "[Path]",
-          }),
+          },
         }),
       },
       snippet = {
@@ -57,14 +57,14 @@ return {
         ["<C-e>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Insert,
-          select = true
+          select = true,
         }),
       }),
       sources = cmp.config.sources({
         -- ordered by priority
-        { name = "nvim_lsp"},
+        { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
---        { name = "luasnip", keyword_length = 2 },
+        --        { name = "luasnip", keyword_length = 2 },
         { name = "buffer", keyword_length = 3 },
         { name = "path" },
       }),

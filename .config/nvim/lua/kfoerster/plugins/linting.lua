@@ -26,4 +26,3 @@ return {
     end, { desc = "Lint file" })
   end,
 }
-

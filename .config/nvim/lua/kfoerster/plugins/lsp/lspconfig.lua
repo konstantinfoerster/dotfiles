@@ -16,23 +16,20 @@ return {
       Error = " ",
       Warn = " ",
       Hint = "󰠠 ",
-      Info = " "
+      Info = " ",
     }
     for type, icon in pairs(signs) do
       local hl = "DiagnosticSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
--- with active border the cursor sometimes get stuck, don't know why :(
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-      vim.lsp.handlers.hover,
-      { border = "rounded" }
-    )
---
---     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
---       vim.lsp.handlers.signature_help,
---       { border = "rounded" }
---     )
+    -- with active border the cursor sometimes get stuck, don't know why :(
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+    --
+    --     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+    --       vim.lsp.handlers.signature_help,
+    --       { border = "rounded" }
+    --     )
 
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(args)
@@ -54,24 +51,21 @@ return {
         keybind("n", "<leader>rn", vim.lsp.buf.rename, "Smart rename")
         keybind("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show buffer diagnostics")
         keybind("n", "<leader>d", vim.diagnostic.open_float, "Show line diagnostics")
---        keybind("n", "<leader>dh", vim.diagnostic.goto_prev,  "Go to previous diagnostic") replaced by trouble?
---        keybind("n", "<leader>dl", vim.diagnostic.goto_next, "Go to next diagnostic") replaced by trouble ?
+        --        keybind("n", "<leader>dh", vim.diagnostic.goto_prev,  "Go to previous diagnostic") replaced by trouble?
+        --        keybind("n", "<leader>dl", vim.diagnostic.goto_next, "Go to next diagnostic") replaced by trouble ?
         keybind("n", "<leader>rs", ":LspRestart<CR>", "Restart LSP")
 
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         if client.server_capabilities.signatureHelpProvider then
-          require('lsp-overloads').setup(client, { })
+          require("lsp-overloads").setup(client, {})
         end
-      end
+      end,
     })
 
     local lspconfig = require("lspconfig")
     local lsp_defaults = lspconfig.util.default_config
-    lsp_defaults.capabilities = vim.tbl_deep_extend(
-      "force",
-      lsp_defaults.capabilities,
-      require("cmp_nvim_lsp").default_capabilities()
-    )
+    lsp_defaults.capabilities =
+      vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
 
     -- lsp server that do not require any configuration
     local servers = { "html", "tsserver", "emmet_ls", "pyright", "vuels", "yamlls" }
@@ -80,25 +74,25 @@ return {
     end
 
     lspconfig["gopls"].setup({
---       on_attach = function(client, bufnr)
---         require("lsp-inlayhints").setup({
---          inlay_hints = {type_hints = {prefix = "=> "}}
---         })
---         require("lsp-inlayhints").on_attach(client, bufnr)
---         workaround for gopls not supporting semanticTokensProvider
---         https://github.com/golang/go/issues/54531#issuecomment-1464982242
---         if not client.server_capabilities.semanticTokensProvider then
---          local semantic = client.config.capabilities.textDocument.semanticTokens
---          client.server_capabilities.semanticTokensProvider = {
---            full = true,
---            legend = {
---              tokenTypes = semantic.tokenTypes,
---              tokenModifiers = semantic.tokenModifiers,
---            },
---            range = true,
---          }
---         end
---       end,
+      --       on_attach = function(client, bufnr)
+      --         require("lsp-inlayhints").setup({
+      --          inlay_hints = {type_hints = {prefix = "=> "}}
+      --         })
+      --         require("lsp-inlayhints").on_attach(client, bufnr)
+      --         workaround for gopls not supporting semanticTokensProvider
+      --         https://github.com/golang/go/issues/54531#issuecomment-1464982242
+      --         if not client.server_capabilities.semanticTokensProvider then
+      --          local semantic = client.config.capabilities.textDocument.semanticTokens
+      --          client.server_capabilities.semanticTokensProvider = {
+      --            full = true,
+      --            legend = {
+      --              tokenTypes = semantic.tokenTypes,
+      --              tokenModifiers = semantic.tokenModifiers,
+      --            },
+      --            range = true,
+      --          }
+      --         end
+      --       end,
       settings = {
         gopls = {
           analyses = {
@@ -131,7 +125,7 @@ return {
             functionTypeParameters = true,
             parameterNames = true,
             rangeVariableTypes = true,
-          }
+          },
         },
       },
     })

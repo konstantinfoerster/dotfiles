@@ -17,12 +17,12 @@ return {
         yaml = { { "prettierd", "prettier" } },
         sh = { "shellcheck" },
       },
--- no automatic formatting for now
---       format_on_save = {
---         lsp_fallback = true,
---         async = false,
---         timeout = 500,
---       },
+      -- no automatic formatting for now
+      --       format_on_save = {
+      --         lsp_fallback = true,
+      --         async = false,
+      --         timeout = 500,
+      --       },
     })
 
     vim.keymap.set({ "n", "v" }, "<leader>f", function()

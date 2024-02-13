@@ -32,10 +32,10 @@ return {
     vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Find recent used files" })
     vim.keymap.set("n", "<leader>fg", builtin.git_files, { desc = "Find files known by git" })
     vim.keymap.set("n", "<leader>sc", builtin.grep_string, { desc = "Find string under cursor" })
-    vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Find string in cwd" })
+    vim.keymap.set("n", "<leader>sf", builtin.live_grep, { desc = "Find string in cwd" })
     vim.keymap.set("n", "<leader>ss", function()
       builtin.grep_string({ search = vim.fn.input("Grep > ") })
-    end, { desc = "Find string in cwd" })
+    end, { desc = "Find given string in cwd" })
     vim.keymap.set(
       "n",
       "<leader>fe",
