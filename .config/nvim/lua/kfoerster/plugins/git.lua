@@ -1,9 +1,13 @@
 return {
   {
     "sindrets/diffview.nvim",
-    opts = {},
     config = function()
-      vim.keymap.set("n", "<leader>gdh", "<cmd>DiffviewOpen origin/HEAD...HEAD --imply-local<CR>") -- toggle file explorer
+      require("diffview").setup({
+        default_args = {
+          DiffviewOpen = { "--imply-local" },
+        },
+      })
+      vim.keymap.set("n", "<leader>gdh", "<cmd>DiffviewOpen origin/HEAD...HEAD --imply-local<CR>") -- diff origin head with head
     end,
   },
   {

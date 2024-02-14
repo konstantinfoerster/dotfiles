@@ -15,7 +15,6 @@ return {
         css = { { "prettierd", "prettier" } },
         json = { { "prettierd", "prettier" } },
         yaml = { { "prettierd", "prettier" } },
-        sh = { "shellcheck" },
       },
       -- no automatic formatting for now
       --       format_on_save = {
