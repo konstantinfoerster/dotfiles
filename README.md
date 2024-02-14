@@ -1,9 +1,11 @@
 # Dotfiles
+
 Dotfiles repository
 
 Vim / Terminal Theme: base16-atelier-dune
 
 ## Setup
+
 ```
 cd ~
 git clone https://github.com/konstantinfoerster/dotfiles.git
@@ -22,4 +24,5 @@ git clone --recursive https://github.com/konstantinfoerster/dotfiles.git
 Link all needed files to $HOME
 
 ### Gnome terminal theme
+
 source ~/.config/base16-gnome-terminal/color-scripts/base16-atelier-dune.sh
