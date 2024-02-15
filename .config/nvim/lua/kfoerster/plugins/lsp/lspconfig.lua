@@ -95,6 +95,7 @@ return {
       --       end,
       settings = {
         gopls = {
+          templateExtensions = { "gohtml", "gotmpl", "tmpl" },
           analyses = {
             nilness = true,
             shadow = true,

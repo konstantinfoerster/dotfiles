@@ -45,3 +45,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank({ higroup = "IncSearch", timeout = "250" })
   end,
 })
+
+-- detect go templates
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*.gohtml" },
+  callback = function() vim.opt_local.filetype = "gotmpl" end,
+})
+
