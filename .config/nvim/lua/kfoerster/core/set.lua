@@ -13,7 +13,12 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
-vim.opt.smartindent = true
+-- enable break indent
+vim.opt.breakindent = true
+
+-- case-insensitive searching UNLESS \C or capital in search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 vim.opt.wrap = false
 
@@ -21,6 +26,9 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
+
+-- set completeopt to have a better completion experience
+vim.opt.completeopt = 'menuone,noselect'
 
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
@@ -32,8 +40,8 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
-vim.opt.updatetime = 50
-vim.opt.timeout = false
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 300
 
 vim.opt.colorcolumn = "120"
 

@@ -6,7 +6,6 @@ return {
     configs.setup({
       ensure_installed = {
         "c",
-        "c_sharp",
         "bash",
         "css",
         "go",
@@ -14,10 +13,10 @@ return {
         "gosum",
         "html",
         "javascript",
+        "typescript",
         "json",
         "lua",
         "python",
-        "typescript",
         "vim",
         "vimdoc",
         "query",

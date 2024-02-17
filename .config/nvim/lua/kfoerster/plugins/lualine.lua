@@ -10,6 +10,7 @@ return {
     require("lualine").setup({
       options = {
         globalstatus = false,
+        theme = "auto",
       },
       sections = {
         lualine_a = {
@@ -31,4 +32,3 @@ return {
     })
   end,
 }
-

@@ -5,12 +5,13 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     { "antosha417/nvim-lsp-file-operations", config = true },
     "Issafalcon/lsp-overloads.nvim",
-    "j-hui/fidget.nvim", -- progress indication for lsp init
-    "lvimuser/lsp-inlayhints.nvim", -- rust-tools already provides this feature, but gopls doesn't
+    -- progress indication for lsp init
+    -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+    { "j-hui/fidget.nvim", opts = {} },
+    -- rust-tools already provides this feature, but gopls doesn't
+    "lvimuser/lsp-inlayhints.nvim",
   },
   config = function()
-    require("fidget").setup()
-
     vim.diagnostic.config({ virtual_text = true, severity_sort = true })
     local signs = {
       Error = " ",
@@ -40,17 +41,19 @@ return {
         end
 
         -- set keybindings
-        keybind("n", "gr", "<cmd>Telescope lsp_references<CR>", "[g] to LSP [r]eferences")
-        keybind("n", "gD", vim.lsp.buf.declaration, "[g]o to [D]eclaration")
-        keybind("n", "gd", "<cmd>Telescope lsp_definitions<CR>", "[g]o to LSP [d]efinitions")
-        keybind("n", "gi", "<cmd>Telescope lsp_implementations<CR>", "[g]o to LSP [i]mplementations")
-        keybind("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", "[g]o to LSP [t]ype definitions")
-        keybind("n", "<C-p>", vim.lsp.buf.signature_help, "Show function signature")
+        keybind("n", "gr", "<cmd>Telescope lsp_references<CR>", "[G]oto [R]eferences")
+        keybind("n", "gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+        keybind("n", "gd", "<cmd>Telescope lsp_definitions<CR>", "[G]oto [D]efinitions")
+        keybind("n", "gi", "<cmd>Telescope lsp_implementations<CR>", "[G]oto [I]mplementations")
+        keybind("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", "[G]oto [T]ype definitions")
+        keybind("n", "<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
         keybind("n", "K", vim.lsp.buf.hover, "Show documentation for what is under cursor")
-        keybind({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "See available [c]ode [a]ctions")
-        keybind("n", "<leader>rn", vim.lsp.buf.rename, "Smart rename")
-        keybind("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show buffer diagnostics")
-        keybind("n", "<leader>d", vim.diagnostic.open_float, "Show line diagnostics")
+        keybind({ "n", "v" }, "<leader>ca", function()
+          vim.lsp.buf.code_action({ context = { only = { "quickfix", "refactor", "source" } } })
+        end, "[C]ode [A]ctions")
+        keybind("n", "<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+        keybind("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show buffer [D]iagnostics")
+        keybind("n", "<leader>d", vim.diagnostic.open_float, "Show line [D]iagnostics")
         --        keybind("n", "<leader>dh", vim.diagnostic.goto_prev,  "Go to previous diagnostic") replaced by trouble?
         --        keybind("n", "<leader>dl", vim.diagnostic.goto_next, "Go to next diagnostic") replaced by trouble ?
         keybind("n", "<leader>rs", ":LspRestart<CR>", "Restart LSP")

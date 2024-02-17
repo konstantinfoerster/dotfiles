@@ -14,7 +14,11 @@ vim.keymap.set("n", "+c", "]c") -- previous diff hunk
 -- tabs
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>") -- toggle between buffers
 
-
 -- window
 vim.keymap.set("n", "<C-w>h", ":vertical resize -15<CR>") -- make smaller
 vim.keymap.set("n", "<C-w>l", ":vertical resize +15<CR>") -- make wider
+
+-- keymaps for better default experience
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+
+
