@@ -15,6 +15,8 @@ return {
         "javascript",
         "json",
         "lua",
+        "markdown",
+        "markdown_inline",
         "python",
         "typescript",
         "vim",
