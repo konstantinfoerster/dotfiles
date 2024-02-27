@@ -5,7 +5,7 @@ return {
     local conform = require("conform")
     conform.setup({
       formatters_by_ft = {
-        go = { "goimports", "gofmt" },
+        go = { "gofmt", "goimports" },
         lua = { "stylua" },
         python = { "black" },
         javascript = { { "prettierd", "prettier" } },
@@ -30,6 +30,6 @@ return {
         async = false,
         timeout = 500,
       })
-    end, { desc = "Format file or range (in visual mode)" })
+    end, { desc = "[F]ormat file or range (in visual mode)" })
   end,
 }

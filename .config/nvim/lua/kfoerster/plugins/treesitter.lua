@@ -2,8 +2,7 @@ return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
   config = function()
-    local configs = require("nvim-treesitter.configs")
-    configs.setup({
+    require("nvim-treesitter.configs").setup({
       ensure_installed = {
         "c",
         "bash",
@@ -12,9 +11,12 @@ return {
         "gomod",
         "gosum",
         "html",
+        "java",
         "javascript",
         "json",
         "lua",
+        "markdown",
+        "markdown_inline",
         "python",
         "typescript",
         "vim",
@@ -23,6 +25,7 @@ return {
         "xml",
         "yaml",
       },
+      ignore_install = { "properties" }, -- cause errors in healthcheck
 
       -- Install parsers synchronously (only applied to `ensure_installed`)
       sync_install = false,
