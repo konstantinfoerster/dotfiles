@@ -22,6 +22,11 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
+    -- add border to overlays
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+    vim.lsp.handlers["textDocument/signatureHelp"] =
+      vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(args)
         local bufnr = args.buf
@@ -41,7 +46,7 @@ return {
         keybind({ "n", "v" }, "<leader>ca", function()
           vim.lsp.buf.code_action({ context = { only = { "quickfix", "refactor", "source" } } })
         end, "[C]ode [A]ctions")
-        keybind("n", "<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+        keybind("n", "<leader>cr", vim.lsp.buf.rename, "[C]code [R]ename")
         keybind("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show buffer [D]iagnostics")
         keybind("n", "<leader>d", vim.diagnostic.open_float, "Show line [D]iagnostics")
         --        keybind("n", "<leader>dh", vim.diagnostic.goto_prev,  "Go to previous diagnostic") replaced by trouble?
@@ -120,6 +125,7 @@ return {
               globals = { "vim" },
             },
             workspace = {
+              checkThirdParty = false,
               -- make language server aware of runtime files
               library = {
                 [vim.fn.expand("$VIMRUNTIME/lua")] = true,
