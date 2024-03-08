@@ -105,6 +105,7 @@ return {
             usePlaceholders = false, -- jump to next placeholder seems broken
             -- experimentalPostfixCompletions = true,
             semanticTokens = true,
+            completeUnimported = true,
             hints = {
               assignVariableTypes = true,
               compositeLiteralFields = true,
