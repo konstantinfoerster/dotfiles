@@ -21,6 +21,8 @@ vim.opt.expandtab = true
 
 -- enable break indent
 vim.opt.breakindent = true
+-- more clever indent
+vim.opt.cindent = true
 
 -- case-insensitive searching UNLESS \C or capital in search
 vim.opt.ignorecase = true

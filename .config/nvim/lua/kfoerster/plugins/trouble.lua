@@ -5,7 +5,7 @@ return {
     require("trouble").setup({ icons = true })
 
     vim.keymap.set("n", "<leader>tt", "<Cmd>TroubleToggle document_diagnostics<CR>", { desc = "Toggle [T]rouble" })
-    vim.keymap.set("n", "<leader>tT", "<Cmd>TroubleToggle workspace_diagnostics<CR>", { desc = "Toggle [T]rouble" })
+    vim.keymap.set("n", "<leader>tw", "<Cmd>TroubleToggle workspace_diagnostics<CR>", { desc = "Toggle [T]rouble" })
     vim.keymap.set("n", "<leader>tq", "<Cmd>TroubleToggle quickfix<CR>", { desc = "Toggle [T]rouble" })
     vim.keymap.set("n", "<leader>tn", function()
       require("trouble").next({ skip_groups = true, jump = true })
