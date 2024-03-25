@@ -5,6 +5,7 @@ return {
     "rcarriga/nvim-dap-ui",
     "jay-babu/mason-nvim-dap.nvim",
     "leoluz/nvim-dap-go",
+    "nvim-neotest/nvim-nio",
   },
   config = function()
     require("mason-nvim-dap").setup({
