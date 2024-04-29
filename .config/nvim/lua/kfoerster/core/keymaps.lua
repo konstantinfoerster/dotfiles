@@ -19,7 +19,7 @@ vim.keymap.set("n", "<C-w>h", ":vertical resize -15<CR>", { desc = "Vertical res
 vim.keymap.set("n", "<C-w>l", ":vertical resize +15<CR>", { desc = "Vertical resize (wider)" })
 
 -- disable space since it's the leader key
-vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true, desc = "Disable space space key" })
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true, desc = "Disable space key" })
 
 -- center buffer
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Page up and center" })

@@ -49,8 +49,8 @@ return {
         keybind("n", "<leader>cr", vim.lsp.buf.rename, "[C]code [R]ename")
         keybind("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show buffer [D]iagnostics")
         keybind("n", "<leader>d", vim.diagnostic.open_float, "Show line [D]iagnostics")
-        --        keybind("n", "<leader>dh", vim.diagnostic.goto_prev,  "Go to previous diagnostic") replaced by trouble?
-        --        keybind("n", "<leader>dl", vim.diagnostic.goto_next, "Go to next diagnostic") replaced by trouble ?
+        keybind("n", "+d", vim.diagnostic.goto_next, "Go to next diagnostic")
+        keybind("n", "üd", vim.diagnostic.goto_prev,  "Go to previous diagnostic")
         keybind("n", "<leader>rr", ":LspRestart<CR>", "[R]estart LSP")
 
         local client = vim.lsp.get_client_by_id(args.data.client_id)
