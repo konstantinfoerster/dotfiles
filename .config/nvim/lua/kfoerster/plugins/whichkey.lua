@@ -9,13 +9,12 @@ return {
     local whichkey = require("which-key")
     whichkey.setup()
 
-    whichkey.register({
-      ["<leader>e"] = { name = "[E]xplorer", _ = "which_key_ignore" },
-      ["<leader>c"] = { name = "[C]code", _ = "which_key_ignore" },
-      ["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
-      ["<leader>t"] = { name = "[T]rouble", _ = "which_key_ignore" },
-      ["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
-      ["<leader>d"] = { name = "[D]iagnostics", _ = "which_key_ignore" },
-    })
+    whichkey.add({
+      { "<leader>e", desc = "[E]xplorer" },
+      { "<leader>c", desc = "[C]code" },
+      { "<leader>g", desc = "[G]it" },
+      { "<leader>t", desc = "[T]rouble" },
+      { "<leader>s", desc = "[S]earch" },
+   })
   end,
 }
