@@ -12,6 +12,7 @@ return {
         "go",
         "gomod",
         "gosum",
+        "groovy",
         "html",
         "java",
         "javascript",

@@ -70,7 +70,7 @@ return {
 
     local lsp_servers = {
       -- ts, js
-      tsserver = {},
+      ts_ls = {},
       -- js
       emmet_ls = {},
       -- vuejs

@@ -67,3 +67,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank({ higroup = "IncSearch", timeout = "250" })
   end,
 })
+
+-- detect Jenkinsfiles
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*.Jenkinsfile" },
+  callback = function()
+    vim.opt_local.filetype = "groovy"
+  end,
+})
