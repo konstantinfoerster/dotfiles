@@ -5,7 +5,6 @@
       - gnome
       - gnome-tweaks
       - gdm
-      - gnome-software-packagekit-plugin
     state: present
 
 - name: Enable gdm

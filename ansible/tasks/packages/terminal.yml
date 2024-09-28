@@ -2,6 +2,7 @@
 - name: Install terminal packages
   community.general.pacman:
     name:
+      - alacritty
       - tmux
       - gvim # vim with +clipboard support
       - the_silver_searcher # vim
@@ -10,6 +11,7 @@
       - ripgrep # nvim telescope
       - fzf # command-line fuzzy finder
       # nvim
+      - neovim
       - fd # telescope alternative to find
       - luacheck # lua linter
     state: present
