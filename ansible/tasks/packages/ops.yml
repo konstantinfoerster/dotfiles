@@ -8,4 +8,8 @@
       - ansible
       - ansible-lint
       - python-passlib
+      # ansible testing
+      - molecule
+      - molecule-plugins
+      - python-docker
     state: present

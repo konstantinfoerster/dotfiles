@@ -12,6 +12,7 @@
       - pwgen
       - traceroute
       - ntp
+      - dosfstools
     state: present
 
 - name: Enable NetworkManager
