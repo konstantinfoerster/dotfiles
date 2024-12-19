@@ -9,7 +9,7 @@ user: tester
 user_password: password
 hostname: test-workstation
 aur_dir: "/home/{{ user }}/apps/aur"
-dotfiles_repo: 'git@github.com:konstantinfoerster/dotfiles.git'
+dotfiles_repo: 'https://github.com/konstantinfoerster/dotfiles.git'
 dotfiles_dir: "/home/{{ user }}/dotfiles"
 dotfiles_branch: "master"
 git_user_name: "Tester"
