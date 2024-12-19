@@ -88,8 +88,7 @@ return {
               shadow = true,
               unusedparams = true,
               unusedwrite = true,
-              useany = true,
-              fieldalignment = true,
+              useany = true
             },
             codelenses = {
               gc_details = false,

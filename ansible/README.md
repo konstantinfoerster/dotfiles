@@ -6,9 +6,7 @@
 * Plugin network cable if not already done
 * Check if efi or bios `ls /sys/firmware/efi*`
   * This project is only for systems with bios
-* Install pip `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py`
-* Install ansible `pip install ansible`
-* Install git `pacman -Syy && pacman -S git`
+* Install git and ansible `pacman -Syy && pacman -S git ansible-core python-passlib`
 * Clone the dotfiles repository `git clone https://github.com/konstantinfoerster/dotfiles.git`
 * Change into the dotfiles ansible dir `cd dotfiles/ansible`
 * Copy `example.config.yml` to `config.yml` and make your system dependent changes
