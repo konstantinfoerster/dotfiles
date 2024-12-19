@@ -20,6 +20,7 @@ return {
         "lua",
         "markdown",
         "markdown_inline",
+        "make",
         "python",
         "toml",
         "typescript",
