@@ -3,6 +3,7 @@
   community.general.pacman:
     name:
       - alacritty
+      - htop
       - tmux
       - gvim # vim with +clipboard support
       - the_silver_searcher # vim
