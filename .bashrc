@@ -6,16 +6,24 @@ if [[ $- != *i* ]]; then
     return
 fi
 
-# Don't put duplicate lines in the history. See bash(1) for more options
-# ... or force ignoredups and ignorespace
+# Ignore duplicate lines in the history and lines starting with space
 HISTCONTROL=ignoredups:ignorespace
+# Max entries in history
+HISTSIZE=5000
+HISTFILESIZE=$HISTSIZE
 
-# Append to the history file, don't overwrite it
-shopt -s histappend
-
-# For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+# sync history on every command (makes history work between multiple sessions)
+history() {
+  _bash_history_sync
+  builtin history "$@"
+}
+_bash_history_sync() {
+  builtin history -a # append entered line
+  HISTFILESIZE=$HISTSIZE # force history file truncation
+  builtin history -c # clear history of current session
+  builtin history -r # read history file into current session
+}
+PROMPT_COMMAND=_bash_history_sync
 
 # Check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS. 
@@ -31,11 +39,10 @@ for filename in "$HOME"/.bashrc.d/*.sh; do
 done
 
 if [ -f ~/.bashrc.d/git-prompt.sh ]; then
-#    source ~/.bashrc.d/git-prompt.sh # already added
+#    source ~/.bashrc.d/git-prompt.sh # already added via script in .bashrc.d
     GIT_PS1_SHOWDIRTYSTATE=1
     GIT_PS1_SHOWCOLORHINTS=1
     GIT_PS1_SHOWUNTRACKEDFILES=1 # can be slow
     GIT_PS1_SHOWSTASHSTATE=1
-    # PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
-    PROMPT_COMMAND='__git_ps1 "\w" "\\\$ "'
+    PROMPT_COMMAND='__git_ps1 "\w" "\\\$ "; _bash_history_sync'
 fi
