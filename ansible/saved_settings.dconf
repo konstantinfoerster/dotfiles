@@ -162,7 +162,7 @@ help=@as []
 
 [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
 binding='<Shift><Alt>Return'
-command='/home/kf/.scripts/tmux-alacritty.sh'
+command='tmux-alacritty.sh'
 name='tmux-session'
 
 [org/gnome/settings-daemon/plugins/power]
