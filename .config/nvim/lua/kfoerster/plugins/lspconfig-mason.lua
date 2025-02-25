@@ -50,7 +50,7 @@ return {
         keybind("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show buffer [D]iagnostics")
         keybind("n", "<leader>d", vim.diagnostic.open_float, "Show line [D]iagnostics")
         keybind("n", "+d", vim.diagnostic.goto_next, "Go to next diagnostic")
-        keybind("n", "üd", vim.diagnostic.goto_prev,  "Go to previous diagnostic")
+        keybind("n", "üd", vim.diagnostic.goto_prev, "Go to previous diagnostic")
         keybind("n", "<leader>rr", ":LspRestart<CR>", "[R]estart LSP")
 
         local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -88,10 +88,9 @@ return {
               shadow = true,
               unusedparams = true,
               unusedwrite = true,
-              useany = true
+              useany = true,
             },
             codelenses = {
-              gc_details = false,
               generate = true,
               regenerate_cgo = true,
               run_govulncheck = true,
@@ -149,6 +148,8 @@ return {
     local ensure_installed = vim.tbl_keys(lsp_servers)
     vim.list_extend(ensure_installed, {
       -- formatter
+      "goimports", -- golang
+      "black", -- python
       "prettier", -- js, ts
       "prettierd", -- js, ts
       "stylua", -- lua
