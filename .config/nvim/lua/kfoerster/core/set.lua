@@ -2,6 +2,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- mapping for german layout + to ] and + to [ (applied only in normal mode)
+vim.opt.langmap = "+]ü["
 -- disable mouse
 vim.opt.mouse = ""
 vim.opt.guicursor = ""
@@ -17,6 +19,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
+-- convert tabs to spaces
 vim.opt.expandtab = true
 
 -- enable break indent
@@ -24,9 +27,9 @@ vim.opt.breakindent = true
 -- more clever indent
 vim.opt.cindent = true
 
--- case-insensitive searching UNLESS \C or capital in search
+-- case-insensitive searching
 vim.opt.ignorecase = true
-vim.opt.smartcase = true
+vim.opt.smartcase = false
 
 vim.opt.wrap = false
 
@@ -58,6 +61,9 @@ vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
 
 vim.opt.colorcolumn = "120"
+
+-- Enable border for floating windows
+vim.o.winborder = "rounded"
 
 -- highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {

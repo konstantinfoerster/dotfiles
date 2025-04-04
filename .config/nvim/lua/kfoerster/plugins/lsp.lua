@@ -1,31 +1,61 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    -- progress indication for lsp init
-    { "j-hui/fidget.nvim", opts = {} },
-    "Issafalcon/lsp-overloads.nvim",
-    "hrsh7th/cmp-nvim-lsp",
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
+    -- progress indication for lsp init
+    { "j-hui/fidget.nvim", opts = {} },
+    {
+      "saghen/blink.cmp",
+      event = "InsertEnter",
+      -- use a release tag to download pre-built binaries
+      version = "1.*",
+      opts = {
+        -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+        -- 'super-tab' for mappings similar to vscode (tab to accept)
+        -- 'enter' for enter to accept
+        -- 'none' for no mappings
+        --
+        -- All presets have the following mappings:
+        -- C-space: Open menu or open docs if already open
+        -- C-n/C-p or Up/Down: Select next/previous item
+        -- C-e: Hide menu
+        -- C-k: Toggle signature help (if signature.enabled = true)
+        --
+        -- See :h blink-cmp-config-keymap for defining your own keymap
+        keymap = {
+          preset = "enter",
+
+          ["<C-k>"] = { "select_prev", "fallback" },
+          ["<C-j>"] = { "select_next", "fallback" },
+        },
+        appearance = {
+          nerd_font_variant = "mono",
+        },
+        completion = {
+          documentation = { auto_show = true },
+        },
+        signature = { enabled = true },
+        sources = {
+          default = { "lsp", "path", "buffer" },
+        },
+        fuzzy = { implementation = "prefer_rust_with_warning" },
+      },
+      opts_extend = { "sources.default" },
+    },
   },
   config = function()
-    vim.diagnostic.config({ virtual_text = true, severity_sort = true })
-    local signs = {
-      Error = " ",
-      Warn = " ",
-      Hint = "󰠠 ",
-      Info = " ",
-    }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end
-
-    -- add border to overlays
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-    vim.lsp.handlers["textDocument/signatureHelp"] =
-      vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+    vim.diagnostic.config({
+      virtual_text = true,
+      underline = { severity = vim.diagnostic.severity.ERROR },
+      float = {
+        severity_sort = true,
+        focusable = false,
+        source = true,
+        header = "",
+      },
+    })
 
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(args)
@@ -41,22 +71,13 @@ return {
         keybind("n", "gd", "<cmd>Telescope lsp_definitions<CR>", "[G]oto [D]efinitions")
         keybind("n", "gi", "<cmd>Telescope lsp_implementations<CR>", "[G]oto [I]mplementations")
         keybind("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", "[G]oto [T]ype definitions")
-        keybind("n", "<C-k>", vim.lsp.buf.signature_help, "Show signature for currently completing func")
+        -- keybind("n", "<C-k>", vim.lsp.buf.signature_help, "Show signature for currently completing func")
         keybind("n", "K", vim.lsp.buf.hover, "Show documentation about the word under cursor")
-        keybind({ "n", "v" }, "<leader>ca", function()
-          vim.lsp.buf.code_action({ context = { only = { "quickfix", "refactor", "source" } } })
-        end, "[C]ode [A]ctions")
+        keybind({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ctions")
         keybind("n", "<leader>cr", vim.lsp.buf.rename, "[C]code [R]ename")
         keybind("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show buffer [D]iagnostics")
         keybind("n", "<leader>d", vim.diagnostic.open_float, "Show line [D]iagnostics")
-        keybind("n", "+d", vim.diagnostic.goto_next, "Go to next diagnostic")
-        keybind("n", "üd", vim.diagnostic.goto_prev, "Go to previous diagnostic")
         keybind("n", "<leader>rr", ":LspRestart<CR>", "[R]estart LSP")
-
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if client.server_capabilities.signatureHelpProvider then
-          require("lsp-overloads").setup(client, {})
-        end
       end,
     })
 
@@ -68,6 +89,7 @@ return {
       end,
     })
 
+    local capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
     local lsp_servers = {
       -- ts, js
       ts_ls = {},
@@ -165,20 +187,19 @@ return {
     require("mason-tool-installer").setup({
       ensure_installed = ensure_installed,
       auto_update = false,
-      run_on_start = true,
     })
 
-    require("mason-lspconfig").setup({})
-
-    -- configure lsp server
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-    local lspconfig = require("lspconfig")
-    for k, server in pairs(lsp_servers) do
-      lspconfig[k].setup({
-        settings = server.settings,
-        capabilities = capabilities,
-      })
-    end
+    require("mason-lspconfig").setup({
+      ensure_installed = {},
+      automatic_installation = false,
+      handlers = {
+        function(server_name)
+          local server = lsp_servers[server_name] or {}
+          -- merge lsp_server capabilities overwrites with default capabilities
+          server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+          require("lspconfig")[server_name].setup(server)
+        end,
+      },
+    })
   end,
 }

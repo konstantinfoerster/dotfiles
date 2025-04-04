@@ -13,10 +13,6 @@ return {
         theme = "auto",
       },
       sections = {
-        lualine_a = {
-          -- show buffers instead of mode
-          { "buffers" },
-        },
         lualine_x = {
           {
             -- show lazy updates in lualine
