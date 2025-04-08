@@ -1,26 +1,32 @@
 return {
   {
-    "ellisonleao/gruvbox.nvim",
-    priority = 1000, -- ensure to load this before all other plugins
-    name = "gruvbox",
+    "rose-pine/neovim",
+    name = "rose-pine",
+    lazy = false,
+    priority = 1000,
     config = function()
-      require("gruvbox").setup({
-        italic = {
-          strings = false,
-          emphasis = false,
-          comments = true,
-          operators = false,
-          folds = false,
+      require("rose-pine").setup({
+        extend_background_behind_borders = false,
+        styles = {
+          italic = false,
+          transparency = false,
         },
-        overrides = {
-          DiffAdd = { bg = "#525742" },
-          DiffChange = { bg = "#3e4934" },
-          DiffText = { bg = "#fabd2f" },
+        dim_inactive_windows = false,
+        palette = {
+          -- Override the builtin palette per variant
+          moon = {
+            base = "#232326",
+            surface = "#232326",
+          },
         },
-        contrast = "", -- can be "hard", "soft" or empty string
+        highlight_groups = {
+          DiffAdd = { bg = "foam", blend = 10 },
+          DiffChange = { bg = "rose", blend = 10 },
+          DiffDelete = { bg = "love", blend = 10 },
+          DiffText = { bg = "rose", blend = 30 },
+        },
       })
-      vim.o.background = "dark"
-      vim.cmd("colorscheme gruvbox")
+      vim.cmd("colorscheme rose-pine-moon")
     end,
   },
 }

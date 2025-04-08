@@ -71,7 +71,7 @@ return {
         keybind("n", "gd", "<cmd>Telescope lsp_definitions<CR>", "[G]oto [D]efinitions")
         keybind("n", "gi", "<cmd>Telescope lsp_implementations<CR>", "[G]oto [I]mplementations")
         keybind("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", "[G]oto [T]ype definitions")
-        -- keybind("n", "<C-k>", vim.lsp.buf.signature_help, "Show signature for currently completing func")
+        keybind("n", "<C-k>", vim.lsp.buf.signature_help, "Show signature for currently completing func")
         keybind("n", "K", vim.lsp.buf.hover, "Show documentation about the word under cursor")
         keybind({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ctions")
         keybind("n", "<leader>cr", vim.lsp.buf.rename, "[C]code [R]ename")
@@ -91,6 +91,8 @@ return {
 
     local capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
     local lsp_servers = {
+      -- css
+      cssls = {},
       -- ts, js
       ts_ls = {},
       -- js
