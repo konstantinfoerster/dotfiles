@@ -7,10 +7,6 @@ vim.keymap.set("n", "q", "<nop>", { desc = "Disable recording" })
 -- fast buffer change
 vim.keymap.set("n", "<leader><leader>", "<c-^>", { desc = "Switch to last buffer" })
 
--- diff jumps for german layouts
-vim.keymap.set("n", "+c", "]c", { desc = "Next diff hunk" })
-vim.keymap.set("n", "üc", "[c", { desc = "Previous diff hunk" })
-
 -- tabs
 vim.keymap.set("n", "<leader>qq", ":tabclose<CR>", { desc = "Close tab" })
 

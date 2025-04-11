@@ -2,8 +2,10 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- mapping for german layout + to ] and + to [ (applied only in normal mode)
-vim.opt.langmap = "+]ü["
+-- mapping for german layout + to ] (applied only in normal mode)
+-- sadly umlauts are not supported e.g. ü[ wont' work
+vim.opt.langmap = "+]"
+
 -- disable mouse
 vim.opt.mouse = ""
 vim.opt.guicursor = ""

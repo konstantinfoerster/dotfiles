@@ -49,6 +49,9 @@ return {
     vim.diagnostic.config({
       virtual_text = true,
       underline = { severity = vim.diagnostic.severity.ERROR },
+      jump = {
+        float = true,
+      },
       float = {
         severity_sort = true,
         focusable = false,
@@ -63,6 +66,20 @@ return {
         local keybind = function(mode, key, cmd, desc)
           local opts = { noremap = true, silent = true, buffer = bufnr, desc = desc }
           vim.keymap.set(mode, key, cmd, opts)
+        end
+
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client.name == "gopls" and not client.server_capabilities.semanticTokensProvider then
+          -- workaround for https://github.com/golang/go/issues/54531
+          local semantic = client.config.capabilities.textDocument.semanticTokens
+          client.server_capabilities.semanticTokensProvider = {
+            full = true,
+            legend = {
+              tokenTypes = semantic.tokenTypes,
+              tokenModifiers = semantic.tokenModifiers,
+            },
+            range = true,
+          }
         end
 
         -- set keybindings
