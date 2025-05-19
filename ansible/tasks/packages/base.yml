@@ -13,6 +13,7 @@
       - traceroute
       - ntp
       - dosfstools
+      - man-pages
     state: present
 
 - name: Enable NetworkManager

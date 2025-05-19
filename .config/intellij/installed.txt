@@ -1,9 +1,0 @@
-com.intellij.kubernetes
-com.intellij.plugins.webcomponents
-com.jetbrains.plugins.ini4idea
-intellij.prettierJS
-name.kropp.intellij.makefile
-org.jetbrains.kotlin
-org.jetbrains.plugins.go
-org.jetbrains.plugins.vagrant
-org.jetbrains.plugins.vue

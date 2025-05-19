@@ -1,8 +1,7 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     -- progress indication for lsp init
     { "j-hui/fidget.nvim", opts = {} },
@@ -40,6 +39,10 @@ return {
         },
         completion = {
           documentation = { auto_show = true },
+          trigger = {
+            -- do not show compeltion menu when entering insert mode
+            show_on_insert_on_trigger_character = false,
+          },
           menu = {
             draw = {
               columns = {
@@ -101,20 +104,6 @@ return {
           vim.keymap.set(mode, key, cmd, opts)
         end
 
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if client.name == "gopls" and not client.server_capabilities.semanticTokensProvider then
-          -- workaround for https://github.com/golang/go/issues/54531
-          local semantic = client.config.capabilities.textDocument.semanticTokens
-          client.server_capabilities.semanticTokensProvider = {
-            full = true,
-            legend = {
-              tokenTypes = semantic.tokenTypes,
-              tokenModifiers = semantic.tokenModifiers,
-            },
-            range = true,
-          }
-        end
-
         -- set keybindings
         keybind("n", "gr", "<cmd>Telescope lsp_references<CR>", "[G]oto [R]eferences")
         keybind("n", "gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
@@ -131,7 +120,7 @@ return {
       end,
     })
 
-    -- detect go templates
+    -- set filetype for go templates
     vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
       pattern = { "*.gohtml" },
       callback = function()
@@ -139,88 +128,7 @@ return {
       end,
     })
 
-    local capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
-    local lsp_servers = {
-      -- css
-      cssls = {},
-      -- ts, js
-      ts_ls = {},
-      -- js
-      emmet_ls = {},
-      -- vuejs
-      vuels = {},
-      html = {},
-      -- pyhon
-      pyright = {},
-      -- golang
-      gopls = {
-        settings = {
-          gopls = {
-            templateExtensions = { "gohtml", "gotmpl", "tmpl" },
-            analyses = {
-              nilness = true,
-              shadow = true,
-              unusedparams = true,
-              unusedwrite = true,
-              useany = true,
-            },
-            codelenses = {
-              generate = true,
-              regenerate_cgo = true,
-              run_govulncheck = true,
-              test = true,
-              tidy = true,
-              upgrade_dependency = false,
-              vendor = true,
-            },
-            staticcheck = true,
-            usePlaceholders = false, -- jump to next placeholder seems broken
-            -- experimentalPostfixCompletions = true,
-            semanticTokens = true,
-            completeUnimported = true,
-            hints = {
-              assignVariableTypes = true,
-              compositeLiteralFields = true,
-              compositeLiteralTypes = true,
-              constantValues = true,
-              functionTypeParameters = true,
-              parameterNames = true,
-              rangeVariableTypes = true,
-            },
-          },
-        },
-      },
-      lua_ls = {
-        settings = {
-          Lua = {
-            runtime = {
-              version = "LuaJIT",
-            },
-            workspace = {
-              checkThirdParty = false,
-              library = {
-                "${3rd}/luv/library",
-                unpack(vim.api.nvim_get_runtime_file("", true)),
-              },
-            },
-          },
-        },
-      },
-      yamlls = {},
-    }
-
-    require("mason").setup({
-      ui = {
-        icons = {
-          package_installed = "✓",
-          package_pending = "➜",
-          package_uninstalled = "✗",
-        },
-      },
-    })
-
-    local ensure_installed = vim.tbl_keys(lsp_servers)
-    vim.list_extend(ensure_installed, {
+    local mason_packages = {
       -- formatter
       "goimports", -- golang
       "black", -- python
@@ -234,24 +142,119 @@ return {
       "golangci-lint", -- golang
       "yamllint", -- yaml
       "shellcheck", -- shell
+    }
+
+    local capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+    vim.lsp.config("*", {
+      capabilities = capabilities,
+    })
+    -- frontend stuff
+    vim.lsp.enable("cssls")
+    table.insert(mason_packages, "css-lsp")
+    vim.lsp.enable("ts_ls")
+    vim.lsp.config("ts_ls", {
+      init_options = {
+        plugins = {
+          {
+            name = "@vue/typescript-plugin",
+            location = vim.fn.expand("$MASON/packages/vue-language-server/node_modules/@vue/language-server"),
+            languages = { "javascript", "typescript", "vue" },
+          },
+        },
+      },
+      filetypes = {
+        "javascript",
+        "typescript",
+        "vue",
+      },
+    })
+    table.insert(mason_packages, "typescript-language-server")
+    vim.lsp.enable("volar")
+    table.insert(mason_packages, "vue-language-server")
+
+    -- backend stuff
+    vim.lsp.enable("gopls")
+    vim.lsp.config("gopls", {
+      settings = {
+        gopls = {
+          templateExtensions = { "gohtml", "gotmpl", "tmpl" },
+          analyses = {
+            nilness = true,
+            shadow = true,
+            unusedparams = true,
+            unusedwrite = true,
+            useany = true,
+          },
+          codelenses = {
+            generate = true,
+            regenerate_cgo = true,
+            run_govulncheck = true,
+            test = true,
+            tidy = true,
+            upgrade_dependency = false,
+            vendor = true,
+          },
+          staticcheck = true,
+          usePlaceholders = false, -- jump to next placeholder seems broken
+          -- experimentalPostfixCompletions = true,
+          semanticTokens = true,
+          completeUnimported = true,
+          hints = {
+            assignVariableTypes = true,
+            compositeLiteralFields = true,
+            compositeLiteralTypes = true,
+            constantValues = true,
+            functionTypeParameters = true,
+            parameterNames = true,
+            rangeVariableTypes = true,
+          },
+        },
+      },
+    })
+    table.insert(mason_packages, "gopls")
+    vim.lsp.enable("lua_ls")
+    vim.lsp.config("lua_ls", {
+      settings = {
+        Lua = {
+          runtime = {
+            version = "LuaJIT",
+          },
+          diagnostics = {
+            -- Get the language server to recognize the `vim` global
+            globals = {
+              "vim",
+              "require",
+            },
+          },
+          workspace = {
+            checkThirdParty = false,
+            library = {
+              "${3rd}/luv/library",
+              unpack(vim.api.nvim_get_runtime_file("", true)),
+            },
+          },
+        },
+      },
+    })
+    table.insert(mason_packages, "lua-language-server")
+
+    -- other stuff
+    vim.lsp.enable("yamlls")
+    table.insert(mason_packages, "yaml-language-server")
+
+    require("mason").setup({
+      ui = {
+        icons = {
+          package_installed = "✓",
+          package_pending = "➜",
+          package_uninstalled = "✗",
+        },
+      },
     })
 
     require("mason-tool-installer").setup({
-      ensure_installed = ensure_installed,
+      ensure_installed = mason_packages,
       auto_update = false,
-    })
-
-    require("mason-lspconfig").setup({
-      ensure_installed = {},
-      automatic_installation = false,
-      handlers = {
-        function(server_name)
-          local server = lsp_servers[server_name] or {}
-          -- merge lsp_server capabilities overwrites with default capabilities
-          server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-          require("lspconfig")[server_name].setup(server)
-        end,
-      },
     })
   end,
 }
