@@ -40,7 +40,7 @@ return {
         completion = {
           documentation = { auto_show = true },
           trigger = {
-            -- do not show compeltion menu when entering insert mode
+            -- do not show completion menu when entering insert mode
             show_on_insert_on_trigger_character = false,
           },
           menu = {
@@ -120,14 +120,6 @@ return {
       end,
     })
 
-    -- set filetype for go templates
-    vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-      pattern = { "*.gohtml" },
-      callback = function()
-        vim.opt_local.filetype = "gotmpl"
-      end,
-    })
-
     local mason_packages = {
       -- formatter
       "goimports", -- golang
@@ -169,10 +161,18 @@ return {
       },
     })
     table.insert(mason_packages, "typescript-language-server")
-    vim.lsp.enable("volar")
+    vim.lsp.enable("vue_ls")
     table.insert(mason_packages, "vue-language-server")
 
     -- backend stuff
+    -- add filetypes for go templates
+    vim.filetype.add({
+      extension = {
+        gotmpl = "gotmpl",
+        gohtml = "gotmpl",
+      },
+    })
+
     vim.lsp.enable("gopls")
     vim.lsp.config("gopls", {
       settings = {

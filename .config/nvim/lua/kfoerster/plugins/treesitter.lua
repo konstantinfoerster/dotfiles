@@ -12,6 +12,7 @@ return {
         "go",
         "gomod",
         "gosum",
+        "gotmpl",
         "groovy",
         "html",
         "java",
