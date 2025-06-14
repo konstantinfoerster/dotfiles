@@ -7,4 +7,8 @@
       - meld
       - transmission-gtk
       - transmission-cli
+      - cdrkit # includes genisoimage
+      - syslinux # includes isohybrid
+      - libisoburn # includes xorriso
+      - libfido2 # yubikey
     state: present
