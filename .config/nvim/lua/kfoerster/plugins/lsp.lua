@@ -114,8 +114,8 @@ return {
         keybind("n", "K", vim.lsp.buf.hover, "Show documentation about the word under cursor")
         keybind({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ctions")
         keybind("n", "<leader>cr", vim.lsp.buf.rename, "[C]code [R]ename")
-        keybind("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show buffer [D]iagnostics")
-        keybind("n", "<leader>d", vim.diagnostic.open_float, "Show line [D]iagnostics")
+        keybind("n", "<leader>tD", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show buffer [D]iagnostics")
+        keybind("n", "<leader>td", vim.diagnostic.open_float, "Show line [D]iagnostics")
         keybind("n", "<leader>rr", ":LspRestart<CR>", "[R]estart LSP")
       end,
     })
