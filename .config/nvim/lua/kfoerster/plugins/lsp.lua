@@ -143,24 +143,79 @@ return {
     -- frontend stuff
     vim.lsp.enable("cssls")
     table.insert(mason_packages, "css-lsp")
-    vim.lsp.enable("ts_ls")
-    vim.lsp.config("ts_ls", {
-      init_options = {
-        plugins = {
-          {
-            name = "@vue/typescript-plugin",
-            location = vim.fn.expand("$MASON/packages/vue-language-server/node_modules/@vue/language-server"),
-            languages = { "javascript", "typescript", "vue" },
+    -- typescript + vue3
+    vim.lsp.config("vtsls", {
+      before_init = function(_, config)
+        local vuePluginConfig = {
+          name = "@vue/typescript-plugin",
+          location = vim.fn.expand("$MASON/packages/vue-language-server/node_modules/@vue/language-server"),
+          languages = { "vue" },
+          configNamespace = "typescript",
+          enableForWorkspaceTypeScriptVersions = true,
+        }
+        table.insert(config.settings.vtsls.tsserver.globalPlugins, vuePluginConfig)
+      end,
+      filetypes = {
+        "javascript",
+        "javascriptreact",
+        "javascript.jsx",
+        "typescript",
+        "typescriptreact",
+        "typescript.tsx",
+        "vue",
+      },
+      settings = {
+        complete_function_calls = true,
+        vtsls = {
+          tsserver = {
+            globalPlugins = {},
+          },
+          enableMoveToFileCodeAction = true,
+          autoUseWorkspaceTsdk = true,
+          experimental = {
+            completion = {
+              enableServerSideFuzzyMatch = true,
+            },
+          },
+        },
+        typescript = {
+          updateImportsOnFileMove = { enabled = "always" },
+          suggest = {
+            completeFunctionCalls = true,
           },
         },
       },
-      filetypes = {
-        "javascript",
-        "typescript",
-        "vue",
-      },
     })
-    table.insert(mason_packages, "typescript-language-server")
+    vim.lsp.enable("vtsls")
+    table.insert(mason_packages, "vtsls")
+    vim.lsp.config("vue_ls", {
+      -- check https://github.com/vuejs/language-tools/wiki/Neovim
+      on_init = function(client)
+        client.handlers["tsserver/request"] = function(_, result, context)
+          local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
+          if #clients == 0 then
+            vim.notify("Could not found `vtsls` lsp client, vue_lsp would not work without it.", vim.log.levels.ERROR)
+            return
+          end
+          local ts_client = clients[1]
+
+          local param = unpack(result)
+          local id, command, payload = unpack(param)
+          ts_client:exec_cmd({
+            title = "vue_request_forward", -- You can give title anything as it's used to represent a command in the UI, `:h Client:exec_cmd`
+            command = "typescript.tsserverRequest",
+            arguments = {
+              command,
+              payload,
+            },
+          }, { bufnr = context.bufnr }, function(_, r)
+            local response_data = { { id, r.body } }
+            ---@diagnostic disable-next-line: param-type-mismatch
+            client:notify("tsserver/response", response_data)
+          end)
+        end
+      end,
+    })
     vim.lsp.enable("vue_ls")
     table.insert(mason_packages, "vue-language-server")
 
@@ -173,7 +228,6 @@ return {
       },
     })
 
-    vim.lsp.enable("gopls")
     vim.lsp.config("gopls", {
       settings = {
         gopls = {
@@ -184,6 +238,7 @@ return {
             unusedparams = true,
             unusedwrite = true,
             useany = true,
+            ST1000 = false, -- missing package comments
           },
           codelenses = {
             generate = true,
@@ -211,8 +266,8 @@ return {
         },
       },
     })
+    vim.lsp.enable("gopls")
     table.insert(mason_packages, "gopls")
-    vim.lsp.enable("lua_ls")
     vim.lsp.config("lua_ls", {
       settings = {
         Lua = {
@@ -236,6 +291,7 @@ return {
         },
       },
     })
+    vim.lsp.enable("lua_ls")
     table.insert(mason_packages, "lua-language-server")
 
     -- other stuff
