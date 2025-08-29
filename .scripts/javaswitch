@@ -1,5 +1,8 @@
 #!/bin/sh
-if [ "17" = "$1" ]; then
+if [ "21" = "$1" ]; then
+    echo "Switch to java 21"
+    sudo archlinux-java set java-21-openjdk
+elif [ "17" = "$1" ]; then
     echo "Switch to java 17"
     sudo archlinux-java set java-17-openjdk
 elif [ "11" = "$1" ]; then
