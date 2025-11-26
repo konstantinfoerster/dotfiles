@@ -31,6 +31,10 @@ if [ -e /usr/bin/chromium ]; then
     export CHROME_BIN=/usr/bin/chromium
 fi
 
+if [ -e /usr/lib/seahorse/ssh-askpass ]; then
+    export SSH_ASKPASS=/usr/lib/seahorse/ssh-askpass
+fi
+
 #export TERM='xterm-256color'
 
 stty -ixon

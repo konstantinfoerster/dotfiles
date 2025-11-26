@@ -12,4 +12,5 @@
       - molecule
       - molecule-plugins
       - python-docker
+      - sops
     state: present

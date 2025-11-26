@@ -3,6 +3,7 @@
   community.general.pacman:
     name:
       - ntfs-3g
+      - exfatprogs
       - mesa
       - mesa-libgl
       - mesa-vdpau
