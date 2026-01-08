@@ -5,6 +5,8 @@
       - gnome
       - gnome-tweaks
       - gdm
+      - gnome-firmware
+      - dmidecode
     state: present
 
 - name: Enable gdm

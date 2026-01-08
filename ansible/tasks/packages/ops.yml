@@ -12,5 +12,9 @@
       - molecule
       - molecule-plugins
       - python-docker
+      # k8s
       - sops
+      - kubectl
+      - kubectx
+      - kustomize
     state: present

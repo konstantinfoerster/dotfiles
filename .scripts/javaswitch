@@ -1,5 +1,8 @@
 #!/bin/sh
-if [ "21" = "$1" ]; then
+if [ "25" = "$1" ]; then
+    echo "Switch to java 25"
+    sudo archlinux-java set java-25-openjdk
+elif [ "21" = "$1" ]; then
     echo "Switch to java 21"
     sudo archlinux-java set java-21-openjdk
 elif [ "17" = "$1" ]; then
@@ -9,8 +12,8 @@ elif [ "11" = "$1" ]; then
     echo "Switch to java 11"
     sudo archlinux-java set java-11-openjdk
 else
-    echo "Version $1 not found or no version provided. Fallback to java 8"
-    sudo archlinux-java set java-8-openjdk
+    echo "Version $1 not found or no version provided. Fallback to java 25"
+    sudo archlinux-java set java-25-openjdk
 fi
 
 RESULT=$?
@@ -20,4 +23,4 @@ else
     echo "Switch failed. Exit code $CODE"
 fi
 
-exit $CODE
+exit "$CODE"

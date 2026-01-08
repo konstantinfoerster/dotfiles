@@ -2,16 +2,8 @@
 - name: Install development packages
   community.general.pacman:
     name:
-      - jdk8-openjdk
-      - openjdk8-doc
-      - openjdk8-src
-      - jdk11-openjdk
-      - openjdk11-doc
-      - openjdk11-src
-      - jdk17-openjdk
-      - openjdk17-doc
-      - openjdk17-src
+      - jdk25-openjdk
+      - openjdk25-doc
+      - openjdk25-src
       - go
-      - kubectl
-      - kubectx
     state: present
