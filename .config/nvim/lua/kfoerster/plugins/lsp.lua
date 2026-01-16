@@ -6,7 +6,6 @@ return {
     -- progress indication for lsp init
     { "j-hui/fidget.nvim", opts = {} },
     "nvim-tree/nvim-web-devicons",
-    "onsails/lspkind-nvim",
     {
       "saghen/blink.cmp",
       event = "InsertEnter",
@@ -36,9 +35,39 @@ return {
         },
         appearance = {
           nerd_font_variant = "mono",
+          kind_icons = {
+            -- codicons from lspkind
+            Text = "󰉿",
+            Method = "󰆧",
+            Function = "󰊕",
+            Constructor = "",
+            Field = "󰜢",
+            Variable = "󰀫",
+            Class = "󰠱",
+            Interface = "",
+            Module = "",
+            Property = "󰜢",
+            Unit = "󰑭",
+            Value = "󰎠",
+            Enum = "",
+            Keyword = "󰌋",
+            Snippet = "",
+            Color = "󰏘",
+            File = "󰈙",
+            Reference = "󰈇",
+            Folder = "󰉋",
+            EnumMember = "",
+            Constant = "󰏿",
+            Struct = "󰙅",
+            Event = "",
+            Operator = "󰆕",
+            TypeParameter = "",
+          },
         },
         completion = {
-          documentation = { auto_show = true },
+          documentation = {
+            auto_show = true,
+          },
           trigger = {
             -- do not show completion menu when entering insert mode
             show_on_insert_on_trigger_character = false,
@@ -59,10 +88,6 @@ return {
                       if dev_icon then
                         icon = dev_icon
                       end
-                    else
-                      icon = require("lspkind").symbolic(ctx.kind, {
-                        mode = "symbol",
-                      })
                     end
 
                     return icon .. ctx.icon_gap
