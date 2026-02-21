@@ -13,6 +13,8 @@
       - molecule-plugins
       - python-docker
       # k8s
+      - age
+      - age-plugin-yubikey
       - sops
       - kubectl
       - kubectx

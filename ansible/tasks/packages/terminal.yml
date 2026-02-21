@@ -15,4 +15,7 @@
       - neovim
       - fd # telescope alternative to find
       - luacheck # lua linter
+      # password manager
+      - pass
+      - wl-clipboard
     state: present
