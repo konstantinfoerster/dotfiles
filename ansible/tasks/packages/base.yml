@@ -4,6 +4,7 @@
     name:
       - networkmanager
       - base-devel
+      - base
       - bash-completion
       - openssh
       - gnupg
