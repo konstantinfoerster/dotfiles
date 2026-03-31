@@ -28,6 +28,7 @@
 
     - name: Configure grub
       ansible.builtin.import_tasks: tasks/grub.yml
+      when: use_grub
 
     - name: Set root password and add user
       ansible.builtin.import_tasks: tasks/user.yml

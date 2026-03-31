@@ -14,3 +14,4 @@ dotfiles_dir: "/home/{{ user }}/dotfiles"
 dotfiles_branch: "master"
 git_user_name: "Tester"
 git_user_email: "tester@mailinator.com"
+use_grub: true
