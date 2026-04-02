@@ -1,12 +1,4 @@
 ---
-- name: Check out dotfiles from personal repository
-  ansible.builtin.git:
-    repo: "{{ dotfiles_repo }}"
-    dest: "{{ dotfiles_dir }}"
-    force: false
-    recursive: true
-    version: "{{ dotfiles_branch }}"
-
 - name: Remove existing .bash_profile since we use .profile
   ansible.builtin.file:
     path: "/home/{{ user }}/.bash_profile"

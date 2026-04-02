@@ -3,14 +3,11 @@
   community.general.pacman:
     name:
       - virtualbox-host-modules-arch
-      - vagrant
-      - python-vagrant
       - ansible
       - ansible-lint
       - python-passlib
       # ansible testing
       - molecule
-      - molecule-plugins
       - python-docker
       # k8s
       - age

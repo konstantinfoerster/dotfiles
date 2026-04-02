@@ -12,7 +12,6 @@
       - man-db
       - pwgen
       - traceroute
-      - ntp
       - dosfstools
       - man-pages
     state: present
@@ -29,8 +28,8 @@
     enabled: true
     state: started
 
-- name: Enable ntp daemon
+- name: Enable systemd-timesyncd daemon
   ansible.builtin.systemd:
-    name: ntpd
+    name: systemd-timesyncd
     enabled: true
     state: started
