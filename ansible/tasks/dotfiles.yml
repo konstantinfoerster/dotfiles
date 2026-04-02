@@ -15,8 +15,6 @@
     - .scripts
     - .tmux.conf
     - .vimrc
-    - .config/Code/User/settings.json
-    - .config/base16-shell
     - .config/alacritty
     - .config/nvim
     - .gnupg/gpg.conf
