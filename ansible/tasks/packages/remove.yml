@@ -1,0 +1,11 @@
+---
+- name: Remove unused packages
+  community.general.pacman:
+    name:
+      - gnome-software
+      - gnome-user-docs
+      - yelp
+      - ntp
+      - xorg-server
+    remove_nosave: true
+    state: absent

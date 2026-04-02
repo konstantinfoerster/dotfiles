@@ -27,9 +27,3 @@
     name: sshd
     enabled: true
     state: started
-
-- name: Enable systemd-timesyncd daemon
-  ansible.builtin.systemd:
-    name: systemd-timesyncd
-    enabled: true
-    state: started

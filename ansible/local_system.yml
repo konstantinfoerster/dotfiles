@@ -61,6 +61,9 @@
           ansible.builtin.import_tasks: tasks/packages/yubikey.yml
         - name: Install other packages
           ansible.builtin.import_tasks: tasks/packages/misc.yml
+        - name: Remove unused packages
+          ansible.builtin.import_tasks: tasks/packages/remove.yml
+
     - name: Apply user specific setting
       become_user: "{{ user }}"
       become: true
