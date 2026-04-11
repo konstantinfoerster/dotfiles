@@ -42,6 +42,7 @@
     - '^(MUSIC=.*)'
     - '^(PICTURES=.*)'
     - '^(VIDEOS=.*)'
+    - '^(PROJECTS=.*)'
   become: true
   become_user: root
 
