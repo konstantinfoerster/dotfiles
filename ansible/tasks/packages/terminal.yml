@@ -11,6 +11,7 @@
       - mediainfo # technical and tag information about a video or audio file
       - ripgrep # nvim telescope
       - fzf # command-line fuzzy finder
+      - tree-sitter-cli
       # nvim
       - neovim
       - fd # telescope alternative to find
