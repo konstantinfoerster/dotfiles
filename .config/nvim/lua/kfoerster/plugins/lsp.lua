@@ -130,16 +130,16 @@ return {
         end
 
         -- set keybindings
-        keybind("n", "gr", "<cmd>Telescope lsp_references<CR>", "[G]oto [R]eferences")
+        keybind("n", "gr", "<cmd>FzfLua lsp_references<CR>", "[G]oto [R]eferences")
         keybind("n", "gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-        keybind("n", "gd", "<cmd>Telescope lsp_definitions<CR>", "[G]oto [D]efinitions")
-        keybind("n", "gi", "<cmd>Telescope lsp_implementations<CR>", "[G]oto [I]mplementations")
-        keybind("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", "[G]oto [T]ype definitions")
+        keybind("n", "gd", "<cmd>FzfLua lsp_definitions<CR>", "[G]oto [D]efinitions")
+        keybind("n", "gi", "<cmd>FzfLua lsp_implementations<CR>", "[G]oto [I]mplementations")
+        keybind("n", "gt", "<cmd>FzfLua lsp_typedefs<CR>", "[G]oto [T]ype definitions")
         keybind("n", "<C-k>", vim.lsp.buf.signature_help, "Show signature for currently completing func")
         keybind("n", "K", vim.lsp.buf.hover, "Show documentation about the word under cursor")
         keybind({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ctions")
         keybind("n", "<leader>cr", vim.lsp.buf.rename, "[C]code [R]ename")
-        keybind("n", "<leader>tD", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show buffer [D]iagnostics")
+        keybind("n", "<leader>tD", "<cmd>FzfLua lsp_document_diagnostics<CR>", "Show document [D]iagnostics")
         keybind("n", "<leader>td", vim.diagnostic.open_float, "Show line [D]iagnostics")
         keybind("n", "<leader>rr", ":LspRestart<CR>", "[R]estart LSP")
       end,
