@@ -23,4 +23,4 @@ else
     echo "Switch failed. Exit code $CODE"
 fi
 
-exit "$CODE"
+exit "$RESULT"

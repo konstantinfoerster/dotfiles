@@ -48,6 +48,6 @@ return {
       "<Cmd>:Telescope file_browser<CR>",
       { desc = "Open [F]ile [E]xplorer", noremap = true }
     )
-    vim.keymap.set("n", "<leader>gf", builtin.git_files, { desc = "Search [G]it [F]iles" })
+    vim.keymap.set("n", "<leader>sg", builtin.git_files, { desc = "[S]earch [G]it files" })
   end,
 }
