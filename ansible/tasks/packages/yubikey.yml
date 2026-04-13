@@ -1,0 +1,14 @@
+---
+- name: Install misc packages
+  community.general.pacman:
+    name:
+      - libfido2
+      - pcsclite
+      - pcsc-tools
+      - yubikey-manager
+    state: present
+
+- name: Enable pcsd service
+  ansible.builtin.systemd:
+    name: pcscd
+    enabled: true

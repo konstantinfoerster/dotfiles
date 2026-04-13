@@ -7,4 +7,5 @@
       - ttf-hack
       - ttf-hack-nerd # patched fonts for nvim-web-devicons
       - powerline-fonts
+      - ttf-liberation # required by chrome
     state: present

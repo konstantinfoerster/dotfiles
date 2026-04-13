@@ -28,6 +28,7 @@
 
     - name: Configure grub
       ansible.builtin.import_tasks: tasks/grub.yml
+      when: use_grub
 
     - name: Set root password and add user
       ansible.builtin.import_tasks: tasks/user.yml
@@ -56,8 +57,13 @@
           ansible.builtin.import_tasks: tasks/packages/dev.yml
         - name: Install docker
           ansible.builtin.import_tasks: tasks/packages/docker.yml
+        - name: Install yubikey
+          ansible.builtin.import_tasks: tasks/packages/yubikey.yml
         - name: Install other packages
           ansible.builtin.import_tasks: tasks/packages/misc.yml
+        - name: Remove unused packages
+          ansible.builtin.import_tasks: tasks/packages/remove.yml
+
     - name: Apply user specific setting
       become_user: "{{ user }}"
       become: true

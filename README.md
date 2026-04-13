@@ -10,6 +10,8 @@ Vim / Terminal Theme: base16-atelier-dune
 cd ~
 git clone https://github.com/konstantinfoerster/dotfiles.git
 cd dotfiles
+
+# next commands are only required if the gnome-terminal will be used
 git submodule init
 git submodule update
 ```

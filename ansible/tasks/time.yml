@@ -11,3 +11,8 @@
 - name: Sync system with hardware time
   ansible.builtin.command: hwclock --systohc
   changed_when: false
+
+- name: Enable systemd-timesyncd daemon
+  ansible.builtin.systemd:
+    name: systemd-timesyncd
+    enabled: true
