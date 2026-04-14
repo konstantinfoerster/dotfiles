@@ -2,6 +2,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- disable python3 provider, since we use conform to run black
+vim.g.loaded_python3_provider = 0
+
 -- mapping for german layout + to ] (applied only in normal mode)
 -- sadly umlauts are not supported e.g. ü[ wont' work
 vim.opt.langmap = "+]"
