@@ -13,7 +13,7 @@ vim.schedule(function()
 
   require("blink.cmp").setup({
     enabled = function()
-      return not vim.tbl_contains({ "NvimTree", "DressingInput" }, vim.bo.filetype)
+      return not vim.tbl_contains({ "NvimTree" }, vim.bo.filetype)
     end,
     -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
     -- 'super-tab' for mappings similar to vscode (tab to accept)
