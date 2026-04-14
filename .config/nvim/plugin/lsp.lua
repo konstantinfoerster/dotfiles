@@ -163,54 +163,9 @@ vim.schedule(function()
   })
 
   -- frontend stuff
-  vim.lsp.enable("cssls")
+  vim.lsp.enable({ "cssls", "vtsls", "vue_ls" })
   table.insert(mason_packages, "css-lsp")
-  -- typescript + vue3
-  vim.lsp.config("vtsls", {
-    before_init = function(_, config)
-      local vuePluginConfig = {
-        name = "@vue/typescript-plugin",
-        location = vim.fn.expand("$MASON/packages/vue-language-server/node_modules/@vue/language-server"),
-        languages = { "vue" },
-        configNamespace = "typescript",
-        enableForWorkspaceTypeScriptVersions = true,
-      }
-      table.insert(config.settings.vtsls.tsserver.globalPlugins, vuePluginConfig)
-    end,
-    filetypes = {
-      "javascript",
-      "javascriptreact",
-      "javascript.jsx",
-      "typescript",
-      "typescriptreact",
-      "typescript.tsx",
-      "vue",
-    },
-    settings = {
-      complete_function_calls = true,
-      vtsls = {
-        tsserver = {
-          globalPlugins = {},
-        },
-        enableMoveToFileCodeAction = true,
-        autoUseWorkspaceTsdk = true,
-        experimental = {
-          completion = {
-            enableServerSideFuzzyMatch = true,
-          },
-        },
-      },
-      typescript = {
-        updateImportsOnFileMove = { enabled = "always" },
-        suggest = {
-          completeFunctionCalls = true,
-        },
-      },
-    },
-  })
-  vim.lsp.enable("vtsls")
   table.insert(mason_packages, "vtsls")
-  vim.lsp.enable("vue_ls")
   table.insert(mason_packages, "vue-language-server")
 
   -- backend stuff
@@ -221,110 +176,11 @@ vim.schedule(function()
       gohtml = "gotmpl",
     },
   })
-
-  vim.lsp.config("gopls", {
-    settings = {
-      gopls = {
-        templateExtensions = { "gohtml", "gotmpl", "tmpl" },
-        analyses = {
-          nilness = true,
-          shadow = true,
-          unusedparams = true,
-          unusedwrite = true,
-          useany = true,
-          ST1000 = false, -- missing package comments
-        },
-        codelenses = {
-          generate = true,
-          regenerate_cgo = true,
-          run_govulncheck = true,
-          test = true,
-          tidy = true,
-          upgrade_dependency = false,
-          vendor = true,
-        },
-        staticcheck = true,
-        usePlaceholders = false, -- jump to next placeholder seems broken
-        semanticTokens = true,
-        completeUnimported = true,
-        hints = {
-          assignVariableTypes = true,
-          compositeLiteralFields = true,
-          compositeLiteralTypes = true,
-          constantValues = true,
-          functionTypeParameters = true,
-          parameterNames = true,
-          rangeVariableTypes = true,
-        },
-      },
-    },
-  })
-  vim.lsp.enable("gopls")
+  vim.lsp.enable({ "gopls", "lua_ls" })
   table.insert(mason_packages, "gopls")
-
-  vim.lsp.config("lua_ls", {
-    settings = {
-      Lua = {
-        runtime = {
-          version = "LuaJIT",
-        },
-        diagnostics = {
-          -- Get the language server to recognize the `vim` global
-          globals = {
-            "vim",
-            "require",
-          },
-        },
-        workspace = {
-          checkThirdParty = false,
-          library = {
-            vim.env.VIMRUNTIME,
-            "${3rd}/luv/library",
-          },
-        },
-      },
-    },
-  })
-  vim.lsp.enable("lua_ls")
   table.insert(mason_packages, "lua-language-server")
 
   -- other stuff
-  vim.lsp.config("yamlls", {
-    settings = {
-      yaml = {
-        hover = true,
-        completion = true,
-        validate = false,
-        schemaStore = {
-          -- enable = true,
-          -- url = "https://www.schemastore.org/api/json/catalog.json",
-          enable = false,
-          -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
-          url = "",
-        },
-        schemas = {
-          ["https://json.schemastore.org/kustomization.json"] = {
-            "kustomization.yaml",
-            "kustomization.yml",
-            "**/kustomization.yaml",
-            "**/kustomization.yml",
-          },
-          ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = {
-            "docker-compose*.yaml",
-            "docker-compose*.yml",
-          },
-          kubernetes = {
-            "overlays/**/*.yaml",
-            "resources/**/*.yaml",
-          },
-          -- ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/refs/heads/master/v1.28.15-standalone-strict/all.json"] = {
-          --   "overlays/**/*.yaml",
-          --   "resources/**/*.yaml",
-          -- },
-        },
-      },
-    },
-  })
   vim.lsp.enable("yamlls")
   table.insert(mason_packages, "yaml-language-server")
 
