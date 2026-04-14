@@ -1,11 +1,11 @@
+-- disable netrw at the very start
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.pack.add({
   { src = "https://github.com/nvim-tree/nvim-web-devicons", name = "nvim-web-devicons" },
   { src = "https://github.com/nvim-tree/nvim-tree.lua", name = "nvim-tree.lua" },
 })
-
--- disable netrw at the very start of your init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 
 local HEIGHT_RATIO = 0.6
 local WIDTH_RATIO = 0.5

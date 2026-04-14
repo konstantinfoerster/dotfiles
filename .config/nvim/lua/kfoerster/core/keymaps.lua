@@ -1,6 +1,3 @@
--- map leader to space
-vim.g.mapleader = " "
-
 -- disable recording
 vim.keymap.set("n", "q", "<nop>", { desc = "Disable recording" })
 
