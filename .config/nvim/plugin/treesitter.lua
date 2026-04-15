@@ -10,6 +10,16 @@ vim.api.nvim_create_autocmd("PackChanged", {
   end,
 })
 
+-- enable highlighting
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function()
+    -- Enable treesitter highlighting and disable regex syntax
+    pcall(vim.treesitter.start)
+    -- Enable treesitter-based indentation
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})
+
 vim.pack.add({
   { src = "https://github.com/nvim-treesitter/nvim-treesitter", name = "nvim-treesitter", version = "main" },
 })
@@ -35,6 +45,7 @@ vim.schedule(function()
     "markdown_inline",
     "make",
     "python",
+    "regex",
     "toml",
     "typescript",
     "vim",
@@ -47,13 +58,3 @@ vim.schedule(function()
 
   require("nvim-treesitter").install(parsers)
 end)
-
--- enable highlighting
-vim.api.nvim_create_autocmd("FileType", {
-  callback = function()
-    -- Enable treesitter highlighting and disable regex syntax
-    pcall(vim.treesitter.start)
-    -- Enable treesitter-based indentation
-    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-  end,
-})

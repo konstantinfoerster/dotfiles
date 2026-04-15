@@ -1,6 +1,5 @@
 vim.schedule(function()
   vim.pack.add({
-    { src = "https://github.com/nvim-tree/nvim-web-devicons", name = "nvim-web-devicons" },
     { src = "https://github.com/saghen/blink.cmp", name = "blink.cmp", version = vim.version.range("1.x") },
     { src = "https://github.com/neovim/nvim-lspconfig", name = "nvim-lspconfig" },
     { src = "https://github.com/mason-org/mason.nvim", name = "mason.nvim" },
@@ -102,20 +101,6 @@ vim.schedule(function()
       default = { "lsp", "path", "buffer" },
     },
     fuzzy = { implementation = "prefer_rust_with_warning" },
-  })
-
-  vim.diagnostic.config({
-    virtual_text = true,
-    underline = { severity = vim.diagnostic.severity.ERROR },
-    jump = {
-      float = true,
-    },
-    float = {
-      severity_sort = true,
-      focusable = false,
-      source = true,
-      header = "",
-    },
   })
 
   vim.api.nvim_create_autocmd("LspAttach", {
