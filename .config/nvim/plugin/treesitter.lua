@@ -10,7 +10,9 @@ vim.api.nvim_create_autocmd("PackChanged", {
   end,
 })
 
--- enable highlighting
+-- disable vim default syntax highlighting
+vim.cmd("syntax off")
+-- enable treesitter highlighting
 vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     -- Enable treesitter highlighting and disable regex syntax

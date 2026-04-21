@@ -1,13 +1,15 @@
 vim.diagnostic.config({
   virtual_text = true,
+  severity_sort = true,
   underline = { severity = vim.diagnostic.severity.ERROR },
   jump = {
     float = true,
   },
   float = {
-    severity_sort = true,
     focusable = false,
     source = true,
     header = "",
   },
 })
+
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Show line [D]iagnostics" })

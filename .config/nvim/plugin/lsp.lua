@@ -121,7 +121,6 @@ vim.schedule(function()
       keybind({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ctions")
       keybind("n", "<leader>cr", vim.lsp.buf.rename, "[C]ode [R]ename")
       keybind("n", "<leader>tD", "<cmd>FzfLua lsp_document_diagnostics<CR>", "Show document [D]iagnostics")
-      keybind("n", "<leader>td", vim.diagnostic.open_float, "Show line [D]iagnostics")
       keybind("n", "<leader>rr", ":LspRestart<CR>", "[R]estart LSP")
     end,
   })
