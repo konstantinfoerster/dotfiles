@@ -12,8 +12,8 @@ vim.api.nvim_create_autocmd("UIEnter", {
         DiffviewOpen = { "--imply-local" },
       },
     })
-    vim.keymap.set("n", "<leader>gdh", "<cmd>DiffviewOpen origin/HEAD...HEAD<CR>", { desc = "[G]it [D]iff [H]ead" })
-    vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<CR>", { desc = "[G]it [D]iff view" })
+    vim.keymap.set("n", "<leader>D", "<cmd>DiffviewOpen origin/HEAD...HEAD<CR>", { desc = "Git [D]iff head" })
+    vim.keymap.set("n", "<leader>d", "<cmd>DiffviewOpen<CR>", { desc = "Git [d]iff view" })
 
     require("gitsigns").setup({
       signs = {
@@ -36,9 +36,9 @@ vim.api.nvim_create_autocmd("UIEnter", {
         map("n", "<leader>gb", function()
           gitsigns.blame_line()
         end, { desc = "[G]it line [B]lame" })
-        map("n", "<leader>gdl", function()
+        map("n", "<leader>gl", function()
           gitsigns.diffthis()
-        end, { desc = "[G]it [D]ff [L]ine" })
+        end, { desc = "[G]it diff [L]ine" })
       end,
     })
   end),

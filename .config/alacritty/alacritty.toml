@@ -51,3 +51,8 @@ style = "Regular"
 [window]
 startup_mode = "Windowed"
 #startup_mode = "Maximized"
+
+[[hints.enabled]]
+command = ""
+hyperlinks = true
+mouse.enabled = false
