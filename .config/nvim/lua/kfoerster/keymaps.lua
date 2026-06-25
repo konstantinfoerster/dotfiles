@@ -4,9 +4,6 @@ vim.keymap.set("n", "q", "<nop>", { desc = "Disable recording" })
 -- fast buffer change
 vim.keymap.set("n", "<leader><leader>", "<c-^>", { desc = "Switch to last buffer" })
 
--- tabs
-vim.keymap.set("n", "<leader>qq", ":tabclose<CR>", { desc = "Close tab" })
-
 -- window
 vim.keymap.set("n", "<C-w>h", ":vertical resize -15<CR>", { desc = "Vertical resize (smaller)" })
 vim.keymap.set("n", "<C-w>l", ":vertical resize +15<CR>", { desc = "Vertical resize (wider)" })

@@ -1,4 +1,7 @@
 return {
+  init_options = {
+    semanticTokens = true,
+  },
   settings = {
     gopls = {
       templateExtensions = { "gohtml", "gotmpl", "tmpl" },

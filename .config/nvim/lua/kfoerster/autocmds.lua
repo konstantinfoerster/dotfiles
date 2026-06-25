@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- detect Jenkinsfiles
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = { "*.Jenkinsfile" },
+  pattern = { "Jenkinsfile", "*.Jenkinsfile" },
   callback = function()
     vim.opt_local.filetype = "groovy"
   end,

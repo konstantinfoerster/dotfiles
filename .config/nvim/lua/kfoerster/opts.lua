@@ -29,8 +29,6 @@ vim.opt.expandtab = true
 
 -- enable break indent
 vim.opt.breakindent = true
--- more clever indent
-vim.opt.cindent = true
 
 -- case-insensitive searching
 vim.opt.ignorecase = true
@@ -39,7 +37,8 @@ vim.opt.wrap = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+-- store undo files in XDG-compliant way, linux would use  ~/.local/state/undo
+vim.opt.undodir = vim.fn.stdpath("state") .. "/undo"
 vim.opt.undofile = true
 
 -- set completeopt to have a better completion experience

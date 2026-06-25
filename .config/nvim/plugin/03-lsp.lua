@@ -4,11 +4,7 @@ vim.schedule(function()
     { src = "https://github.com/neovim/nvim-lspconfig", name = "nvim-lspconfig" },
     { src = "https://github.com/mason-org/mason.nvim", name = "mason.nvim" },
     { src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim", name = "mason-tool-installer.nvim" },
-    { src = "https://github.com/j-hui/fidget.nvim", name = "fidget.nvim" },
   })
-
-  -- shows LSP progress messages
-  require("fidget").setup({})
 
   require("blink.cmp").setup({
     enabled = function()

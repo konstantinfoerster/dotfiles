@@ -51,14 +51,41 @@ require("nvim-tree").setup({
 })
 
 vim.keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle [E]xplorer" })
-vim.keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "[E]xplorer [R]fresh" })
+vim.keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "[E]xplorer [R]efresh" })
+
+-- tmux aware navigation
+local in_tmux = vim.env.TMUX ~= nil
+vim.api.nvim_create_autocmd("UIEnter", {
+  once = true,
+  callback = vim.schedule_wrap(function()
+    local tmux_nav = function(direction)
+      local nr = vim.fn.winnr()
+      vim.cmd("wincmd " .. direction)
+      if nr == vim.fn.winnr() and in_tmux then
+        vim.fn.system("tmux select-pane -" .. ({ h = "L", j = "D", k = "U", l = "R" })[direction])
+      end
+    end
+    local modes = { "n", "v" }
+    vim.keymap.set(modes, "<C-h>", function()
+      tmux_nav("h")
+    end, { desc = "Navigate left tmux pane" })
+    vim.keymap.set(modes, "<C-j>", function()
+      tmux_nav("j")
+    end, { desc = "Navigate bottom tmux pane" })
+    vim.keymap.set(modes, "<C-k>", function()
+      tmux_nav("k")
+    end, { desc = "Navigate top tmux pane" })
+    vim.keymap.set(modes, "<C-l>", function()
+      tmux_nav("l")
+    end, { desc = "Navigate right tmux pane" })
+  end),
+})
 
 -- fuzzy finder
 vim.api.nvim_create_autocmd("UIEnter", {
   once = true,
   callback = vim.schedule_wrap(function()
     vim.pack.add({
-      { src = "https://github.com/nvim-tree/nvim-web-devicons", name = "nvim-web-devicons" },
       { src = "https://github.com/ibhagwan/fzf-lua", name = "fzf-lua" },
     })
 
