@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd("UIEnter", {
         DiffviewOpen = { "--imply-local" },
       },
     })
-    vim.keymap.set("n", "<leader>gD", "<cmd>DiffviewOpen origin/HEAD...HEAD<CR>", { desc = "Git [D]iff head" })
+    vim.keymap.set("n", "<leader>gh", "<cmd>DiffviewOpen origin/HEAD...HEAD<CR>", { desc = "Git [D]iff head" })
     vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<CR>", { desc = "Git [d]iff view" })
     vim.keymap.set("n", "<leader>qq", "<cmd>DiffviewClose<CR>", { desc = "Close diff view" })
 

@@ -1,6 +1,13 @@
 -- disable netrw at the very start
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+-- TODO: try out netrw
+-- vim.g.netrw_banner = 0 -- disable top banner
+-- vim.g.netrw_liststyle = 3 -- tree view
+-- vim.g.netrw_winsize = 25 -- fixed left split width
+-- vim.g.netrw_browse_split = 0
+-- vim.g.netrw_altfile = 1
+-- vim.keymap.set("n", "<leader>ee", ":Lexplore<CR>", { desc = "Toggle [E]xplorer" })
 
 vim.pack.add({
   { src = "https://github.com/nvim-tree/nvim-tree.lua", name = "nvim-tree.lua" },

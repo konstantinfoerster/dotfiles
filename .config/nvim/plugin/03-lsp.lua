@@ -126,7 +126,7 @@ vim.schedule(function()
     "goimports",
     "black",
     "prettier",
-    "prettierd",
+    -- "prettierd",
     "stylua",
 
     -- linter
@@ -159,6 +159,8 @@ vim.schedule(function()
   vim.lsp.enable({ "gopls", "lua_ls" })
   table.insert(mason_packages, "gopls")
   table.insert(mason_packages, "lua-language-server")
+  vim.lsp.enable('jdtls')
+  table.insert(mason_packages, "jdtls")
 
   -- other stuff
   vim.lsp.enable("yamlls")

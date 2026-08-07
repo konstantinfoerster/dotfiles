@@ -46,6 +46,7 @@ vim.schedule(function()
     "markdown",
     "markdown_inline",
     "make",
+    "proto",
     "python",
     "regex",
     "toml",
