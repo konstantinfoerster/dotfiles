@@ -6,4 +6,5 @@
       - openjdk25-doc
       - openjdk25-src
       - go
+      - nvm # node version manager
     state: present
