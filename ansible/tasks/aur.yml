@@ -10,17 +10,6 @@
 - name: Install AUR packages
   ansible.builtin.include_tasks: tasks/helper/aur_download.yml
   with_items:
-    - nvm-git
     - google-chrome
   loop_control:
     loop_var: aur_package
-
-- name: "Install node lts version"
-  ansible.builtin.shell:
-    cmd: ". /usr/share/nvm/init-nvm.sh && nvm install --lts"
-  register: nvm_install_result
-  changed_when: '"already installed" not in nvm_install_result.stderr'
-
-- name: "Show installed node version"
-  ansible.builtin.debug:
-    msg: "{{ nvm_install_result.stderr }}"
