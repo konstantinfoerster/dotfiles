@@ -126,7 +126,6 @@ vim.schedule(function()
     "goimports",
     "black",
     "prettier",
-    -- "prettierd",
     "stylua",
 
     -- linter
