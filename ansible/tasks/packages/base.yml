@@ -4,7 +4,6 @@
     name:
       - networkmanager
       - base-devel
-      - base
       - bash-completion
       - openssh
       - gnupg
@@ -46,8 +45,21 @@
     enabled: true
     state: started
 
+- name: Harden ssh daemon
+  ansible.builtin.copy:
+    dest: /etc/ssh/sshd_config.d/10-harden.conf
+    content: |
+      PasswordAuthentication no
+      PermitEmptyPasswords no
+      KbdInteractiveAuthentication no
+      PermitRootLogin no
+      GSSAPIAuthentication no
+      X11Forwarding no
+    mode: "0644"
+  register: sshd_config
+
 - name: Enable ssh daemon
   ansible.builtin.systemd:
     name: sshd
     enabled: true
-    state: started
+    state: "{{ 'restarted' if sshd_config.changed else 'started' }}"

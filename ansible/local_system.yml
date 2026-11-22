@@ -4,15 +4,9 @@
   connection: "{{ connection_type | default('local')  }}"
   become: true
   gather_facts: false
-
-  pre_tasks:
-    - name: Load configuration
-      ansible.builtin.include_vars: "{{ item }}"
-      loop:
-        - config.yml
-        - vars/bootloader.yml
-      tags:
-        - always
+  vars_files:
+    - config.yml
+    - vars/bootloader.yml
 
   tasks:
     - name: Set timezone and sync hw clock

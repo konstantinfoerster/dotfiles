@@ -11,7 +11,7 @@
 - Clone the dotfiles repository `git clone https://github.com/konstantinfoerster/dotfiles.git`
 - Change into the dotfiles ansible dir `cd dotfiles/ansible`
 - Copy `example.config.yml` to `config.yml` and make your system dependent changes
-- To run an installation with storage wipe run `ansible-playbook -K main.yml -t wipe -t storage -t prepare`
+- To run an installation with storage wipe run `ansible-playbook main.yml -t wipe -t storage -t prepare`
 - Run `umount -a` to unmount all devices
 - Run `reboot`
 

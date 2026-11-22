@@ -13,17 +13,16 @@
 - name: Make sure destination dir exists
   ansible.builtin.file:
     path: "{{ '/home/' + user + '/' + file | dirname }}"
-    mode: '0755'
+    mode: "0700"
     owner: "{{ user }}"
     group: "{{ user }}"
     state: directory
-  when: not file_available.stat.exists
+  when: not file_available.stat.exists and file | dirname | length > 0
 
-- name: "Link file if require {{ file }}"
+- name: "Link file {{ file }}"
   ansible.builtin.file:
     src: "{{ dotfiles_dir }}/{{ file }}"
     dest: "/home/{{ user }}/{{ file }}"
     owner: "{{ user }}"
     group: "{{ user }}"
     state: link
-  when: not file_available.stat.exists

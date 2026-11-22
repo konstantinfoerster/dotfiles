@@ -32,15 +32,15 @@
     - never
     - wipe
   block:
-    - name: "Delete keys from root partition of {{ main_disk_partition_root }}"
+    - name: Close LUKS device
       community.crypto.luks_device:
-        device: "{{ main_disk_partition_root }}"
-        force_remove_last_key: true
-        passphrase: "{{ main_disk_password }}"
-        state: "absent"
-      when:
-        - crypted_disk
-        - main_disk_info.partitions | length > 1
+        name: "{{ crypted_disk_name }}"
+        state: closed
+
+    - name: Wipe filesystem and LUKS signatures from all partitions
+      ansible.builtin.shell: "wipefs --all {{ main_disk }}?*"
+      changed_when: true
+      when: main_disk_info.partitions | length > 0
 
     - name: Remove all partitions from disk
       community.general.parted:
@@ -53,6 +53,8 @@
   tags:
     - never
     - storage
+  vars:
+    root_device: "{{ '/dev/mapper/' ~ crypted_disk_name if crypted_disk else main_disk_partition_root }}"
   block:
     - name: Create boot partition
       community.general.parted:
@@ -79,53 +81,29 @@
         part_end: 100%
         state: present
 
-    - name: "Encrypt {{ main_disk_partition_root }}"
+    - name: Encrypt root partition
+      community.crypto.luks_device:
+        device: "{{ main_disk_partition_root }}"
+        type: luks2
+        hash: "sha512"
+        name: "{{ crypted_disk_name }}"
+        keysize: 512
+        passphrase: "{{ main_disk_password }}"
+        state: "opened"
       when: crypted_disk
-      block:
-        - name: Encrypt root partition
-          community.crypto.luks_device:
-            device: "{{ main_disk_partition_root }}"
-            type: luks2
-            hash: "sha512"
-            name: "{{ crypted_disk_name }}"
-            keysize: 512
-            passphrase: "{{ main_disk_password }}"
-            state: "opened"
 
-        - name: Format encrypted root partition
-          community.general.filesystem:
-            fstype: ext4
-            dev: "/dev/mapper/{{ crypted_disk_name }}"
-            state: present
+    - name: Format root partition
+      community.general.filesystem:
+        fstype: ext4
+        dev: "{{ root_device }}"
+        state: present
 
-        - name: Mount encrypted root partition
-          ansible.posix.mount:
-            fstype: ext4
-            src: "/dev/mapper/{{ crypted_disk_name }}"
-            path: /mnt
-            state: mounted
-
-    - name: "Format and mount root partition {{ main_disk_partition_root }}"
-      when: not crypted_disk
-      block:
-        - name: Format root partition
-          community.general.filesystem:
-            fstype: ext4
-            dev: "{{ main_disk_partition_root }}"
-            state: present
-
-        - name: Mount root partition
-          ansible.posix.mount:
-            fstype: ext4
-            src: "{{ main_disk_partition_root }}"
-            path: /mnt
-            state: mounted
-
-    - name: Create boot directory if it does not exist
-      ansible.builtin.file:
-        path: /mnt/boot
-        state: directory
-        mode: "0755"
+    - name: Mount root partition
+      ansible.posix.mount:
+        fstype: ext4
+        src: "{{ root_device }}"
+        path: /mnt
+        state: mounted
 
     - name: Mount boot partition
       ansible.posix.mount:

@@ -4,30 +4,25 @@
     - prepare
     - never
   block:
-    - name: Check if pacstrap already executed
-      ansible.builtin.stat:
-        path: /mnt/proc
-      register: proc_stats
-
     - name: Install based packages into chroot
       ansible.builtin.command:
         cmd: pacstrap /mnt base linux linux-firmware gvim ansible git sudo
-      changed_when: true
-      when: not proc_stats.stat.exists
-
-    - name: Check if /mnt/etc/fstab is already configured
-      ansible.builtin.lineinfile:
-        name: /mnt/etc/fstab
-        regexp: "^UUID="
-        state: absent
-      check_mode: true
-      changed_when: false
-      register: fstab_result
+        creates: /mnt/etc/arch-release
 
     - name: Generate filesystem mount configuration
-      ansible.builtin.shell: genfstab -U /mnt >> /mnt/etc/fstab
+      ansible.builtin.shell: genfstab -U /mnt > /mnt/etc/fstab
       changed_when: true
-      when: not fstab_result.found
+
+    - name: Create user home
+      ansible.builtin.file:
+        path: "/mnt/home/{{ user }}"
+        state: directory
+        mode: "0700"
+
+    - name: Copy dotfiles into new system
+      ansible.builtin.command:
+        cmd: "cp -a {{ playbook_dir | dirname }} /mnt{{ dotfiles_dir }}"
+        creates: "/mnt{{ dotfiles_dir }}"
 
     - name: Install systemd-boot with UEFI boot entry
       ansible.builtin.command: arch-chroot -S /mnt bootctl install

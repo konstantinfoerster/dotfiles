@@ -5,7 +5,12 @@
       - ntfs-3g
       - exfatprogs
       - mesa
-      - mesa-libgl
       - libva-utils
-      - libva-intel-driver # i965
     state: present
+
+- name: Install intel video driver packages
+  community.general.pacman:
+    name:
+      - libva-intel-driver
+    state: present
+  when: "'GenuineIntel' in ansible_facts['processor']"

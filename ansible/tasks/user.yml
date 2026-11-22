@@ -2,8 +2,8 @@
 - name: Change root Password
   ansible.builtin.user:
     name: root
-    password: "{{ root_password | password_hash('sha512') }}"
-    update_password: on_create
+    password: "{{ root_password | password_hash('sha512', 'rootpassword') }}"
+    update_password: always
     state: present
 
 - name: "Add user {{ user }}"
@@ -12,6 +12,21 @@
     password: "{{ user_password | password_hash('sha512') }}"
     update_password: on_create
     state: present
+
+- name: Set owner of home
+  ansible.builtin.file:
+    path: "/home/{{ user }}"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: "0700"
+    state: directory
+
+- name: Set owner of dotfiles
+  ansible.builtin.file:
+    path: "{{ dotfiles_dir }}"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    recurse: true
 
 - name: "Allow sudo usage for user {{ user }}"
   ansible.builtin.copy:

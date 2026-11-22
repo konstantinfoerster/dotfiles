@@ -25,6 +25,7 @@
   ansible.builtin.find:
     paths: "{{ aur_dir }}/{{ aur_package }}"
     patterns: '*.pkg.tar.zst'
+    excludes: '*-debug-*'
   register: aur_build_packages
 
 - name: "Install package {{ aur_package }}"

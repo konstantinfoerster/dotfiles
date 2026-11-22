@@ -19,11 +19,6 @@
 - name: Configure bootloader systemd-boot
   when: bootloader == 'systemd-boot'
   block:
-    - name: Install UEFI boot manager
-      ansible.builtin.command: "bootctl install"
-      args:
-        creates: /boot/EFI/systemd/systemd-bootx64.efi
-
     - name: Read root filesystem UUID
       ansible.builtin.command: findmnt -no UUID /
       register: root_uuid
