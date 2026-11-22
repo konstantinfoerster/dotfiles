@@ -8,9 +8,22 @@
       - libva-utils
     state: present
 
+- name: Read GPU vendors
+  ansible.builtin.shell: cat /sys/class/drm/card*/device/vendor
+  register: gpu_vendors
+  changed_when: false
+
+- name: Install amd video driver packages
+  community.general.pacman:
+    name:
+      - vulkan-radeon
+      - amdgpu_top
+    state: present
+  when: "'0x1002' in gpu_vendors.stdout_lines"
+
 - name: Install intel video driver packages
   community.general.pacman:
     name:
       - libva-intel-driver
     state: present
-  when: "'GenuineIntel' in ansible_facts['processor']"
+  when: "'0x8086' in gpu_vendors.stdout_lines"
