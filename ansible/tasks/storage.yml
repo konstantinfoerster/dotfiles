@@ -36,6 +36,7 @@
       community.crypto.luks_device:
         name: "{{ crypted_disk_name }}"
         state: closed
+      when: crypted_disk_name is defined
 
     - name: Wipe filesystem and LUKS signatures from all partitions
       ansible.builtin.shell: "wipefs --all {{ main_disk }}?*"
