@@ -1,0 +1,36 @@
+---
+- name: Configure root partition encryption
+  when: crypted_disk
+  block:
+    - name: Read LUKS UUID of root partition
+      ansible.builtin.command: "blkid -t TYPE=crypto_LUKS -s UUID -o value {{ main_disk_partition_root }}"
+      register: luks_uuid
+      changed_when: false
+      failed_when: luks_uuid.stdout == ''
+
+    - name: Add root partition to crypttab
+      ansible.builtin.lineinfile:
+        path: /etc/crypttab
+        regexp: '^{{ crypted_disk_name }}\s'
+        line: "{{ crypted_disk_name }}  UUID={{ luks_uuid.stdout }}  none  luks,x-initrd.attach"
+        owner: root
+        group: root
+        mode: "0600"
+        create: true
+      register: crypttab
+
+    - name: Enable sd-encrypt hook
+      ansible.builtin.replace:
+        path: /etc/mkinitcpio.conf
+        regexp: '^(HOOKS=\(.*)block filesystems(.*\))'
+        replace: '\1block sd-encrypt filesystems\2'
+      register: mkinitcpio
+
+    - name: Ensure initramfs can unlock root partition
+      ansible.builtin.command: grep -qE '^HOOKS=.*\bsystemd\b.*\bsd-encrypt\b' /etc/mkinitcpio.conf
+      changed_when: false
+
+    - name: Regenerate initramfs
+      ansible.builtin.command: mkinitcpio -P
+      changed_when: true
+      when: crypttab.changed or mkinitcpio.changed # noqa no-handler

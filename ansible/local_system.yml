@@ -10,6 +10,7 @@
       ansible.builtin.include_vars: "{{ item }}"
       loop:
         - config.yml
+        - vars/bootloader.yml
       tags:
         - always
 
@@ -26,9 +27,11 @@
     - name: Set hostname and add hosts
       ansible.builtin.import_tasks: tasks/hostname.yml
 
-    - name: Configure grub
-      ansible.builtin.import_tasks: tasks/grub.yml
-      when: use_grub
+    - name: Configure root partition encryption
+      ansible.builtin.import_tasks: tasks/encryption.yml
+
+    - name: Configure bootloader
+      ansible.builtin.import_tasks: tasks/bootloader.yml
 
     - name: Set root password and add user
       ansible.builtin.import_tasks: tasks/user.yml

@@ -16,6 +16,30 @@
       - man-pages
     state: present
 
+- name: Gather CPU facts
+  ansible.builtin.setup:
+    gather_subset:
+      - hardware
+    filter:
+      - ansible_processor
+
+- name: Install CPU microcode
+  community.general.pacman:
+    name: "{{ ucode_packages[cpu_vendor] }}"
+    state: present
+  vars:
+    ucode_packages:
+      GenuineIntel: intel-ucode
+      AuthenticAMD: amd-ucode
+    cpu_vendor: "{{ ansible_facts['processor'][1] }}"
+  when: cpu_vendor in ucode_packages
+  register: ucode
+
+- name: Regenerate initramfs with microcode
+  ansible.builtin.command: mkinitcpio -P
+  changed_when: true
+  when: ucode.changed # noqa no-handler
+
 - name: Enable NetworkManager
   ansible.builtin.systemd:
     name: NetworkManager

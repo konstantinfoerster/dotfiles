@@ -13,6 +13,7 @@
           ansible.builtin.include_vars: "{{ item }}"
           loop:
             - config.yml
+            - vars/bootloader.yml
 
         - name: Running from iso?
           ansible.builtin.command: uname -a
@@ -24,6 +25,18 @@
             hostlist: "{{ 'chroot' if 'archiso' in uname_out.stdout else 'localhost' }}"
             is_archiso: "{{ true if 'archiso' in uname_out.stdout else false }}"
             cacheable: true
+
+        # fail before the disk gets wiped
+        - name: Check boot mode
+          ansible.builtin.stat:
+            path: /sys/firmware/efi
+          register: efi
+
+        - name: Ensure bootloader matches boot mode
+          ansible.builtin.assert:
+            that: efi.stat.exists == (bootloader == 'systemd-boot')
+            fail_msg: "bootloader={{ bootloader }} does not match the boot mode (UEFI={{ efi.stat.exists }})"
+            quiet: true
 
   tasks:
     - name: Setup encrypted hard drive

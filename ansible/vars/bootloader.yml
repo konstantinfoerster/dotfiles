@@ -1,0 +1,14 @@
+---
+# Settings for the boot partition, selected by `bootloader` in config.yml
+bootloader_settings:
+  grub:
+    label: msdos
+    flags: [boot]
+    fstype: ext4
+  systemd-boot:
+    label: gpt
+    flags: [esp]
+    fstype: vfat
+    mkfs_opts: "-F 32"
+
+boot_partition: "{{ bootloader_settings[bootloader] }}"

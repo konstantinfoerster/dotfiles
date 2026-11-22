@@ -18,7 +18,7 @@
     - name: Check if /mnt/etc/fstab is already configured
       ansible.builtin.lineinfile:
         name: /mnt/etc/fstab
-        regexp: '^UUID='
+        regexp: "^UUID="
         state: absent
       check_mode: true
       changed_when: false
@@ -28,3 +28,9 @@
       ansible.builtin.shell: genfstab -U /mnt >> /mnt/etc/fstab
       changed_when: true
       when: not fstab_result.found
+
+    - name: Install systemd-boot with UEFI boot entry
+      ansible.builtin.command: arch-chroot -S /mnt bootctl install
+      args:
+        creates: /mnt/boot/EFI/systemd/systemd-bootx64.efi
+      when: bootloader == 'systemd-boot'

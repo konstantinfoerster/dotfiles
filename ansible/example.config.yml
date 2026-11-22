@@ -1,7 +1,11 @@
 ---
 main_disk: /dev/sda
+main_disk_partition_boot: /dev/sda1
+main_disk_partition_root: /dev/sda2
 main_disk_password: "test123"
+crypted_disk: true
 crypted_disk_name: cryptdisk
+bootloader: systemd-boot # or grub
 timezone: Europe/Berlin
 pacman_mirror: "https://mirror.netcologne.de/archlinux/$repo/os/$arch"
 root_password: password
@@ -13,5 +17,4 @@ dotfiles_repo: 'https://github.com/konstantinfoerster/dotfiles.git'
 dotfiles_dir: "/home/{{ user }}/dotfiles"
 dotfiles_branch: "master"
 git_user_name: "Tester"
-git_user_email: "tester@mailinator.com"
-use_grub: true
+git_user_email: "tester@localhost"
