@@ -49,6 +49,7 @@ vim.schedule(function()
     "proto",
     "python",
     "regex",
+    "sql",
     "toml",
     "typescript",
     "vim",
