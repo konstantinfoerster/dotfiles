@@ -16,13 +16,6 @@ if [ -d "$HOME/go/bin" ]; then
     export PATH=$HOME/go/bin:$PATH
 fi
 
-# if [ -d "/usr/share/dotnet" ]; then
-#     export PATH=$HOME/.dotnet/tools:$PATH
-#     export DOTNET_CLI_TELEMETRY_OPTOUT=1
-#     export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
-#     export PATH=$HOME/.bin/dotnet/omnisharp/:$PATH
-# fi
-
 export XDG_CONFIG_HOME=$HOME/.config
 
 export JAVA_HOME=/usr/lib/jvm/default
@@ -38,8 +31,6 @@ fi
 if [ -e /usr/lib/seahorse/ssh-askpass ]; then
     export SSH_ASKPASS=/usr/lib/seahorse/ssh-askpass
 fi
-
-#export TERM='xterm-256color'
 
 stty -ixon
 
