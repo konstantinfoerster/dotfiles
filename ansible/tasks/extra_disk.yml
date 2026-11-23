@@ -1,0 +1,27 @@
+---
+- name: Read extra disk filesystem
+  ansible.builtin.command: "lsblk -dno UUID,FSTYPE {{ extra_disk.device }}"
+  register: extra_disk_fs
+  changed_when: false
+  failed_when: false
+
+- name: Mount extra disk
+  when: extra_disk_fs.stdout | split | length == 2
+  vars:
+    mount_path: "/mnt/{{ extra_disk.name }}"
+  block:
+    - name: "Mount extra disk to {{ mount_path }}"
+      ansible.posix.mount:
+        path: "{{ mount_path }}"
+        src: "UUID={{ (extra_disk_fs.stdout | split)[0] }}"
+        fstype: "{{ (extra_disk_fs.stdout | split)[1] }}"
+        opts: defaults,nofail
+        state: "{{ 'present' if inventory_hostname == 'chroot' else 'mounted' }}"
+
+    - name: "Set owner of {{ mount_path }}"
+      ansible.builtin.file:
+        path: "{{ mount_path }}"
+        state: directory
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0755"
