@@ -7,6 +7,7 @@
     - name: Install based packages into chroot
       ansible.builtin.command:
         cmd: pacstrap /mnt base linux linux-firmware gvim ansible git sudo
+        # skip if path exists
         creates: /mnt/etc/arch-release
 
     - name: Generate filesystem mount configuration
@@ -22,10 +23,12 @@
     - name: Copy dotfiles into new system
       ansible.builtin.command:
         cmd: "cp -a {{ playbook_dir | dirname }} /mnt{{ dotfiles_dir }}"
+        # skip if path exists
         creates: "/mnt{{ dotfiles_dir }}"
 
     - name: Install systemd-boot with UEFI boot entry
-      ansible.builtin.command: arch-chroot -S /mnt bootctl install
-      args:
+      ansible.builtin.command:
+        cmd: arch-chroot -S /mnt bootctl install
+        # skip if path exists
         creates: /mnt/boot/EFI/systemd/systemd-bootx64.efi
       when: bootloader == 'systemd-boot'

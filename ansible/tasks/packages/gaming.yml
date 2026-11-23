@@ -1,0 +1,37 @@
+---
+- name: Install amd 32-bit video driver packages
+  community.general.pacman:
+    name:
+      - lib32-mesa
+      - lib32-vulkan-radeon
+    state: present
+  when: "'0x1002' in gpu_vendors.stdout_lines"
+
+- name: Install intel 32-bit video driver packages
+  community.general.pacman:
+    name:
+      - lib32-mesa
+      - lib32-vulkan-intel
+    state: present
+  when: "'0x8086' in gpu_vendors.stdout_lines"
+
+- name: Install steam and gamemode
+  community.general.pacman:
+    name:
+      - steam
+      - gamemode
+      - lib32-gamemode
+    state: present
+
+- name: "Assigned group gamemode to user {{ user }}"
+  ansible.builtin.user:
+    name: "{{ user }}"
+    groups: gamemode
+    append: true
+
+- name: Install ntsync autoload
+  community.general.pacman:
+    name:
+      - ntsync-autoload
+    extra_args: --asdeps
+    state: present

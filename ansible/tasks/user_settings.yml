@@ -46,15 +46,14 @@
   become: true
   become_user: root
 
-- name: Delete default user dirs configuration in users home (will be generated on login)
-  ansible.builtin.file:
-    path: "/home/{{ user }}/.config/user-dirs.dirs"
-    state: absent
-
-- name: Ensure default user dirs do not exists in users home
-  ansible.builtin.file:
-    path: "/home/{{ user }}/{{ item }}"
-    state: absent
+- name: Remove empty default user dirs in users home
+  ansible.builtin.command:
+    cmd: "rmdir /home/{{ user }}/{{ item }}"
+    # skip if path does not exist
+    removes: "/home/{{ user }}/{{ item }}"
+  register: rmdir
+  changed_when: rmdir.rc == 0
+  failed_when: false
   with_items:
     - "Templates"
     - "Public"

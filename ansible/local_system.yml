@@ -58,6 +58,9 @@
           ansible.builtin.import_tasks: tasks/packages/yubikey.yml
         - name: Install other packages
           ansible.builtin.import_tasks: tasks/packages/misc.yml
+        - name: Install gaming packages
+          ansible.builtin.import_tasks: tasks/packages/gaming.yml
+          when: gaming | default(false)
         - name: Remove unused packages
           ansible.builtin.import_tasks: tasks/packages/remove.yml
 

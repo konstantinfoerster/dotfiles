@@ -39,6 +39,11 @@
   changed_when: true
   when: ucode.changed # noqa no-handler
 
+- name: Enable periodic TRIM
+  ansible.builtin.systemd:
+    name: fstrim.timer
+    enabled: true
+
 - name: Enable NetworkManager
   ansible.builtin.systemd:
     name: NetworkManager

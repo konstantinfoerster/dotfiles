@@ -12,7 +12,7 @@
       ansible.builtin.lineinfile:
         path: /etc/crypttab
         regexp: '^{{ crypted_disk_name }}\s'
-        line: "{{ crypted_disk_name }}  UUID={{ luks_uuid.stdout }}  none  luks,x-initrd.attach"
+        line: "{{ crypted_disk_name }}  UUID={{ luks_uuid.stdout }}  none  luks,discard,no-read-workqueue,no-write-workqueue,x-initrd.attach"
         owner: root
         group: root
         mode: "0600"

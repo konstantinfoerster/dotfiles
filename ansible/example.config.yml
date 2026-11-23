@@ -6,6 +6,7 @@ main_disk_password: "test123"
 crypted_disk: true
 crypted_disk_name: cryptdisk
 bootloader: systemd-boot # or grub
+gaming: false
 timezone: Europe/Berlin
 pacman_mirror: "https://mirror.netcologne.de/archlinux/$repo/os/$arch"
 root_password: password

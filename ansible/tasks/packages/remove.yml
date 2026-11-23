@@ -3,6 +3,7 @@
   community.general.pacman:
     name:
       - gnome-software
+      - gnome-tour
       - gnome-user-docs
       - yelp
       - ntp
