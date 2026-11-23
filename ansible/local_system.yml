@@ -52,8 +52,8 @@
           ansible.builtin.import_tasks: tasks/packages/ops.yml
         - name: Install development packages
           ansible.builtin.import_tasks: tasks/packages/dev.yml
-        - name: Install docker
-          ansible.builtin.import_tasks: tasks/packages/docker.yml
+        - name: Install podman
+          ansible.builtin.import_tasks: tasks/packages/podman.yml
         - name: Install yubikey
           ansible.builtin.import_tasks: tasks/packages/yubikey.yml
         - name: Install other packages

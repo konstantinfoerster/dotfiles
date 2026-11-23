@@ -16,6 +16,7 @@
     - .tmux.conf
     - .vimrc
     - .config/alacritty
+    - .config/chrome-flags.conf
     - .config/nvim
     - .gnupg/gpg.conf
     - .gnupg/gpg-agent.conf

@@ -21,6 +21,10 @@ export XDG_CONFIG_HOME=$HOME/.config
 export JAVA_HOME=/usr/lib/jvm/default
 export GOPATH=$HOME/go
 
+if [ -S "$XDG_RUNTIME_DIR/podman/podman.sock" ]; then
+    export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
+fi
+
 export VISUAL=nvim
 export EDITOR=nvim
 
