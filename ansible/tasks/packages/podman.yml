@@ -1,0 +1,14 @@
+---
+- name: Install podman packages
+  community.general.pacman:
+    name:
+      - podman
+      - podman-docker
+      - docker-compose
+    state: present
+
+- name: Enable podman socket for all users
+  ansible.builtin.systemd:
+    name: podman.socket
+    scope: global
+    enabled: true

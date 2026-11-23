@@ -2,7 +2,7 @@
 
 - Download latest archlinux iso and write it to your preferred device
 - Boot to the device, inside the boot menu press tab and add `cow_spacesize=1G` to the boot parameter
-- Set the correct keyboard layout via `loadkeys de`
+- Set the correct keyboard layout via `loadkeys de-latin1`
 - Plugin network cable if not already done
 - Check if efi or bios `ls /sys/firmware/efi*`
   - UEFI: use `bootloader: systemd-boot`
