@@ -124,7 +124,6 @@ vim.schedule(function()
   local mason_packages = {
     -- formatter
     "goimports",
-    "black",
     "prettier",
     "stylua",
 
@@ -158,7 +157,7 @@ vim.schedule(function()
   vim.lsp.enable({ "gopls", "lua_ls" })
   table.insert(mason_packages, "gopls")
   table.insert(mason_packages, "lua-language-server")
-  vim.lsp.enable('jdtls')
+  vim.lsp.enable("jdtls")
   table.insert(mason_packages, "jdtls")
 
   -- other stuff
