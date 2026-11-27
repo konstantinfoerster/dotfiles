@@ -142,7 +142,7 @@ sleep-inactive-battery-type='suspend'
 
 [org/gnome/shell]
 disabled-extensions=['status-icons@gnome-shell-extensions.gcampax.github.com']
-enabled-extensions=['apps-menu@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'native-window-placement@gnome-shell-extensions.gcampax.github.com', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'drive-menu@gnome-shell-extensions.gcampax.github.com']
+enabled-extensions=['apps-menu@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'native-window-placement@gnome-shell-extensions.gcampax.github.com', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'appindicatorsupport@rgcjonas.gmail.com']
 favorite-apps=['Alacritty.desktop', 'google-chrome.desktop', 'org.gnome.Nautilus.desktop']
 remember-mount-password=false
 

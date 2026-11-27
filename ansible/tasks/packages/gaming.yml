@@ -23,6 +23,13 @@
       - lib32-gamemode
     state: present
 
+- name: Install discord
+  community.general.pacman:
+    name:
+      - discord
+      - libappindicator-gtk3
+    state: present
+
 - name: "Assigned group gamemode to user {{ user }}"
   ansible.builtin.user:
     name: "{{ user }}"

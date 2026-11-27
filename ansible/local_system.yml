@@ -65,8 +65,6 @@
         - name: Install gaming packages
           ansible.builtin.import_tasks: tasks/packages/gaming.yml
           when: gaming | default(false)
-        - name: Remove unused packages
-          ansible.builtin.import_tasks: tasks/packages/remove.yml
 
     - name: Apply user specific setting
       become_user: "{{ user }}"

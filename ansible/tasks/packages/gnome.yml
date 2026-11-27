@@ -2,11 +2,48 @@
 - name: Install desktop packages
   community.general.pacman:
     name:
-      - gnome
-      - gnome-tweaks
+      # desktop
       - gdm
+      - gnome-shell
+      - gnome-session
+      - gnome-settings-daemon
+      - gnome-control-center
+      - gnome-keyring
+      - seahorse # gui for keyring, gpg and ssh keys
+      - gnome-menus
+      - gnome-backgrounds
+      - gnome-color-manager
+      - xdg-desktop-portal-gnome # file dialogs and screen sharing for apps
+      - xdg-user-dirs-gtk # creates Documents, Downloads, etc.
+      - gnome-tweaks
+      - gnome-shell-extensions # apps-menu, places-menu, drive-menu, ...
+      - gnome-shell-extension-appindicator # tray icons
+      - gnome-extensions-app
+
+      # files
+      - nautilus
+      - sushi # preview on space
+      - gst-thumbnailers # video and audio thumbnails
+      - gvfs # trash and mounting in nautilus
+      - gvfs-mtp # phones
+      - gvfs-nfs
+      - gvfs-smb
+
+      # apps
+      - gnome-text-editor
+      - gnome-calculator
+      - gnome-font-viewer
+      - gnome-system-monitor
+      - gnome-disk-utility
+      - loupe # image viewer
+      - papers # pdf viewer
+      - showtime # video player
+      - decibels # audio player
+      - simple-scan # document scanner
+
+      # firmware
       - gnome-firmware
-      - dmidecode
+      - dmidecode # hardware info for gnome-firmware
     state: present
 
 - name: Enable gdm

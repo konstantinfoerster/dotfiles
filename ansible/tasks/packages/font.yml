@@ -8,4 +8,5 @@
       - ttf-hack-nerd # patched fonts for nvim-web-devicons
       - powerline-fonts
       - ttf-liberation # required by chrome
+      - noto-fonts-emoji
     state: present
