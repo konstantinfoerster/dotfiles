@@ -36,9 +36,12 @@
 
     - name: Install packages
       block:
-        - name: Ensure pacman cache and installed packages are up to date
+        - name: Update pacman cache
           community.general.pacman:
             update_cache: true
+          changed_when: false
+        - name: Upgrade installed packages
+          community.general.pacman:
             upgrade: true
         - name: Install base packages
           ansible.builtin.import_tasks: tasks/packages/base.yml

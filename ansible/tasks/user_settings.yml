@@ -52,7 +52,7 @@
     # skip if path does not exist
     removes: "/home/{{ user }}/{{ item }}"
   register: rmdir
-  changed_when: rmdir.rc == 0
+  changed_when: rmdir.changed and rmdir.rc == 0
   failed_when: false
   with_items:
     - "Templates"
