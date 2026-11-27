@@ -33,7 +33,6 @@ vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
       formatters_by_ft = {
         go = { "gofmt", "goimports" },
         lua = { "stylua" },
-        python = { "black" },
         javascript = { "prettier", stop_after_first = true },
         typescript = { "prettier", stop_after_first = true },
         vue = { "prettier", stop_after_first = true },
